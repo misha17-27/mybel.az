@@ -80,8 +80,8 @@ $ld = ['@context' => 'https://schema.org', '@graph' => $graph];
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Stil: ortaq baza + aktiv tema -->
-    <link rel="stylesheet" href="/assets/css/base.css?v=1">
-    <link rel="stylesheet" href="/assets/css/theme-<?= e($theme_key) ?>.css?v=1">
+    <link rel="stylesheet" href="<?= e(asset('/assets/css/base.css')) ?>">
+    <link rel="stylesheet" href="<?= e(asset('/assets/css/theme-' . $theme_key . '.css')) ?>">
 
     <script type="application/ld+json"><?= json_encode($ld, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?></script>
 </head>

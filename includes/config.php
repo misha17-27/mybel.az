@@ -169,6 +169,13 @@ for ($i = 1; $i <= 10; $i++) {
 // =====================================================================
 function e($s) { return htmlspecialchars((string)$s, ENT_QUOTES, 'UTF-8'); }
 
+/** Asset URL + avtomatik keş-busting (fayl dəyişdikcə ?v dəyişir) */
+function asset($path) {
+    $full = ($_SERVER['DOCUMENT_ROOT'] ?? __DIR__ . '/..') . $path;
+    $v = @filemtime($full) ?: 1;
+    return $path . '?v=' . $v;
+}
+
 /** slug üzrə elementi tapır (layihə və ya fəaliyyət sahəsi) */
 function find_by_slug(array $list, $slug) {
     foreach ($list as $item) {
