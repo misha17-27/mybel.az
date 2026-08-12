@@ -1,0 +1,58 @@
+/* =====================================================================
+   TEMA 2 — MODERN / CƏSARƏTLİ
+   Tünd hero, iri sans tipografiya, narıncı vurğular.
+   ===================================================================== */
+:root[data-theme="modern"] {
+    --brand:      #e2622c;
+    --brand-dark: #c14f1e;
+    --ink:        #14130f;
+    --muted:      #6f6a63;
+    --line:       #e5e2dc;
+    --bg:         #ffffff;
+    --bg-soft:    #f4f1ec;
+    --white:      #ffffff;
+    --radius:     14px;
+    --font-head:  'Manrope', system-ui, sans-serif;
+    --font-body:  'Manrope', system-ui, sans-serif;
+    --shadow:     0 18px 50px rgba(0,0,0,.12);
+}
+[data-theme="modern"] h1, [data-theme="modern"] h2, [data-theme="modern"] .hero-title { font-weight: 800; letter-spacing: -.03em; }
+[data-theme="modern"] .section-title { text-transform: none; }
+
+/* Hero: tünd, tam ekran, iri tipografiya */
+[data-theme="modern"] .home-hero {
+    position: relative; color: #fff; overflow: hidden;
+    background: #14130f;
+    padding-block: clamp(4rem, 12vw, 9rem);
+}
+[data-theme="modern"] .home-hero::before {
+    content: ""; position: absolute; inset: 0;
+    background:
+        radial-gradient(120% 90% at 80% 10%, rgba(226,98,44,.35), transparent 55%),
+        linear-gradient(180deg, #1c1a15, #14130f);
+    z-index: 0;
+}
+[data-theme="modern"] .home-hero .container { position: relative; z-index: 1; }
+[data-theme="modern"] .home-hero .hero-title { font-size: clamp(2.6rem, 8vw, 6rem); line-height: 1.02; }
+[data-theme="modern"] .home-hero .hero-lead { color: rgba(255,255,255,.72); }
+[data-theme="modern"] .home-hero .eyebrow { color: var(--brand); }
+[data-theme="modern"] .hero-figure { display: none; }
+[data-theme="modern"] .home-hero .btn-outline,
+[data-theme="modern"] .section-alt .btn-outline { color: #fff; border-color: rgba(255,255,255,.4); }
+[data-theme="modern"] .home-hero .btn-outline:hover,
+[data-theme="modern"] .section-alt .btn-outline:hover { background: #fff; color: var(--ink); border-color: #fff; }
+
+/* İri, kontrastlı kartlar */
+[data-theme="modern"] .card { border-radius: var(--radius); }
+[data-theme="modern"] .card-title { font-weight: 800; }
+[data-theme="modern"] .card-tag { text-transform: uppercase; font-size: .68rem; letter-spacing: .06em; }
+[data-theme="modern"] .service-card { background: var(--ink); color: #fff; border-color: transparent; }
+[data-theme="modern"] .service-card p { color: rgba(255,255,255,.65); }
+[data-theme="modern"] .service-card:hover { transform: translateY(-6px) scale(1.01); }
+[data-theme="modern"] .service-icon { background: rgba(226,98,44,.18); }
+[data-theme="modern"] .section-alt { background: var(--ink); color: #fff; }
+[data-theme="modern"] .section-alt .section-desc, [data-theme="modern"] .section-alt .stat-label { color: rgba(255,255,255,.65); }
+[data-theme="modern"] .cta-band { background: linear-gradient(120deg, var(--brand), var(--brand-dark)); }
+[data-theme="modern"] .cta-band p { color: rgba(255,255,255,.9); }
+[data-theme="modern"] .cta-band .btn { background: #fff; color: var(--ink); }
+[data-theme="modern"] .btn { font-weight: 700; }

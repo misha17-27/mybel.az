@@ -1,0 +1,61 @@
+<?php
+require $_SERVER['DOCUMENT_ROOT'] . '/includes/bootstrap.php';
+$current_section = 'layiheler';
+
+$activeCat = $_GET['cat'] ?? '';
+$list = $PROJECTS;
+if ($activeCat && isset($CATEGORIES[$activeCat])) {
+    $list = array_values(array_filter($PROJECTS, fn($p) => $p['category'] === $activeCat));
+}
+
+$page_title = 'Layihələr — ' . $SITE['name'];
+$page_desc  = 'MYBEL Concept-in restoran, otel və fərdi evlər üzrə tamamladığı mebel və interyer layihələri.';
+$page_url   = '/layiheler/';
+$breadcrumbs = [['name' => 'Ana səhifə', 'url' => '/'], ['name' => 'Layihələr', 'url' => '/layiheler/']];
+
+include $_SERVER['DOCUMENT_ROOT'] . '/includes/head.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
+?>
+<section class="page-hero">
+    <div class="container">
+        <nav class="breadcrumb" aria-label="Naviqasiya izi">
+            <a href="/">Ana səhifə</a><span>/</span><strong>Layihələr</strong>
+        </nav>
+        <h1>Layihələr</h1>
+        <p>Tamamladığımız işlərlə tanış olun — hər biri fərdi dizayn və peşəkar icra ilə.</p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="filter-bar">
+            <a href="/layiheler/" class="<?= $activeCat === '' ? 'is-active' : '' ?>">Hamısı</a>
+            <?php foreach ($CATEGORIES as $key => $label): ?>
+                <a href="/layiheler/?cat=<?= e($key) ?>" class="<?= $activeCat === $key ? 'is-active' : '' ?>"><?= e($label) ?></a>
+            <?php endforeach; ?>
+        </div>
+
+        <?php if (empty($list)): ?>
+            <p>Bu kateqoriyada hələ layihə yoxdur.</p>
+        <?php else: ?>
+        <div class="card-grid">
+            <?php foreach ($list as $p): ?>
+                <article class="card" data-reveal>
+                    <a class="card-media" href="/layiheler/<?= e($p['slug']) ?>/">
+                        <span class="card-tag"><?= e(cat_name($p['category'])) ?></span>
+                        <img src="<?= e($p['cover']) ?>" alt="<?= e($p['title']) ?>" loading="lazy" width="1200" height="800">
+                    </a>
+                    <div class="card-body">
+                        <h2 class="card-title"><?= e($p['title']) ?></h2>
+                        <p class="card-meta"><?= e($p['location']) ?> · <?= e($p['year']) ?></p>
+                        <p class="card-excerpt"><?= e($p['excerpt']) ?></p>
+                        <a class="card-link" href="/layiheler/<?= e($p['slug']) ?>/">Layihəyə bax</a>
+                    </div>
+                </article>
+            <?php endforeach; ?>
+        </div>
+        <?php endif; ?>
+    </div>
+</section>
+
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/includes/footer.php'; ?>

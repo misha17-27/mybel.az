@@ -1,0 +1,42 @@
+/* =====================================================================
+   TEMA 1 — KLASSİK / ELEQANT
+   Serif başlıqlar, isti krem fon, səxavətli boşluqlar.
+   ===================================================================== */
+:root[data-theme="classic"] {
+    --brand:      #b9541f;
+    --brand-dark: #934016;
+    --ink:        #2a2622;
+    --muted:      #7a7168;
+    --line:       #e6ddd1;
+    --bg:         #fbf8f3;
+    --bg-soft:    #f2ebe0;
+    --white:      #ffffff;
+    --radius:     6px;
+    --font-head:  'Playfair Display', Georgia, serif;
+    --font-body:  'Manrope', system-ui, sans-serif;
+    --shadow:     0 14px 40px rgba(60,40,20,.10);
+}
+
+[data-theme="classic"] .eyebrow { font-style: italic; text-transform: none; letter-spacing: .05em; font-family: 'Playfair Display', serif; font-weight: 500; font-size: 1rem; }
+[data-theme="classic"] h1, [data-theme="classic"] h2, [data-theme="classic"] h3 { font-weight: 600; letter-spacing: -.01em; }
+
+/* Hero: mərkəzləşdirilmiş, klassik */
+[data-theme="classic"] .home-hero {
+    background: linear-gradient(180deg, var(--bg-soft), var(--bg));
+    padding-block: clamp(3.5rem, 8vw, 7rem);
+    text-align: center;
+}
+[data-theme="classic"] .home-hero .container { max-width: 940px; }
+[data-theme="classic"] .home-hero .hero-lead { margin-inline: auto; }
+[data-theme="classic"] .home-hero .hero-actions { justify-content: center; }
+[data-theme="classic"] .hero-figure { margin-top: 3rem; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); aspect-ratio: 16/7; }
+[data-theme="classic"] .hero-figure img { width: 100%; height: 100%; object-fit: cover; }
+[data-theme="classic"] .hero-title { font-style: normal; }
+
+[data-theme="classic"] .card { border: 1px solid var(--line); box-shadow: none; }
+[data-theme="classic"] .card:hover { box-shadow: var(--shadow); }
+[data-theme="classic"] .card-tag { border-radius: 3px; background: var(--ink); }
+[data-theme="classic"] .btn { border-radius: 4px; }
+[data-theme="classic"] .filter-bar a, [data-theme="classic"] .theme-dot { border-radius: 4px; }
+[data-theme="classic"] .service-icon { border-radius: 6px; background: var(--bg-soft); }
+[data-theme="classic"] .cta-band { background: #3a3128; }

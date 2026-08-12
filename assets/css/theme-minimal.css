@@ -1,0 +1,57 @@
+/* =====================================================================
+   TEMA 3 — MİNİMAL / EDİTORİAL
+   Çoxlu ağ boşluq, nazik xətlər, monoxrom + zərif narıncı.
+   ===================================================================== */
+:root[data-theme="minimal"] {
+    --brand:      #b5531f;
+    --brand-dark: #8f3f14;
+    --ink:        #171717;
+    --muted:      #8a8a8a;
+    --line:       #eaeaea;
+    --bg:         #ffffff;
+    --bg-soft:    #fafafa;
+    --white:      #ffffff;
+    --radius:     0px;
+    --font-head:  'Manrope', system-ui, sans-serif;
+    --font-body:  'Manrope', system-ui, sans-serif;
+    --shadow:     none;
+    --section-y:  clamp(3.5rem, 9vw, 8rem);
+}
+[data-theme="minimal"] h1, [data-theme="minimal"] h2, [data-theme="minimal"] h3 { font-weight: 600; letter-spacing: -.02em; }
+[data-theme="minimal"] .eyebrow { color: var(--ink); opacity: .5; font-weight: 600; }
+[data-theme="minimal"] .section-title { font-weight: 500; }
+
+/* Hero: sadə, editorial, iki sütun */
+[data-theme="minimal"] .home-hero { padding-block: clamp(3rem, 8vw, 7rem); border-bottom: 1px solid var(--line); }
+[data-theme="minimal"] .home-hero .hero-title { font-weight: 500; font-size: clamp(2.4rem, 7vw, 5.2rem); }
+[data-theme="minimal"] .hero-figure { margin-top: 3rem; aspect-ratio: 21/9; overflow: hidden; }
+[data-theme="minimal"] .hero-figure img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(.15); }
+
+/* Kölgəsiz, düz xətli kartlar */
+[data-theme="minimal"] .card { box-shadow: none; border: 1px solid var(--line); border-radius: 0; }
+[data-theme="minimal"] .card:hover { box-shadow: none; transform: none; border-color: var(--ink); }
+[data-theme="minimal"] .card:hover .card-media img { transform: none; }
+[data-theme="minimal"] .card-media { aspect-ratio: 4/3; }
+[data-theme="minimal"] .card-media img { filter: grayscale(.2); transition: filter .4s; }
+[data-theme="minimal"] .card:hover .card-media img { filter: none; }
+[data-theme="minimal"] .card-tag { background: #fff; color: var(--ink); border: 1px solid var(--line); border-radius: 0; }
+[data-theme="minimal"] .card-title { font-weight: 500; }
+
+[data-theme="minimal"] .btn { border-radius: 0; font-weight: 600; text-transform: uppercase; letter-spacing: .1em; font-size: .78rem; }
+[data-theme="minimal"] .btn:not(.btn-outline):not(.btn-ghost) { background: var(--ink); color: #fff; }
+[data-theme="minimal"] .btn:not(.btn-outline):not(.btn-ghost):hover { background: var(--brand); color: #fff; }
+[data-theme="minimal"] .btn-outline { background: transparent; color: var(--ink); border-color: var(--ink); }
+[data-theme="minimal"] .btn-outline:hover { background: var(--ink); color: #fff; }
+[data-theme="minimal"] .btn-ghost { background: transparent; color: var(--brand); }
+[data-theme="minimal"] .filter-bar a { border-radius: 0; }
+[data-theme="minimal"] .filter-bar a.is-active { background: var(--ink); }
+[data-theme="minimal"] .service-card { border-radius: 0; border-color: var(--line); }
+[data-theme="minimal"] .service-card:hover { transform: none; box-shadow: none; border-color: var(--ink); }
+[data-theme="minimal"] .service-icon { border-radius: 0; background: var(--bg-soft); }
+[data-theme="minimal"] .clients-grid, [data-theme="minimal"] .detail-cover, [data-theme="minimal"] .gallery-grid img,
+[data-theme="minimal"] .about-split img, [data-theme="minimal"] .cta-band, [data-theme="minimal"] .map-embed { border-radius: 0; }
+[data-theme="minimal"] .about-split img { box-shadow: none; border: 1px solid var(--line); }
+[data-theme="minimal"] .cta-band { background: var(--bg-soft); color: var(--ink); border: 1px solid var(--line); }
+[data-theme="minimal"] .cta-band p { color: var(--muted); }
+[data-theme="minimal"] .theme-dot { border-radius: 0; }
+[data-theme="minimal"] .section-head { max-width: 780px; }

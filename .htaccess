@@ -1,0 +1,51 @@
+# ============ MYBEL Concept — Apache konfiqurasiyası ============
+Options -Indexes
+DirectoryIndex index.php
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # sitemap.xml -> sitemap.php
+    RewriteRule ^sitemap\.xml$ sitemap.php [L]
+
+    # Təmiz URL: /layiheler/<slug>/ -> detay.php?slug=<slug>
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^layiheler/([a-z0-9-]+)/?$ layiheler/detay.php?slug=$1 [L,QSA]
+
+    # Təmiz URL: /fealiyyet/<slug>/ -> detay.php?slug=<slug>
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^fealiyyet/([a-z0-9-]+)/?$ fealiyyet/detay.php?slug=$1 [L,QSA]
+</IfModule>
+
+# Xüsusi 404
+ErrorDocument 404 /404.php
+
+# İçəri qovluqları gizlət
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>
+
+# Gzip sıxılma
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/javascript application/json image/svg+xml
+</IfModule>
+
+# Brauzer keşi
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType image/png "access plus 6 months"
+    ExpiresByType image/jpeg "access plus 6 months"
+    ExpiresByType image/webp "access plus 6 months"
+    ExpiresByType image/svg+xml "access plus 1 month"
+</IfModule>
+
+# Təhlükəsizlik başlıqları
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
