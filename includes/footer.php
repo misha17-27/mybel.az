@@ -3,7 +3,7 @@
 <footer class="site-footer">
     <div class="container footer-grid">
         <div class="footer-col footer-brand">
-            <img src="/assets/img/logo.png" alt="<?= e($SITE['name']) ?> loqo" width="120" height="120" class="footer-logo">
+            <img src="/assets/img/logo.png" alt="<?= e($SITE['name']) ?> loqo" width="140" height="131" class="footer-logo">
             <p><?= e($SITE['description']) ?></p>
         </div>
 

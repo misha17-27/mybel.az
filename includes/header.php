@@ -22,7 +22,7 @@ function theme_link($path, $n) {
 <header class="site-header" id="siteHeader">
     <div class="container header-inner">
         <a class="brand" href="/" aria-label="<?= e($SITE['name']) ?> — ana səhifə">
-            <img src="/assets/img/logo.png" alt="<?= e($SITE['name']) ?> loqo" width="120" height="120" class="brand-logo">
+            <img src="/assets/img/logo.png" alt="<?= e($SITE['name']) ?> loqo" width="120" height="113" class="brand-logo">
         </a>
 
         <nav class="main-nav" aria-label="Əsas menyu">
