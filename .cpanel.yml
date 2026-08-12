@@ -1,0 +1,9 @@
+---
+deployment:
+  tasks:
+    # mybel.az əsas domendir -> public_html. $HOME cPanel istifadəçisinin ev qovluğudur,
+    # ona görə dəqiq login-dən asılı deyil.
+    - export DEPLOYPATH=$HOME/public_html/
+    - /bin/mkdir -p $DEPLOYPATH
+    - /bin/cp -R * $DEPLOYPATH
+    - /bin/cp -f .htaccess $DEPLOYPATH
