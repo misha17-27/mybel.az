@@ -22,7 +22,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
 <section class="section">
     <div class="container">
         <div class="card-grid">
-            <?php foreach ($AREAS as $a): ?>
+            <?php foreach (visible_sorted($AREAS) as $a): ?>
                 <article class="card" data-reveal>
                     <a class="card-media" href="/fealiyyet/<?= e($a['slug']) ?>/">
                         <img src="<?= e($a['cover']) ?>" alt="<?= e($a['title']) ?>" loading="lazy" width="1200" height="800">

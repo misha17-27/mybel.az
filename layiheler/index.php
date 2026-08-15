@@ -3,9 +3,9 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/bootstrap.php';
 $current_section = 'layiheler';
 
 $activeCat = $_GET['cat'] ?? '';
-$list = $PROJECTS;
+$list = visible_sorted($PROJECTS);
 if ($activeCat && isset($CATEGORIES[$activeCat])) {
-    $list = array_values(array_filter($PROJECTS, fn($p) => $p['category'] === $activeCat));
+    $list = array_values(array_filter($list, fn($p) => $p['category'] === $activeCat));
 }
 
 $page_title = 'Layihələr — ' . $SITE['name'];

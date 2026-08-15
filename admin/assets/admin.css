@@ -1,0 +1,113 @@
+/* MYBEL admin panel — üslub */
+:root{
+  --bg:#f3f4f6; --panel:#fff; --ink:#14130f; --muted:#6b7280; --line:#e5e7eb;
+  --brand:#c75b2a; --brand-dark:#a8481f; --brand-soft:#f6ece5;
+  --sidebar:#14130f; --sidebar-ink:#c9c7c2; --sidebar-active:#c75b2a;
+  --ok:#1c7a3e; --ok-bg:#e7f6ec; --err:#b3261e; --err-bg:#fdeaea; --radius:12px;
+  --font:'Manrope',system-ui,Segoe UI,Roboto,sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:var(--font);background:var(--bg);color:var(--ink);font-size:15px;line-height:1.5}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+h1,h2,h3{margin:0;line-height:1.2}
+
+/* ---------- Layout ---------- */
+.admin{display:grid;grid-template-columns:250px 1fr;min-height:100vh}
+.sidebar{background:var(--sidebar);color:var(--sidebar-ink);position:sticky;top:0;height:100vh;display:flex;flex-direction:column;overflow-y:auto}
+.sidebar-brand{padding:1.4rem 1.5rem;display:flex;align-items:center;gap:.6rem}
+.sidebar-brand img{width:120px;filter:brightness(0) invert(1)}
+.sidebar-group{padding:.4rem 1.5rem;margin-top:.8rem;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:#6b6862}
+.sidebar-nav a{display:flex;align-items:center;gap:.7rem;padding:.7rem 1.5rem;color:var(--sidebar-ink);font-weight:500;font-size:.95rem;border-left:3px solid transparent}
+.sidebar-nav a:hover{background:rgba(255,255,255,.05);color:#fff}
+.sidebar-nav a.active{background:rgba(199,91,42,.14);color:#fff;border-left-color:var(--sidebar-active)}
+.sidebar-nav a svg{width:18px;height:18px;flex:0 0 18px;stroke:currentColor;fill:none;stroke-width:1.8}
+.sidebar-foot{margin-top:auto;padding:1rem 1.5rem;font-size:.8rem;color:#6b6862;border-top:1px solid rgba(255,255,255,.08)}
+.sidebar-foot b{color:#fff;display:block;font-size:.9rem}
+
+.main{display:flex;flex-direction:column;min-width:0}
+.topbar{background:var(--panel);border-bottom:1px solid var(--line);padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:20}
+.topbar h1{font-size:1.3rem}
+.topbar-actions{display:flex;gap:.6rem;align-items:center}
+.content{padding:1.8rem 2rem;max-width:1200px;width:100%}
+
+/* ---------- Buttons ---------- */
+.btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--brand);color:#fff;border:1px solid var(--brand);
+  padding:.6rem 1.1rem;border-radius:9px;font:inherit;font-weight:600;font-size:.9rem;cursor:pointer;transition:.15s}
+.btn:hover{background:var(--brand-dark);border-color:var(--brand-dark)}
+.btn-outline{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn-outline:hover{background:#fff;border-color:var(--brand);color:var(--brand)}
+.btn-danger{background:transparent;color:var(--err);border-color:#f0c4c1}
+.btn-danger:hover{background:var(--err);color:#fff;border-color:var(--err)}
+.btn-sm{padding:.4rem .8rem;font-size:.82rem}
+
+/* ---------- Cards ---------- */
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:1.4rem;margin-bottom:1.3rem}
+.card h2{font-size:1.05rem;margin-bottom:.3rem}
+.card .hint{color:var(--muted);font-size:.86rem;margin-bottom:1rem}
+.grid{display:grid;gap:1.2rem}
+.grid-4{grid-template-columns:repeat(4,1fr)}
+.grid-2{grid-template-columns:1fr 1fr}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem 1.4rem}
+.stat .num{font-size:2rem;font-weight:800;color:var(--brand);line-height:1}
+.stat .lbl{color:var(--muted);font-size:.85rem;margin-top:.4rem}
+
+/* ---------- Forms ---------- */
+.field{margin-bottom:1rem}
+.field label{display:block;font-weight:600;font-size:.85rem;margin-bottom:.35rem}
+.field input[type=text],.field input[type=email],.field input[type=tel],.field input[type=url],
+.field input[type=password],.field input[type=number],.field textarea,.field select{
+  width:100%;padding:.6rem .8rem;border:1px solid var(--line);border-radius:8px;font:inherit;background:#fff;color:var(--ink)}
+.field textarea{min-height:110px;resize:vertical}
+.field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--brand)}
+.row{display:grid;gap:1rem}
+.row-2{grid-template-columns:1fr 1fr}
+.row-3{grid-template-columns:2fr 1fr 1fr}
+.inline{display:flex;align-items:center;gap:.5rem}
+.check{display:inline-flex;align-items:center;gap:.45rem;font-size:.9rem}
+
+/* ---------- Tables ---------- */
+table{width:100%;border-collapse:collapse}
+th{text-align:left;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:.6rem .5rem;border-bottom:1px solid var(--line)}
+td{padding:.65rem .5rem;border-bottom:1px solid var(--line);vertical-align:middle}
+tr:last-child td{border-bottom:0}
+
+/* ---------- Alerts / badges ---------- */
+.alert{padding:.8rem 1rem;border-radius:9px;margin-bottom:1rem;font-weight:500;font-size:.9rem}
+.alert-success{background:var(--ok-bg);color:var(--ok);border:1px solid #bfe6cc}
+.alert-error{background:var(--err-bg);color:var(--err);border:1px solid #f3c2c0}
+.badge{display:inline-block;padding:.15rem .5rem;border-radius:999px;font-size:.7rem;font-weight:700;background:var(--brand-soft);color:var(--brand)}
+.badge-new{background:#e7f6ec;color:var(--ok)}
+.tag{display:inline-block;font-size:.72rem;padding:.15rem .55rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.lang-switch a{padding:.3rem .8rem;font-size:.8rem;font-weight:700}
+.lang-switch a.on{background:var(--brand);color:#fff}
+
+.thumb{width:56px;height:40px;object-fit:cover;border-radius:6px;border:1px solid var(--line);background:#fafafa}
+.item-card{border:1px solid var(--line);border-radius:10px;padding:1rem;margin-bottom:1rem;background:#fff}
+.item-head{display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-bottom:.8rem}
+.muted{color:var(--muted)}
+.right{margin-left:auto}
+.tabs{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.2rem}
+.tabs a{padding:.5rem 1rem;border:1px solid var(--line);border-radius:999px;font-size:.88rem;font-weight:600;background:#fff}
+.tabs a.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+/* ---------- Login ---------- */
+.login-wrap{min-height:100vh;display:grid;place-items:center;background:linear-gradient(160deg,#1b1b1b,#2a2724);padding:1.5rem}
+.login-card{background:#fff;border-radius:16px;padding:2.4rem;width:100%;max-width:400px;box-shadow:0 30px 80px rgba(0,0,0,.35)}
+.login-card .logo{width:150px;margin:0 auto 1.4rem}
+.login-card h1{text-align:center;font-size:1.4rem;margin-bottom:.3rem}
+.login-card .sub{text-align:center;color:var(--muted);font-size:.9rem;margin-bottom:1.6rem}
+.login-card .btn{width:100%;justify-content:center;padding:.8rem;font-size:1rem}
+
+@media(max-width:860px){
+  .admin{grid-template-columns:1fr}
+  .sidebar{position:fixed;inset:0 auto 0 0;width:250px;transform:translateX(-100%);transition:.3s;z-index:60}
+  .sidebar.open{transform:none}
+  .grid-4{grid-template-columns:1fr 1fr}
+  .row-2,.row-3,.grid-2{grid-template-columns:1fr}
+  .menu-btn{display:inline-flex!important}
+  .sidebar-backdrop.show{display:block}
+}
+.menu-btn{display:none;background:none;border:1px solid var(--line);border-radius:8px;padding:.4rem .6rem;cursor:pointer}
+.sidebar-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:55}

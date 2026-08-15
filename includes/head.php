@@ -55,7 +55,7 @@ $ld = ['@context' => 'https://schema.org', '@graph' => $graph];
 
     <title><?= e($page_title) ?></title>
     <meta name="description" content="<?= e($page_desc) ?>">
-    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="robots" content="<?= (($SITE['seo']['robots'] ?? 'index') === 'noindex') ? 'noindex, nofollow' : 'index, follow, max-image-preview:large' ?>">
     <link rel="canonical" href="<?= e($canonical) ?>">
     <link rel="alternate" hreflang="az" href="<?= e($canonical) ?>">
     <link rel="alternate" hreflang="x-default" href="<?= e($canonical) ?>">

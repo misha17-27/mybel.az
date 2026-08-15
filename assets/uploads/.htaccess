@@ -1,0 +1,5 @@
+# Yüklənən qovluqda skript icrası qadağandır (təhlükəsizlik)
+php_flag engine off
+<FilesMatch "\.(php|phtml|phar|pht|cgi|pl|py|asp|aspx|sh)$">
+    Require all denied
+</FilesMatch>

@@ -22,7 +22,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
 <section class="section">
     <div class="container">
         <div class="services-grid">
-            <?php foreach ($SERVICES as $s): ?>
+            <?php foreach (visible_sorted($SERVICES) as $s): ?>
                 <div class="service-card" data-reveal>
                     <div class="service-icon"><?= icon($s['icon']) ?></div>
                     <h2 style="font-size:1.25rem;margin-bottom:.5rem"><?= e($s['title']) ?></h2>

@@ -25,6 +25,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (function_exists('mail') && $old['email'] !== '') {
                 @mail($SITE['email'], 'Yeni müraciət — mybel.az', $body, 'From: ' . $SITE['email']);
             }
+            // Admin panel üçün müraciəti yadda saxla
+            $messages = load_json('messages', []);
+            array_unshift($messages, [
+                'id'      => new_id(),
+                'name'    => $old['name'],
+                'email'   => $old['email'],
+                'phone'   => $old['phone'],
+                'message' => $old['message'],
+                'ip'      => $_SERVER['REMOTE_ADDR'] ?? '',
+                'date'    => date('Y-m-d H:i'),
+                'read'    => false,
+            ]);
+            save_json('messages', $messages);
             $sent = true;
             $old = ['name' => '', 'email' => '', 'phone' => '', 'message' => ''];
         }

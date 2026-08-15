@@ -1,3 +1,12 @@
 .DS_Store
 Thumbs.db
 *.log
+
+# İstifadəçi məlumatları serverdə yaranır/redaktə olunur — repodan deploy onları üzərinə yazmamalıdır.
+# Yalnız qoruyucu .htaccess repo-da qalır, JSON-lar isə serverdə seed olunur.
+/data/*
+!/data/.htaccess
+
+# Yüklənən şəkillər serverdə qalır, repoya düşmür.
+/assets/uploads/*
+!/assets/uploads/.htaccess

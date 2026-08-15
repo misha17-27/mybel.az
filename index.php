@@ -1,8 +1,9 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'] . '/includes/bootstrap.php';
 $current_section = '';
-$page_title = $SITE['name'] . ' — ' . $SITE['tagline'] . ' | Bakı';
-$page_desc  = $SITE['description'];
+$page_title = $SITE['seo']['home_title'] ?: ($SITE['name'] . ' — ' . $SITE['tagline']);
+$page_desc  = $SITE['seo']['home_desc'] ?: $SITE['description'];
+$page_image = $SITE['seo']['og_image'] ?: '/assets/img/logo.png';
 $page_url   = '/';
 
 include $_SERVER['DOCUMENT_ROOT'] . '/includes/head.php';
@@ -12,9 +13,9 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
 <!-- ============ HERO ============ -->
 <section class="hero home-hero">
     <div class="container">
-        <span class="eyebrow">Premium mebel &amp; interyer</span>
-        <h1 class="hero-title">Məkanınıza dəyər qatan<br>fərdi mebel həlləri</h1>
-        <p class="hero-lead">Restoran, otel və fərdi evlər üçün layihələndirmədən quraşdırmaya qədər tam interyer və mebel istehsalı.</p>
+        <span class="eyebrow"><?= e($SITE['hero']['eyebrow']) ?></span>
+        <h1 class="hero-title"><?= nl2br(e($SITE['hero']['title'])) ?></h1>
+        <p class="hero-lead"><?= e($SITE['hero']['lead']) ?></p>
         <div class="hero-actions">
             <a href="/layiheler/" class="btn">Layihələrimiz</a>
             <a href="/elaqe/" class="btn btn-outline">Bizimlə əlaqə</a>
@@ -29,10 +30,11 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
 <section class="section">
     <div class="container about-split">
         <div class="about-text" data-reveal>
-            <span class="eyebrow">Şirkət haqqında</span>
-            <h2 class="section-title">Keyfiyyət və dizaynı bir araya gətiririk</h2>
-            <p><?= e(ph_text(1)) ?></p>
-            <p><?= e('MYBEL Concept peşəkar komandası ilə hər layihəyə fərdi yanaşır və uzunömürlü nəticə təqdim edir.') ?></p>
+            <span class="eyebrow"><?= e($SITE['about']['eyebrow']) ?></span>
+            <h2 class="section-title"><?= e($SITE['about']['title']) ?></h2>
+            <?php foreach (preg_split('/\n{2,}/', trim($SITE['about']['text'])) as $par): ?>
+                <p><?= nl2br(e($par)) ?></p>
+            <?php endforeach; ?>
             <a href="/haqqimizda/" class="btn-ghost">Ətraflı </a>
         </div>
         <div data-reveal>
@@ -50,7 +52,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
             <p class="section-desc">Restoran, otel və fərdi evlər üzrə tamamladığımız bəzi layihələr.</p>
         </div>
         <div class="card-grid">
-            <?php foreach (array_slice($PROJECTS, 0, 3) as $p): ?>
+            <?php foreach (array_slice(visible_sorted($PROJECTS), 0, 3) as $p): ?>
                 <article class="card" data-reveal>
                     <a class="card-media" href="/layiheler/<?= e($p['slug']) ?>/">
                         <span class="card-tag"><?= e(cat_name($p['category'])) ?></span>
@@ -79,7 +81,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
             <h2 class="section-title">Hansı sahələrdə çalışırıq</h2>
         </div>
         <div class="card-grid">
-            <?php foreach ($AREAS as $a): ?>
+            <?php foreach (visible_sorted($AREAS) as $a): ?>
                 <article class="card" data-reveal>
                     <a class="card-media" href="/fealiyyet/<?= e($a['slug']) ?>/">
                         <img src="<?= e($a['cover']) ?>" alt="<?= e($a['title']) ?>" loading="lazy" width="1200" height="800">
@@ -103,7 +105,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
             <h2 class="section-title">Nə təklif edirik</h2>
         </div>
         <div class="services-grid">
-            <?php foreach ($SERVICES as $s): ?>
+            <?php foreach (visible_sorted($SERVICES) as $s): ?>
                 <div class="service-card" data-reveal>
                     <div class="service-icon"><?= icon($s['icon']) ?></div>
                     <h3><?= e($s['title']) ?></h3>

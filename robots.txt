@@ -1,5 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /admin/
 Disallow: /includes/
+Disallow: /data/
 
 Sitemap: https://mybel.az/sitemap.xml
