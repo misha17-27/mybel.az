@@ -53,6 +53,15 @@ $DEF_SETTINGS = [
         'og_image'   => '/assets/img/logo.png',
         'robots'     => 'index',
     ],
+    'security'    => [
+        'turnstile_enabled' => false,
+        'turnstile_site'    => '',
+        'turnstile_secret'  => '',
+    ],
+    'smtp'        => [
+        'host' => '', 'port' => 587, 'enc' => 'tls',
+        'user' => '', 'pass' => '', 'from' => '', 'from_name' => 'MYBEL Concept',
+    ],
 ];
 
 // ---------- DEFAULT: layihələr ----------
@@ -160,4 +169,31 @@ function find_by_slug(array $list, $slug) {
 function cat_name($key) {
     global $CATEGORIES;
     return $CATEGORIES[$key] ?? $key;
+}
+
+/** Turnstile aktivdir? (açıq + açarlar var) */
+function turnstile_active($SITE): bool {
+    $s = $SITE['security'] ?? [];
+    return !empty($s['turnstile_enabled']) && !empty($s['turnstile_site']) && !empty($s['turnstile_secret']);
+}
+
+/** Turnstile tokenini serverdə yoxla */
+function turnstile_verify(string $secret, ?string $token, ?string $ip = null): bool {
+    if ($secret === '') return true;      // konfiqurasiya yoxdursa keç
+    if (!$token) return false;
+    $data = http_build_query(['secret' => $secret, 'response' => $token, 'remoteip' => $ip]);
+    $url = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
+    $res = null;
+    if (function_exists('curl_init')) {
+        $ch = curl_init($url);
+        curl_setopt_array($ch, [CURLOPT_POST => true, CURLOPT_POSTFIELDS => $data, CURLOPT_RETURNTRANSFER => true, CURLOPT_TIMEOUT => 10]);
+        $res = curl_exec($ch);
+        curl_close($ch);
+    } else {
+        $ctx = stream_context_create(['http' => ['method' => 'POST', 'header' => 'Content-Type: application/x-www-form-urlencoded', 'content' => $data, 'timeout' => 10]]);
+        $res = @file_get_contents($url, false, $ctx);
+    }
+    if (!$res) return false;
+    $j = json_decode($res, true);
+    return !empty($j['success']);
 }

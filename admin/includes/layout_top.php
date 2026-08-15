@@ -17,6 +17,7 @@ function a_icon($n){
     'mail'=>'<rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,6 12,13 2,6"/>',
     'seo'=>'<circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>',
     'user'=>'<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>',
+    'lock'=>'<rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
   ];
   return '<svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'.($p[$n]??'').'</svg>';
 }
@@ -35,6 +36,8 @@ $NAV = [
   ]],
   ['НАСТРОЙКИ', [
     ['seo','SEO','/admin/seo.php','seo'],
+    ['mail','Почта (SMTP)','/admin/mail.php','mail'],
+    ['security','Безопасность','/admin/security.php','lock'],
     ['users','Пользователи','/admin/users.php','user'],
     ['profile','Мой профиль','/admin/profile.php','user'],
   ]],
@@ -57,7 +60,7 @@ $NAV = [
     <div class="sidebar-brand"><img src="/assets/img/logo.png" alt="MYBEL"></div>
     <nav class="sidebar-nav">
       <?php foreach ($NAV as [$group, $items]): ?>
-        <?php if (($U['role'] ?? '') !== 'admin' && $group === 'НАСТРОЙКИ') { $items = array_filter($items, fn($i)=>$i[0]!=='users'); } ?>
+        <?php if (($U['role'] ?? '') !== 'admin' && $group === 'НАСТРОЙКИ') { $items = array_filter($items, fn($i)=>!in_array($i[0],['users','security','mail'],true)); } ?>
         <div class="sidebar-group"><?= e($group) ?></div>
         <?php foreach ($items as [$key,$label,$href,$icon]): ?>
           <a href="<?= e($href) ?>" class="<?= $ACTIVE===$key?'active':'' ?>"><?= a_icon($icon) ?><span><?= e($label) ?></span></a>

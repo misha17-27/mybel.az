@@ -9,6 +9,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = 'Xəta.';
     } elseif (login_attempts_left() <= 0) {
         $error = 'Слишком много попыток. Попробуйте через 15 минут.';
+    } elseif (turnstile_active($SITE) && !turnstile_verify($SITE['security']['turnstile_secret'], $_POST['cf-turnstile-response'] ?? null, $_SERVER['REMOTE_ADDR'] ?? null)) {
+        $error = 'Подтвердите, что вы не робот.';
     } else {
         $email = trim($_POST['email'] ?? '');
         $pass  = (string)($_POST['password'] ?? '');
@@ -39,6 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <link rel="icon" href="/assets/img/logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/admin/assets/admin.css?v=2">
+<?php if (turnstile_active($SITE)): ?><script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script><?php endif; ?>
 </head>
 <body>
 <div class="login-wrap">
@@ -57,6 +60,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <input type="password" id="password" name="password" autocomplete="current-password" required>
     </div>
     <input type="text" name="website" style="position:absolute;left:-9999px" tabindex="-1" aria-hidden="true">
+    <?php if (turnstile_active($SITE)): ?>
+      <div class="field"><div class="cf-turnstile" data-sitekey="<?= e($SITE['security']['turnstile_site']) ?>"></div></div>
+    <?php endif; ?>
     <button type="submit" class="btn">Войти</button>
   </form>
 </div>

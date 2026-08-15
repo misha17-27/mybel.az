@@ -1,5 +1,6 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'] . '/includes/bootstrap.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/mailer.php';
 $current_section = 'elaqe';
 
 // ---- Sadə forma emalı (POST) ----
@@ -8,6 +9,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Honeypot (spam qoruması)
     if (!empty($_POST['website'])) {
         $error = 'Spam aşkarlandı.';
+    } elseif (turnstile_active($SITE) && !turnstile_verify($SITE['security']['turnstile_secret'], $_POST['cf-turnstile-response'] ?? null, $_SERVER['REMOTE_ADDR'] ?? null)) {
+        $error = 'Zəhmət olmasa robot olmadığınızı təsdiqləyin.';
     } else {
         $old['name']    = trim($_POST['name'] ?? '');
         $old['email']   = trim($_POST['email'] ?? '');
@@ -22,9 +25,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Real serverdə burada mail() və ya CRM inteqrasiyası olacaq.
             $body = "Ad: {$old['name']}\nE-poçt: {$old['email']}\nTelefon: {$old['phone']}\n\n{$old['message']}";
             @error_log('[MYBEL əlaqə] ' . str_replace("\n", ' | ', $body));
-            if (function_exists('mail') && $old['email'] !== '') {
-                @mail($SITE['email'], 'Yeni müraciət — mybel.az', $body, 'From: ' . $SITE['email']);
-            }
+            // SMTP (varsa) ilə göndər, yoxsa mail()
+            $mErr = null;
+            @send_site_mail($SITE['email'], 'Yeni müraciət — mybel.az', $body, $mErr);
             // Admin panel üçün müraciəti yadda saxla
             $messages = load_json('messages', []);
             array_unshift($messages, [
@@ -96,6 +99,10 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
                 </div>
                 <!-- honeypot -->
                 <input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
+                <?php if (turnstile_active($SITE)): ?>
+                    <div style="margin:.2rem 0 1rem"><div class="cf-turnstile" data-sitekey="<?= e($SITE['security']['turnstile_site']) ?>"></div></div>
+                    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+                <?php endif; ?>
                 <button type="submit" class="btn">Göndər</button>
                 <p class="form-note">* işarəli sahələr mütləqdir.</p>
             </form>
