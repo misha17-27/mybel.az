@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $id = $_POST['id'] ?? '';
         $projects = array_values(array_filter($projects, fn($p) => $p['id'] !== $id));
         save_json('projects', $projects);
-        flash('Проект удалён.');
+        flash(t('p_deleted'));
         redirect('/admin/projects.php');
     }
 
@@ -24,12 +24,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         foreach ($projects as $i => $p) if ($p['id'] === $id) $idx = $i;
 
         $title = trim($_POST['title'] ?? '');
-        if ($title === '') { flash('Заголовок обязателен.', 'error'); redirect('/admin/projects.php'); }
+        if ($title === '') { flash(t('p_need_title'), 'error'); redirect('/admin/projects.php'); }
 
         $slug = trim($_POST['slug'] ?? '');
         $slug = $slug !== '' ? slugify($slug) : slugify($title);
 
-        // cover: yeni yükləmə > URL sahəsi > köhnə
         $cover = $projects[$idx]['cover'] ?? '';
         $err = null;
         $up = upload_image($_FILES['cover_file'] ?? [], $err);
@@ -37,7 +36,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($up) $cover = $up;
         elseif (trim($_POST['cover_url'] ?? '') !== '') $cover = trim($_POST['cover_url']);
 
-        // qalereya: köhnədən silinməyənlər + yeni yüklənənlər + URL sətri
         $gallery = [];
         $existing = $projects[$idx]['gallery'] ?? [];
         $remove = $_POST['gal_remove'] ?? [];
@@ -68,10 +66,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'gallery'  => $gallery,
         ];
         if ($idx === null) $projects[] = $data; else $projects[$idx] = $data;
-        // sıralama saxla
         usort($projects, fn($a,$b) => ($a['order']??0) <=> ($b['order']??0));
         save_json('projects', $projects);
-        flash('Проект сохранён.');
+        flash(t('p_saved'));
         redirect('/admin/projects.php');
     }
 }
@@ -84,16 +81,15 @@ if (isset($_GET['new'])) {
     foreach ($projects as $p) if ($p['id'] === $_GET['edit']) $editing = $p;
 }
 
-$PAGE_TITLE = 'Проекты';
+$PAGE_TITLE = t('n_projects');
 $ACTIVE = 'projects';
 require __DIR__ . '/includes/layout_top.php';
 ?>
 <?php if ($editing !== null): ?>
-  <!-- ===== FORMA ===== -->
   <div class="card">
     <div class="item-head">
-      <h2><?= $editing['id'] ? 'Редактировать проект' : 'Новый проект' ?></h2>
-      <a href="/admin/projects.php" class="btn btn-outline btn-sm">← К списку</a>
+      <h2><?= $editing['id'] ? e(t('p_edit')) : e(t('p_new')) ?></h2>
+      <a href="/admin/projects.php" class="btn btn-outline btn-sm">← <?= e(t('back_list')) ?></a>
     </div>
     <form method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
@@ -101,61 +97,60 @@ require __DIR__ . '/includes/layout_top.php';
       <input type="hidden" name="id" value="<?= e($editing['id']) ?>">
 
       <div class="row row-2">
-        <div class="field"><label>Заголовок *</label><input type="text" name="title" value="<?= e($editing['title']) ?>" required></div>
-        <div class="field"><label>Slug (URL, необязательно)</label><input type="text" name="slug" value="<?= e($editing['slug']) ?>" placeholder="авто из заголовка"></div>
+        <div class="field"><label><?= e(t('title_f')) ?> *</label><input type="text" name="title" value="<?= e($editing['title']) ?>" required></div>
+        <div class="field"><label><?= e(t('p_slug')) ?></label><input type="text" name="slug" value="<?= e($editing['slug']) ?>" placeholder="<?= e(t('p_slug_ph')) ?>"></div>
       </div>
       <div class="row row-3">
-        <div class="field"><label>Категория</label>
+        <div class="field"><label><?= e(t('p_cat')) ?></label>
           <select name="category">
             <?php foreach ($CATEGORIES as $k=>$v): ?><option value="<?= e($k) ?>" <?= $editing['category']===$k?'selected':'' ?>><?= e($v) ?></option><?php endforeach; ?>
           </select>
         </div>
-        <div class="field"><label>Локация</label><input type="text" name="location" value="<?= e($editing['location']) ?>"></div>
-        <div class="field"><label>Год</label><input type="text" name="year" value="<?= e($editing['year']) ?>"></div>
+        <div class="field"><label><?= e(t('p_loc')) ?></label><input type="text" name="location" value="<?= e($editing['location']) ?>"></div>
+        <div class="field"><label><?= e(t('p_year')) ?></label><input type="text" name="year" value="<?= e($editing['year']) ?>"></div>
       </div>
       <div class="row row-2">
-        <div class="field"><label>Порядок (меньше = выше)</label><input type="number" name="order" value="<?= (int)$editing['order'] ?>"></div>
-        <div class="field"><label>&nbsp;</label><label class="check"><input type="checkbox" name="show" <?= ($editing['show']??true)?'checked':'' ?>> Показывать на сайте</label></div>
+        <div class="field"><label><?= e(t('p_order_hint')) ?></label><input type="number" name="order" value="<?= (int)$editing['order'] ?>"></div>
+        <div class="field"><label>&nbsp;</label><label class="check"><input type="checkbox" name="show" <?= ($editing['show']??true)?'checked':'' ?>> <?= e(t('show_site')) ?></label></div>
       </div>
-      <div class="field"><label>Краткое описание (в карточке)</label><textarea name="excerpt" style="min-height:70px"><?= e($editing['excerpt']) ?></textarea></div>
-      <div class="field"><label>Полный текст (можно HTML: &lt;p&gt;, &lt;br&gt;)</label><textarea name="body" style="min-height:150px"><?= e($editing['body']) ?></textarea></div>
+      <div class="field"><label><?= e(t('p_excerpt')) ?></label><textarea name="excerpt" style="min-height:70px"><?= e($editing['excerpt']) ?></textarea></div>
+      <div class="field"><label><?= t('p_body') ?></label><textarea name="body" style="min-height:150px"><?= e($editing['body']) ?></textarea></div>
 
       <div class="field">
-        <label>Обложка</label>
+        <label><?= e(t('p_cover')) ?></label>
         <?php if ($editing['cover']): ?><img class="thumb" style="width:120px;height:80px;margin-bottom:.5rem" src="<?= e($editing['cover']) ?>" alt=""><?php endif; ?>
         <input type="file" name="cover_file" accept="image/*">
-        <input type="text" name="cover_url" placeholder="или ссылка https://..." style="margin-top:.5rem">
+        <input type="text" name="cover_url" placeholder="<?= e(t('p_or_url')) ?>" style="margin-top:.5rem">
       </div>
 
       <div class="field">
-        <label>Галерея</label>
+        <label><?= e(t('p_gallery')) ?></label>
         <?php if (!empty($editing['gallery'])): ?>
           <div class="inline" style="flex-wrap:wrap;gap:.8rem;margin-bottom:.6rem">
             <?php foreach ($editing['gallery'] as $g): ?>
               <label class="check" style="flex-direction:column;align-items:flex-start;gap:.3rem">
                 <img class="thumb" src="<?= e($g) ?>" alt="">
-                <span class="muted" style="font-size:.75rem"><input type="checkbox" name="gal_remove[]" value="<?= e($g) ?>"> удалить</span>
+                <span class="muted" style="font-size:.75rem"><input type="checkbox" name="gal_remove[]" value="<?= e($g) ?>"> <?= e(t('p_remove')) ?></span>
               </label>
             <?php endforeach; ?>
           </div>
         <?php endif; ?>
         <input type="file" name="gallery_files[]" accept="image/*" multiple>
-        <input type="text" name="gallery_urls" placeholder="или ссылки через пробел" style="margin-top:.5rem">
+        <input type="text" name="gallery_urls" placeholder="<?= e(t('p_or_urls')) ?>" style="margin-top:.5rem">
       </div>
 
-      <button class="btn" type="submit">Сохранить</button>
+      <button class="btn" type="submit"><?= e(t('save')) ?></button>
     </form>
   </div>
 
 <?php else: ?>
-  <!-- ===== SİYAHI ===== -->
   <div class="card">
     <div class="item-head">
-      <div><h2>Все проекты</h2><p class="hint" style="margin:0">Порядок и видимость управляются в карточке проекта.</p></div>
-      <a href="/admin/projects.php?new=1" class="btn">+ Новый проект</a>
+      <div><h2><?= e(t('p_all')) ?></h2><p class="hint" style="margin:0"><?= e(t('p_all_h')) ?></p></div>
+      <a href="/admin/projects.php?new=1" class="btn"><?= e(t('p_new_btn')) ?></a>
     </div>
     <table>
-      <thead><tr><th>Фото</th><th>Название</th><th>Категория</th><th>Год</th><th>Порядок</th><th>Показ</th><th></th></tr></thead>
+      <thead><tr><th><?= e(t('photo')) ?></th><th><?= e(t('name')) ?></th><th><?= e(t('p_cat')) ?></th><th><?= e(t('p_year')) ?></th><th><?= e(t('order')) ?></th><th><?= e(t('show')) ?></th><th></th></tr></thead>
       <tbody>
       <?php usort($projects, fn($a,$b)=>($a['order']??0)<=>($b['order']??0)); ?>
       <?php foreach ($projects as $p): ?>
@@ -167,10 +162,10 @@ require __DIR__ . '/includes/layout_top.php';
           <td><?= (int)($p['order']??0) ?></td>
           <td><?= ($p['show']??true) ? '✅' : '—' ?></td>
           <td class="inline" style="gap:.4rem">
-            <a href="/admin/projects.php?edit=<?= e($p['id']) ?>" class="btn btn-outline btn-sm">Изменить</a>
-            <form method="post" data-confirm="Удалить проект «<?= e($p['title']) ?>»?" style="margin:0">
+            <a href="/admin/projects.php?edit=<?= e($p['id']) ?>" class="btn btn-outline btn-sm"><?= e(t('edit')) ?></a>
+            <form method="post" data-confirm="<?= e(t('p_confirm')) ?>" style="margin:0">
               <?= csrf_field() ?><input type="hidden" name="action" value="delete"><input type="hidden" name="id" value="<?= e($p['id']) ?>">
-              <button class="btn btn-danger btn-sm">Удалить</button>
+              <button class="btn btn-danger btn-sm"><?= e(t('delete')) ?></button>
             </form>
           </td>
         </tr>

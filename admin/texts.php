@@ -20,11 +20,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'text'    => trim($_POST['about_text'] ?? ''),
     ];
     save_json('settings', $s);
-    flash('Тексты сохранены. Сайт обновится сразу.');
+    flash(t('t_saved'));
     redirect('/admin/texts.php');
 }
 
-$PAGE_TITLE = 'Тексты сайта';
+$PAGE_TITLE = t('t_title');
 $ACTIVE = 'texts';
 require __DIR__ . '/includes/layout_top.php';
 $hero = $s['hero'] ?? []; $about = $s['about'] ?? [];
@@ -32,29 +32,29 @@ $hero = $s['hero'] ?? []; $about = $s['about'] ?? [];
 <form method="post">
   <?= csrf_field() ?>
   <div class="card">
-    <h2>Общие</h2>
+    <h2><?= e(t('t_common')) ?></h2>
     <div class="row row-2">
-      <div class="field"><label>Название</label><input type="text" name="name" value="<?= e($s['name']??'') ?>"></div>
-      <div class="field"><label>Юр. название (футер)</label><input type="text" name="legal" value="<?= e($s['legal']??'') ?>"></div>
+      <div class="field"><label><?= e(t('name')) ?></label><input type="text" name="name" value="<?= e($s['name']??'') ?>"></div>
+      <div class="field"><label><?= e(t('t_legal')) ?></label><input type="text" name="legal" value="<?= e($s['legal']??'') ?>"></div>
     </div>
-    <div class="field"><label>Слоган</label><input type="text" name="tagline" value="<?= e($s['tagline']??'') ?>"></div>
-    <div class="field"><label>Короткое описание (футер/SEO fallback)</label><textarea name="description" style="min-height:70px"><?= e($s['description']??'') ?></textarea></div>
+    <div class="field"><label><?= e(t('t_slogan')) ?></label><input type="text" name="tagline" value="<?= e($s['tagline']??'') ?>"></div>
+    <div class="field"><label><?= e(t('t_shortdesc')) ?></label><textarea name="description" style="min-height:70px"><?= e($s['description']??'') ?></textarea></div>
   </div>
 
   <div class="card">
-    <h2>Главный экран (Hero)</h2>
-    <div class="field"><label>Надзаголовок</label><input type="text" name="hero_eyebrow" value="<?= e($hero['eyebrow']??'') ?>"></div>
-    <div class="field"><label>Заголовок (перенос строки = новая строка)</label><textarea name="hero_title" style="min-height:70px"><?= e($hero['title']??'') ?></textarea></div>
-    <div class="field"><label>Подзаголовок</label><textarea name="hero_lead" style="min-height:70px"><?= e($hero['lead']??'') ?></textarea></div>
+    <h2><?= e(t('t_hero')) ?></h2>
+    <div class="field"><label><?= e(t('t_eyebrow')) ?></label><input type="text" name="hero_eyebrow" value="<?= e($hero['eyebrow']??'') ?>"></div>
+    <div class="field"><label><?= e(t('t_hero_title')) ?></label><textarea name="hero_title" style="min-height:70px"><?= e($hero['title']??'') ?></textarea></div>
+    <div class="field"><label><?= e(t('t_hero_lead')) ?></label><textarea name="hero_lead" style="min-height:70px"><?= e($hero['lead']??'') ?></textarea></div>
   </div>
 
   <div class="card">
-    <h2>Блок «О компании» (на главной)</h2>
-    <div class="field"><label>Надзаголовок</label><input type="text" name="about_eyebrow" value="<?= e($about['eyebrow']??'') ?>"></div>
-    <div class="field"><label>Заголовок</label><input type="text" name="about_title" value="<?= e($about['title']??'') ?>"></div>
-    <div class="field"><label>Текст (пустая строка = новый абзац)</label><textarea name="about_text" style="min-height:130px"><?= e($about['text']??'') ?></textarea></div>
+    <h2><?= e(t('t_about')) ?></h2>
+    <div class="field"><label><?= e(t('t_eyebrow')) ?></label><input type="text" name="about_eyebrow" value="<?= e($about['eyebrow']??'') ?>"></div>
+    <div class="field"><label><?= e(t('title_f')) ?></label><input type="text" name="about_title" value="<?= e($about['title']??'') ?>"></div>
+    <div class="field"><label><?= e(t('t_about_text')) ?></label><textarea name="about_text" style="min-height:130px"><?= e($about['text']??'') ?></textarea></div>
   </div>
 
-  <button class="btn" type="submit">Сохранить всё</button>
+  <button class="btn" type="submit"><?= e(t('save_all')) ?></button>
 </form>
 <?php require __DIR__ . '/includes/layout_bottom.php'; ?>

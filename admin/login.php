@@ -8,9 +8,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!empty($_POST['website'])) {              // honeypot
         $error = 'Xəta.';
     } elseif (login_attempts_left() <= 0) {
-        $error = 'Слишком много попыток. Попробуйте через 15 минут.';
+        $error = t('login_many');
     } elseif (turnstile_active($SITE) && !turnstile_verify($SITE['security']['turnstile_secret'], $_POST['cf-turnstile-response'] ?? null, $_SERVER['REMOTE_ADDR'] ?? null)) {
-        $error = 'Подтвердите, что вы не робот.';
+        $error = t('login_robot');
     } else {
         $email = trim($_POST['email'] ?? '');
         $pass  = (string)($_POST['password'] ?? '');
@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             redirect('/admin/');
         } else {
             login_record_fail();
-            $error = 'Неверный e-mail или пароль. Осталось попыток: ' . login_attempts_left();
+            $error = t('login_bad') . ' ' . login_attempts_left();
         }
     }
 }
@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Вход в панель — MYBEL</title>
+<title><?= e(t('login_title')) ?> — MYBEL</title>
 <link rel="icon" href="/assets/img/logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/admin/assets/admin.css?v=2">
@@ -47,23 +47,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <div class="login-wrap">
   <form class="login-card" method="post" action="/admin/login.php" novalidate>
     <img class="logo" src="/assets/img/logo.png" alt="MYBEL Concept">
-    <h1>Вход в панель</h1>
-    <p class="sub">Управление контентом сайта</p>
+    <h1><?= e(t('login_title')) ?></h1>
+    <p class="sub"><?= e(t('login_sub')) ?></p>
     <?php if ($error): ?><div class="alert alert-error"><?= e($error) ?></div><?php endif; ?>
     <?= csrf_field() ?>
     <div class="field">
-      <label for="email">E-mail</label>
+      <label for="email"><?= e(t('email')) ?></label>
       <input type="email" id="email" name="email" value="<?= e($_POST['email'] ?? '') ?>" autocomplete="username" required>
     </div>
     <div class="field">
-      <label for="password">Пароль</label>
+      <label for="password"><?= e(t('password')) ?></label>
       <input type="password" id="password" name="password" autocomplete="current-password" required>
     </div>
     <input type="text" name="website" style="position:absolute;left:-9999px" tabindex="-1" aria-hidden="true">
     <?php if (turnstile_active($SITE)): ?>
       <div class="field"><div class="cf-turnstile" data-sitekey="<?= e($SITE['security']['turnstile_site']) ?>"></div></div>
     <?php endif; ?>
-    <button type="submit" class="btn">Войти</button>
+    <button type="submit" class="btn"><?= e(t('login_btn')) ?></button>
+    <div style="text-align:center;margin-top:1.2rem">
+      <span class="lang-switch">
+        <?php foreach ($ADMIN_LANGS as $code => $label): ?>
+          <a href="/admin/login.php?lang=<?= e($code) ?>" class="<?= $ADMIN_LANG===$code?'on':'' ?>"><?= e($label) ?></a>
+        <?php endforeach; ?>
+      </span>
+    </div>
   </form>
 </div>
 </body>

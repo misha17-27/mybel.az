@@ -13,9 +13,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $changePass = ($new !== '' || $cur !== '' || $rep !== '');
 
     if ($changePass) {
-        if (!password_verify($cur, $me['pass'])) { flash('Текущий пароль неверный.', 'error'); redirect('/admin/profile.php'); }
-        if (strlen($new) < 8) { flash('Новый пароль — минимум 8 символов.', 'error'); redirect('/admin/profile.php'); }
-        if ($new !== $rep) { flash('Пароли не совпадают.', 'error'); redirect('/admin/profile.php'); }
+        if (!password_verify($cur, $me['pass'])) { flash(t('r_bad_cur'), 'error'); redirect('/admin/profile.php'); }
+        if (strlen($new) < 8) { flash(t('r_short'), 'error'); redirect('/admin/profile.php'); }
+        if ($new !== $rep) { flash(t('r_nomatch'), 'error'); redirect('/admin/profile.php'); }
     }
     foreach ($users as &$u) {
         if ($u['id'] === $me['id']) {
@@ -24,28 +24,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
     save_json('users', $users);
-    flash('Профиль обновлён.');
+    flash(t('r_saved'));
     redirect('/admin/profile.php');
 }
 
-$PAGE_TITLE = 'Мой профиль';
+$PAGE_TITLE = t('r_title');
 $ACTIVE = 'profile';
 require __DIR__ . '/includes/layout_top.php';
 ?>
 <div class="card" style="max-width:520px">
-  <h2>Профиль</h2>
-  <p class="hint">E-mail (логин): <strong><?= e($me['email']) ?></strong> · роль: <span class="badge"><?= $me['role']==='admin'?'Администратор':'Редактор' ?></span></p>
+  <h2><?= e(t('r_profile')) ?></h2>
+  <p class="hint"><?= e(t('r_login')) ?> <strong><?= e($me['email']) ?></strong> · <?= e(t('r_role')) ?> <span class="badge"><?= $me['role']==='admin'?e(t('u_admin')):e(t('u_editor')) ?></span></p>
   <form method="post">
     <?= csrf_field() ?>
-    <div class="field"><label>Имя</label><input type="text" name="name" value="<?= e($me['name']) ?>"></div>
-    <h2 style="font-size:1rem;margin-top:1rem">Смена пароля</h2>
-    <p class="hint">Заполните, только если хотите изменить пароль.</p>
-    <div class="field"><label>Текущий пароль</label><input type="password" name="current" autocomplete="current-password"></div>
+    <div class="field"><label><?= e(t('name')) ?></label><input type="text" name="name" value="<?= e($me['name']) ?>"></div>
+    <h2 style="font-size:1rem;margin-top:1rem"><?= e(t('r_chpass')) ?></h2>
+    <p class="hint"><?= e(t('r_chpass_h')) ?></p>
+    <div class="field"><label><?= e(t('r_cur')) ?></label><input type="password" name="current" autocomplete="current-password"></div>
     <div class="row row-2">
-      <div class="field"><label>Новый пароль</label><input type="password" name="newpass" autocomplete="new-password"></div>
-      <div class="field"><label>Повторите</label><input type="password" name="repeat" autocomplete="new-password"></div>
+      <div class="field"><label><?= e(t('r_new')) ?></label><input type="password" name="newpass" autocomplete="new-password"></div>
+      <div class="field"><label><?= e(t('r_rep')) ?></label><input type="password" name="repeat" autocomplete="new-password"></div>
     </div>
-    <button class="btn" type="submit">Сохранить</button>
+    <button class="btn" type="submit"><?= e(t('save')) ?></button>
   </form>
 </div>
 <?php require __DIR__ . '/includes/layout_bottom.php'; ?>

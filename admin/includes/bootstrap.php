@@ -14,6 +14,9 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
 }
 
+// ---- Dil (RU/EN/AZ) ----
+require_once __DIR__ . '/i18n.php';
+
 // ---- İlk admin istifadəçisini yarat (seed) ----
 function ensure_users_seed(): array {
     $users = load_json('users', []);

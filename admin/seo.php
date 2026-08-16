@@ -18,34 +18,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'robots'     => ($_POST['robots'] ?? 'index') === 'noindex' ? 'noindex' : 'index',
     ];
     save_json('settings', $s);
-    flash('SEO сохранено.');
+    flash(t('o_saved'));
     redirect('/admin/seo.php');
 }
 
-$PAGE_TITLE = 'SEO';
+$PAGE_TITLE = t('n_seo');
 $ACTIVE = 'seo';
 require __DIR__ . '/includes/layout_top.php';
 ?>
 <form method="post" enctype="multipart/form-data">
   <?= csrf_field() ?>
   <div class="card">
-    <h2>Поисковая оптимизация</h2>
-    <p class="hint">Эти данные видят Google и соцсети при отправке ссылки.</p>
-    <div class="field"><label>Заголовок главной (Title, 50–60 символов)</label><input type="text" name="home_title" value="<?= e($seo['home_title']??'') ?>"></div>
-    <div class="field"><label>Описание (Description, 140–160 символов)</label><textarea name="home_desc" style="min-height:80px"><?= e($seo['home_desc']??'') ?></textarea></div>
+    <h2><?= e(t('o_title')) ?></h2>
+    <p class="hint"><?= e(t('o_h')) ?></p>
+    <div class="field"><label><?= e(t('o_mt')) ?></label><input type="text" name="home_title" value="<?= e($seo['home_title']??'') ?>"></div>
+    <div class="field"><label><?= e(t('o_md')) ?></label><textarea name="home_desc" style="min-height:80px"><?= e($seo['home_desc']??'') ?></textarea></div>
     <div class="field">
-      <label>Картинка для соцсетей (1200×630)</label>
+      <label><?= e(t('o_og')) ?></label>
       <?php if (!empty($seo['og_image'])): ?><img class="thumb" style="width:160px;height:84px;object-fit:contain;background:#111;margin-bottom:.5rem" src="<?= e($seo['og_image']) ?>" alt=""><?php endif; ?>
       <input type="file" name="og_file" accept="image/*">
-      <input type="text" name="og_url" placeholder="или ссылка /assets/... или https://..." style="margin-top:.5rem">
+      <input type="text" name="og_url" placeholder="<?= e(t('o_or')) ?>" style="margin-top:.5rem">
     </div>
-    <div class="field"><label>Видимость в поиске</label>
+    <div class="field"><label><?= e(t('o_vis')) ?></label>
       <select name="robots">
-        <option value="index" <?= ($seo['robots']??'index')==='index'?'selected':'' ?>>Открыт для поисковиков</option>
-        <option value="noindex" <?= ($seo['robots']??'')==='noindex'?'selected':'' ?>>Закрыт (noindex)</option>
+        <option value="index" <?= ($seo['robots']??'index')==='index'?'selected':'' ?>><?= e(t('o_open')) ?></option>
+        <option value="noindex" <?= ($seo['robots']??'')==='noindex'?'selected':'' ?>><?= e(t('o_closed')) ?></option>
       </select>
     </div>
-    <button class="btn" type="submit">Сохранить</button>
+    <button class="btn" type="submit"><?= e(t('save')) ?></button>
   </div>
 </form>
 <?php require __DIR__ . '/includes/layout_bottom.php'; ?>

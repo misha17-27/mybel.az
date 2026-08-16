@@ -22,28 +22,33 @@ function a_icon($n){
   return '<svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'.($p[$n]??'').'</svg>';
 }
 $NAV = [
-  ['ОСНОВНОЕ', [
-    ['dashboard','Обзор','/admin/','home'],
+  [t('g_main'), [
+    ['dashboard',t('n_dashboard'),'/admin/','home'],
   ]],
-  ['КОНТЕНТ', [
-    ['texts','Тексты сайта','/admin/texts.php','text'],
-    ['projects','Проекты','/admin/projects.php','grid'],
-    ['areas','Сферы деятельности','/admin/areas.php','layers'],
-    ['services','Услуги','/admin/services.php','grid'],
-    ['clients','Клиенты','/admin/clients.php','users'],
-    ['contacts','Контакты и соцсети','/admin/contacts.php','phone'],
-    ['messages','Заявки с сайта','/admin/messages.php','mail'],
+  [t('g_content'), [
+    ['texts',t('n_texts'),'/admin/texts.php','text'],
+    ['projects',t('n_projects'),'/admin/projects.php','grid'],
+    ['areas',t('n_areas'),'/admin/areas.php','layers'],
+    ['services',t('n_services'),'/admin/services.php','grid'],
+    ['clients',t('n_clients'),'/admin/clients.php','users'],
+    ['contacts',t('n_contacts'),'/admin/contacts.php','phone'],
+    ['messages',t('n_messages'),'/admin/messages.php','mail'],
   ]],
-  ['НАСТРОЙКИ', [
-    ['seo','SEO','/admin/seo.php','seo'],
-    ['mail','Почта (SMTP)','/admin/mail.php','mail'],
-    ['security','Безопасность','/admin/security.php','lock'],
-    ['users','Пользователи','/admin/users.php','user'],
-    ['profile','Мой профиль','/admin/profile.php','user'],
+  [t('g_settings'), [
+    ['seo',t('n_seo'),'/admin/seo.php','seo'],
+    ['mail',t('n_mail'),'/admin/mail.php','mail'],
+    ['security',t('n_security'),'/admin/security.php','lock'],
+    ['users',t('n_users'),'/admin/users.php','user'],
+    ['profile',t('n_profile'),'/admin/profile.php','user'],
   ]],
 ];
+// dil seçici üçün cari yol (mövcud lang parametri olmadan)
+$curPath = strtok($_SERVER['REQUEST_URI'], '?');
+$qs = $_GET; unset($qs['lang']);
+$baseQs = http_build_query($qs);
+$langBase = $curPath . ($baseQs ? "?$baseQs&" : '?');
 ?><!doctype html>
-<html lang="ru">
+<html lang="<?= e($ADMIN_LANG) ?>">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -60,25 +65,30 @@ $NAV = [
     <div class="sidebar-brand"><img src="/assets/img/logo.png" alt="MYBEL"></div>
     <nav class="sidebar-nav">
       <?php foreach ($NAV as [$group, $items]): ?>
-        <?php if (($U['role'] ?? '') !== 'admin' && $group === 'НАСТРОЙКИ') { $items = array_filter($items, fn($i)=>!in_array($i[0],['users','security','mail'],true)); } ?>
+        <?php if (($U['role'] ?? '') !== 'admin' && $group === t('g_settings')) { $items = array_filter($items, fn($i)=>!in_array($i[0],['users','security','mail'],true)); } ?>
         <div class="sidebar-group"><?= e($group) ?></div>
         <?php foreach ($items as [$key,$label,$href,$icon]): ?>
           <a href="<?= e($href) ?>" class="<?= $ACTIVE===$key?'active':'' ?>"><?= a_icon($icon) ?><span><?= e($label) ?></span></a>
         <?php endforeach; ?>
       <?php endforeach; ?>
     </nav>
-    <div class="sidebar-foot">Вы вошли как<b><?= e($U['name']) ?></b></div>
+    <div class="sidebar-foot"><?= e(t('logged_as')) ?><b><?= e($U['name']) ?></b></div>
   </aside>
 
   <div class="main">
     <div class="topbar">
       <div class="inline">
-        <button class="menu-btn" id="menuBtn" aria-label="Меню">☰</button>
+        <button class="menu-btn" id="menuBtn" aria-label="<?= e(t('menu')) ?>">☰</button>
         <h1><?= e($PAGE_TITLE) ?></h1>
       </div>
       <div class="topbar-actions">
-        <a href="/" target="_blank" class="btn btn-outline btn-sm">Открыть сайт ↗</a>
-        <a href="/admin/logout.php" class="btn btn-sm">Выйти</a>
+        <span class="lang-switch">
+          <?php foreach ($ADMIN_LANGS as $code => $label): ?>
+            <a href="<?= e($langBase . 'lang=' . $code) ?>" class="<?= $ADMIN_LANG===$code?'on':'' ?>"><?= e($label) ?></a>
+          <?php endforeach; ?>
+        </span>
+        <a href="/" target="_blank" class="btn btn-outline btn-sm"><?= e(t('open_site')) ?> ↗</a>
+        <a href="/admin/logout.php" class="btn btn-sm"><?= e(t('logout')) ?></a>
       </div>
     </div>
     <div class="content">
