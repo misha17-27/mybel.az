@@ -35,7 +35,6 @@ function theme_link($path, $n) {
                         <a href="<?= e($href) ?>"<?= $current_section === $key ? ' aria-current="page"' : '' ?>><?= e($label) ?></a>
                     </li>
                 <?php endforeach; ?>
-                <li class="nav-cta"><a href="/elaqe/" class="btn btn-sm">Sifariş ver</a></li>
             </ul>
         </nav>
     </div>
