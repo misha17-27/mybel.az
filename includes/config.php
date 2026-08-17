@@ -46,6 +46,7 @@ $DEF_SETTINGS = [
         'eyebrow' => 'Şirkət haqqında',
         'title'   => 'Keyfiyyət və dizaynı bir araya gətiririk',
         'text'    => ph_text(1),
+        'video'   => '',   // YouTube/Vimeo linki və ya .mp4 faylı (admin paneldən)
     ],
     'seo'         => [
         'home_title' => 'MYBEL Concept — Premium mebel və interyer həlləri | Bakı',
@@ -169,6 +170,28 @@ function find_by_slug(array $list, $slug) {
 function cat_name($key) {
     global $CATEGORIES;
     return $CATEGORIES[$key] ?? $key;
+}
+
+/**
+ * Video linkindən responsiv embed qaytarır (YouTube/Vimeo/mp4).
+ * Boş olarsa boş sətir qaytarır.
+ */
+function video_embed($url) {
+    $url = trim((string)$url);
+    if ($url === '') return '';
+    if (preg_match('~(?:youtube\.com/(?:watch\?v=|embed/|shorts/)|youtu\.be/)([\w-]{11})~', $url, $m)) {
+        return '<div class="video-frame"><iframe src="https://www.youtube.com/embed/' . e($m[1])
+             . '" title="Video" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>';
+    }
+    if (preg_match('~vimeo\.com/(?:video/)?(\d+)~', $url, $m)) {
+        return '<div class="video-frame"><iframe src="https://player.vimeo.com/video/' . e($m[1])
+             . '" title="Video" loading="lazy" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>';
+    }
+    if (preg_match('~\.(mp4|webm|ogg)(\?.*)?$~i', $url)) {
+        return '<div class="video-frame"><video controls preload="metadata"><source src="' . e($url) . '"></video></div>';
+    }
+    // digər hallar: birbaşa iframe mənbəyi kimi
+    return '<div class="video-frame"><iframe src="' . e($url) . '" title="Video" loading="lazy" allowfullscreen></iframe></div>';
 }
 
 /** Turnstile aktivdir? (açıq + açarlar var) */

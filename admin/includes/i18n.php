@@ -42,6 +42,7 @@ $ADMIN_T = [
   't_title'=>'Тексты сайта','t_common'=>'Общие','t_legal'=>'Юр. название (футер)','t_slogan'=>'Слоган','t_shortdesc'=>'Короткое описание (футер/SEO fallback)',
   't_hero'=>'Главный экран (Hero)','t_eyebrow'=>'Надзаголовок','t_hero_title'=>'Заголовок (перенос строки = новая строка)','t_hero_lead'=>'Подзаголовок',
   't_about'=>'Блок «О компании» (на главной)','t_about_text'=>'Текст (пустая строка = новый абзац)','t_saved'=>'Тексты сохранены. Сайт обновится сразу.',
+  't_video'=>'Видео на странице «О компании»','t_video_h'=>'Ссылка YouTube / Vimeo или прямой .mp4. Пусто — на сайте будет заглушка «место под видео».',
   // projects / areas
   'p_edit'=>'Редактировать проект','p_new'=>'Новый проект','p_slug'=>'Slug (URL, необязательно)','p_slug_ph'=>'авто из заголовка',
   'p_cat'=>'Категория','p_loc'=>'Локация','p_year'=>'Год','p_order_hint'=>'Порядок (меньше = выше)','p_excerpt'=>'Краткое описание (в карточке)',
@@ -98,6 +99,7 @@ $ADMIN_T = [
   't_title'=>'Site texts','t_common'=>'General','t_legal'=>'Legal name (footer)','t_slogan'=>'Slogan','t_shortdesc'=>'Short description (footer / SEO fallback)',
   't_hero'=>'Hero section','t_eyebrow'=>'Eyebrow','t_hero_title'=>'Title (line break = new line)','t_hero_lead'=>'Subtitle',
   't_about'=>'“About” block (home page)','t_about_text'=>'Text (empty line = new paragraph)','t_saved'=>'Texts saved. The site updates instantly.',
+  't_video'=>'Video on the “About” page','t_video_h'=>'YouTube / Vimeo link or a direct .mp4. Empty — the site shows a “video placeholder”.',
   'p_edit'=>'Edit project','p_new'=>'New project','p_slug'=>'Slug (URL, optional)','p_slug_ph'=>'auto from title',
   'p_cat'=>'Category','p_loc'=>'Location','p_year'=>'Year','p_order_hint'=>'Order (lower = higher)','p_excerpt'=>'Short description (card)',
   'p_body'=>'Full text (HTML allowed: <p>, <br>)','p_cover'=>'Cover','p_or_url'=>'or link https://...','p_gallery'=>'Gallery','p_remove'=>'remove','p_or_urls'=>'or links separated by space',
@@ -144,6 +146,7 @@ $ADMIN_T = [
   't_title'=>'Sayt mətnləri','t_common'=>'Ümumi','t_legal'=>'Hüquqi ad (futer)','t_slogan'=>'Şüar','t_shortdesc'=>'Qısa təsvir (futer / SEO ehtiyat)',
   't_hero'=>'Əsas ekran (Hero)','t_eyebrow'=>'Üst başlıq','t_hero_title'=>'Başlıq (sətir keçidi = yeni sətir)','t_hero_lead'=>'Alt başlıq',
   't_about'=>'“Şirkət haqqında” bloku (ana səhifə)','t_about_text'=>'Mətn (boş sətir = yeni abzas)','t_saved'=>'Mətnlər saxlanıldı. Sayt dərhal yenilənir.',
+  't_video'=>'“Şirkət haqqında” səhifəsində video','t_video_h'=>'YouTube / Vimeo linki və ya birbaşa .mp4. Boş — saytda “video yeri” göstərilir.',
   'p_edit'=>'Layihəni redaktə et','p_new'=>'Yeni layihə','p_slug'=>'Slug (URL, istəyə görə)','p_slug_ph'=>'başlıqdan avtomatik',
   'p_cat'=>'Kateqoriya','p_loc'=>'Məkan','p_year'=>'İl','p_order_hint'=>'Sıra (kiçik = yuxarı)','p_excerpt'=>'Qısa təsvir (kartda)',
   'p_body'=>'Tam mətn (HTML olar: <p>, <br>)','p_cover'=>'Örtük şəkli','p_or_url'=>'və ya keçid https://...','p_gallery'=>'Qalereya','p_remove'=>'sil','p_or_urls'=>'və ya boşluqla keçidlər',

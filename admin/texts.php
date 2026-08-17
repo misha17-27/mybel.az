@@ -18,6 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'eyebrow' => trim($_POST['about_eyebrow'] ?? ''),
         'title'   => trim($_POST['about_title'] ?? ''),
         'text'    => trim($_POST['about_text'] ?? ''),
+        'video'   => trim($_POST['about_video'] ?? ''),
     ];
     save_json('settings', $s);
     flash(t('t_saved'));
@@ -53,6 +54,7 @@ $hero = $s['hero'] ?? []; $about = $s['about'] ?? [];
     <div class="field"><label><?= e(t('t_eyebrow')) ?></label><input type="text" name="about_eyebrow" value="<?= e($about['eyebrow']??'') ?>"></div>
     <div class="field"><label><?= e(t('title_f')) ?></label><input type="text" name="about_title" value="<?= e($about['title']??'') ?>"></div>
     <div class="field"><label><?= e(t('t_about_text')) ?></label><textarea name="about_text" style="min-height:130px"><?= e($about['text']??'') ?></textarea></div>
+    <div class="field"><label><?= e(t('t_video')) ?></label><input type="text" name="about_video" value="<?= e($about['video']??'') ?>" placeholder="https://youtu.be/... / https://vimeo.com/... / .mp4"><small class="hint" style="display:block;margin-top:.3rem"><?= e(t('t_video_h')) ?></small></div>
   </div>
 
   <button class="btn" type="submit"><?= e(t('save_all')) ?></button>

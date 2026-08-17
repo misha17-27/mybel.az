@@ -33,6 +33,27 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
     </div>
 </section>
 
+<!-- ============ VİDEO ============ -->
+<section class="section">
+    <div class="container">
+        <div class="section-head center">
+            <span class="eyebrow">Video</span>
+            <h2 class="section-title">Şirkətimiz haqqında video</h2>
+        </div>
+        <?php $about_video = $SITE['about']['video'] ?? ''; ?>
+        <?php if ($about_video !== ''): ?>
+            <?= video_embed($about_video) ?>
+        <?php else: ?>
+            <div class="video-placeholder" data-reveal>
+                <div>
+                    <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin:0 auto .6rem"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/></svg>
+                    <p>Video buraya əlavə olunacaq</p>
+                </div>
+            </div>
+        <?php endif; ?>
+    </div>
+</section>
+
 <section class="section section-alt">
     <div class="container">
         <div class="about-split" style="align-items:start">
