@@ -257,8 +257,10 @@ button { font: inherit; cursor: pointer; }
 .client-cell:hover img { filter: none; opacity: 1; }
 @keyframes clients-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-/* Köhnə grid (istifadə olunmur, ehtiyat üçün) */
+/* Statik grid — bütün loqoları göstərmək üçün (Müştərilər səhifəsi) */
 .clients-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+.clients-grid .client-cell { width: auto; border-right: 0; }
+.clients-grid .client-cell a { display: grid; place-items: center; width: 100%; height: 100%; }
 
 /* =====================================================================
    DETAIL PAGE (layihə / fəaliyyət detalı)

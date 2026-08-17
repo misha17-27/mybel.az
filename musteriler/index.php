@@ -21,7 +21,17 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
 
 <section class="section">
     <div class="container">
-        <?php include $_SERVER['DOCUMENT_ROOT'] . '/includes/clients.php'; ?>
+        <div class="clients-grid">
+            <?php foreach (visible_sorted($CLIENTS) as $c): ?>
+                <div class="client-cell">
+                    <?php if (!empty($c['link'])): ?>
+                        <a href="<?= e($c['link']) ?>" target="_blank" rel="noopener" aria-label="<?= e($c['name']) ?>"><img src="<?= e($c['logo']) ?>" alt="<?= e($c['name']) ?> loqo" loading="lazy" width="240" height="120"></a>
+                    <?php else: ?>
+                        <img src="<?= e($c['logo']) ?>" alt="<?= e($c['name']) ?> loqo" loading="lazy" width="240" height="120">
+                    <?php endif; ?>
+                </div>
+            <?php endforeach; ?>
+        </div>
     </div>
 </section>
 
