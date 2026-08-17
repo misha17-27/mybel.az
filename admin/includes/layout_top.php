@@ -55,7 +55,9 @@ $langBase = $curPath . ($baseQs ? "?$baseQs&" : '?');
 <title><?= e($PAGE_TITLE) ?> — MYBEL admin</title>
 <link rel="icon" href="/assets/img/logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/admin/assets/admin.css?v=2">
+<link rel="stylesheet" href="/admin/assets/admin.css?v=3">
+<link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
 </head>
 <body>
 <div class="admin">

@@ -131,7 +131,7 @@ require __DIR__ . '/includes/layout_top.php';
         <div class="field"><label>&nbsp;</label><label class="check"><input type="checkbox" name="show" <?= ($editing['show']??true)?'checked':'' ?>> <?= e(t('show_site')) ?></label></div>
       </div>
       <div class="field"><label><?= e(t('p_excerpt')) ?></label><textarea name="excerpt" style="min-height:70px"><?= e($editing['excerpt']) ?></textarea></div>
-      <div class="field"><label><?= e(t('p_body')) ?></label><textarea name="body" style="min-height:150px"><?= e($editing['body']) ?></textarea></div>
+      <div class="field"><label><?= e(t('p_body')) ?></label><textarea name="body" class="richtext" style="min-height:150px"><?= e($editing['body']) ?></textarea></div>
 
       <?php $linkedServices = []; foreach ($services as $sv) if (in_array($editing['id'], $sv['projects'] ?? [], true)) $linkedServices[] = $sv['id']; ?>
       <div class="field">

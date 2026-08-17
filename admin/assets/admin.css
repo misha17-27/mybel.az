@@ -112,4 +112,13 @@ tr:last-child td{border-bottom:0}
   .sidebar-backdrop.show{display:block}
 }
 .menu-btn{display:none;background:none;border:1px solid var(--line);border-radius:8px;padding:.4rem .6rem;cursor:pointer}
+
+/* Vizual redaktor (Quill) */
+.rt-editor{background:#fff}
+.ql-toolbar.ql-snow,.ql-container.ql-snow{border-color:var(--line)!important}
+.ql-toolbar.ql-snow{border-radius:8px 8px 0 0}
+.ql-container.ql-snow{border-radius:0 0 8px 8px;font-family:var(--font);font-size:15px}
+.ql-editor{min-height:170px}
+.ql-snow .ql-stroke{stroke:var(--muted)}
+.ql-snow.ql-toolbar button:hover .ql-stroke,.ql-snow .ql-toolbar button.ql-active .ql-stroke{stroke:var(--brand)}
 .sidebar-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:55}

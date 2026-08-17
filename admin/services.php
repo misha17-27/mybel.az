@@ -71,7 +71,7 @@ require __DIR__ . '/includes/layout_top.php';
       </div>
       <div class="field"><label><?= e(t('p_slug')) ?></label><input type="text" name="slug" value="<?= e($editing['slug']??'') ?>" placeholder="<?= e(t('p_slug_ph')) ?>"></div>
       <div class="field"><label><?= e(t('s_short')) ?></label><input type="text" name="desc" value="<?= e($editing['desc']??'') ?>"></div>
-      <div class="field"><label><?= e(t('s_body')) ?></label><textarea name="body" style="min-height:130px"><?= e($editing['body']??'') ?></textarea></div>
+      <div class="field"><label><?= e(t('s_body')) ?></label><textarea name="body" class="richtext" style="min-height:130px"><?= e($editing['body']??'') ?></textarea></div>
       <div class="field"><label class="check"><input type="checkbox" name="show" <?= ($editing['show']??true)?'checked':'' ?>> <?= e(t('show_site')) ?></label></div>
 
       <div class="field">
