@@ -82,6 +82,8 @@ $ADMIN_T = [
   'l_test'=>'Проверка отправки','l_test_h'=>'Отправим тестовое письмо, чтобы убедиться, что настройки верные. Сначала сохраните настройки.','l_to'=>'Адрес получателя','l_send'=>'Отправить тест','l_bad_to'=>'Укажите корректный e-mail получателя.','l_sent'=>'Письмо отправлено на','l_err'=>'Ошибка:',
   'l_where'=>'Где взять данные','l_where_h'=>'В cPanel → Email Accounts → у нужного ящика нажмите Connect Devices. Там указаны сервер, порт и способ шифрования. Пользователь — полный адрес почты, пароль — от этого ящика.',
   'unchanged'=>'•••• без изменений',
+  'th_home'=>'Разделы главной страницы','th_projects'=>'Секция «Проекты»','th_services'=>'Секция «Услуги»','th_clients'=>'Секция «Клиенты»','th_cta'=>'Призыв к действию (CTA)','th_desc'=>'Описание','th_btn'=>'Текст кнопки',
+  'ta_page'=>'Страница «О компании»','ta_lead'=>'Подзаголовок (под заголовком)','ta_intro'=>'Блок «Кто мы»','ta_mission'=>'Миссия','ta_approach'=>'Подход','ta_stats'=>'Цифры (статистика)','ta_num'=>'Число','ta_label'=>'Подпись','ta_text'=>'Текст',
 ],
 'en' => [
   'g_main'=>'MAIN','g_content'=>'CONTENT','g_settings'=>'SETTINGS',
@@ -130,6 +132,8 @@ $ADMIN_T = [
   'l_test'=>'Send test','l_test_h'=>'We will send a test email to verify the settings. Save the settings first.','l_to'=>'Recipient','l_send'=>'Send test','l_bad_to'=>'Enter a valid recipient e-mail.','l_sent'=>'Email sent to','l_err'=>'Error:',
   'l_where'=>'Where to get the data','l_where_h'=>'cPanel → Email Accounts → for the mailbox click Connect Devices. It shows server, port and encryption. User is the full e-mail, password is the mailbox password.',
   'unchanged'=>'•••• unchanged',
+  'th_home'=>'Home page sections','th_projects'=>'“Projects” section','th_services'=>'“Services” section','th_clients'=>'“Clients” section','th_cta'=>'Call to action (CTA)','th_desc'=>'Description','th_btn'=>'Button text',
+  'ta_page'=>'“About” page','ta_lead'=>'Subtitle (under the heading)','ta_intro'=>'“Who we are” block','ta_mission'=>'Mission','ta_approach'=>'Approach','ta_stats'=>'Stats (numbers)','ta_num'=>'Number','ta_label'=>'Caption','ta_text'=>'Text',
 ],
 'az' => [
   'g_main'=>'ƏSAS','g_content'=>'MƏZMUN','g_settings'=>'AYARLAR',
@@ -178,5 +182,7 @@ $ADMIN_T = [
   'l_test'=>'Göndərmə yoxlaması','l_test_h'=>'Ayarların doğru olduğunu yoxlamaq üçün test məktub göndərəcəyik. Əvvəlcə ayarları saxlayın.','l_to'=>'Alıcı ünvanı','l_send'=>'Test göndər','l_bad_to'=>'Düzgün alıcı e-poçtu daxil edin.','l_sent'=>'Məktub göndərildi:','l_err'=>'Xəta:',
   'l_where'=>'Məlumatı haradan almalı','l_where_h'=>'cPanel → Email Accounts → lazımi qutuda Connect Devices basın. Orada server, port və şifrələmə göstərilir. İstifadəçi — tam e-poçt, şifrə — bu qutunun şifrəsidir.',
   'unchanged'=>'•••• dəyişmədən',
+  'th_home'=>'Ana səhifə bölmələri','th_projects'=>'“Layihələr” bölməsi','th_services'=>'“Xidmətlər” bölməsi','th_clients'=>'“Müştərilər” bölməsi','th_cta'=>'Çağırış (CTA)','th_desc'=>'Təsvir','th_btn'=>'Düymə mətni',
+  'ta_page'=>'“Şirkət haqqında” səhifəsi','ta_lead'=>'Alt başlıq (başlığın altında)','ta_intro'=>'“Kimik biz” bloku','ta_mission'=>'Missiya','ta_approach'=>'Yanaşma','ta_stats'=>'Rəqəmlər (statistika)','ta_num'=>'Rəqəm','ta_label'=>'Yazı','ta_text'=>'Mətn',
 ],
 ];

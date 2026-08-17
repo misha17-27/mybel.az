@@ -42,7 +42,9 @@ h1,h2,h3{margin:0;line-height:1.2}
 .btn-sm{padding:.4rem .8rem;font-size:.82rem}
 
 /* ---------- Cards ---------- */
-.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:1.4rem;margin-bottom:1.3rem}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:1.4rem;margin-bottom:1.3rem;box-shadow:0 1px 2px rgba(20,19,15,.03)}
+.card h3{font-size:.95rem;color:var(--muted);font-weight:700}
+.sidebar-brand img{border-radius:8px}
 .card h2{font-size:1.05rem;margin-bottom:.3rem}
 .card .hint{color:var(--muted);font-size:.86rem;margin-bottom:1rem}
 .grid{display:grid;gap:1.2rem}

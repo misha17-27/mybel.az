@@ -16,6 +16,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'instagram' => trim($_POST['instagram'] ?? ''),
         'facebook'  => trim($_POST['facebook'] ?? ''),
         'whatsapp'  => $wa ? 'https://wa.me/' . $wa : '',
+        'youtube'   => trim($_POST['youtube'] ?? ''),
+        'x'         => trim($_POST['x'] ?? ''),
     ];
     save_json('settings', $s);
     flash(t('k_saved'));
@@ -50,6 +52,10 @@ $waNum = preg_replace('/\D/', '', $soc['whatsapp'] ?? '');
     <div class="row row-2">
       <div class="field"><label>Instagram</label><input type="url" name="instagram" value="<?= e($soc['instagram']??'') ?>"></div>
       <div class="field"><label>Facebook</label><input type="url" name="facebook" value="<?= e($soc['facebook']??'') ?>"></div>
+    </div>
+    <div class="row row-2">
+      <div class="field"><label>YouTube</label><input type="url" name="youtube" value="<?= e($soc['youtube']??'') ?>" placeholder="https://youtube.com/@..."></div>
+      <div class="field"><label>X (Twitter)</label><input type="url" name="x" value="<?= e($soc['x']??'') ?>" placeholder="https://x.com/..."></div>
     </div>
   </div>
   <button class="btn" type="submit"><?= e(t('save')) ?></button>

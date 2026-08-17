@@ -25,13 +25,17 @@ function social_icon($name) {
         'whatsapp'  => '<path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9z"/><path d="M9 10a.5 .5 0 0 0 1 0V9a.5 .5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0-1h-1a.5 .5 0 0 0 0 1"/>',
         'youtube'   => '<path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="currentColor" stroke="none"/>',
     ];
+    // X (Twitter) — dolu loqo
+    if ($name === 'x') {
+        return '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>';
+    }
     $inner = $p[$name] ?? '<circle cx="12" cy="12" r="9"/>';
     return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' . $inner . '</svg>';
 }
 
 /** Doldurulmuş sosial keçidləri ikon kimi göstərir */
 function social_links($SITE, $extraClass = '') {
-    $order = ['instagram', 'facebook', 'whatsapp', 'youtube'];
+    $order = ['instagram', 'facebook', 'whatsapp', 'youtube', 'x'];
     $out = '<div class="social-icons ' . $extraClass . '">';
     foreach ($order as $sn) {
         $url = $SITE['social'][$sn] ?? '';

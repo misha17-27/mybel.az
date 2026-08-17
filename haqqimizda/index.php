@@ -15,7 +15,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
             <a href="/">Ana səhifə</a><span>/</span><strong>Şirkət haqqında</strong>
         </nav>
         <h1>Şirkət haqqında</h1>
-        <p>MYBEL Concept — dizayn, keyfiyyət və dəqiqliyi birləşdirən mebel istehsalçısı.</p>
+        <p><?= e($SITE['about_page']['lead']) ?></p>
     </div>
 </section>
 
@@ -25,10 +25,11 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
             <img src="/assets/img/demo/living-neutral.jpg" alt="MYBEL Concept interyer işi" width="900" height="820">
         </div>
         <div class="about-text" data-reveal>
-            <span class="eyebrow">Kimik biz</span>
-            <h2 class="section-title">İdeyanı reallığa çeviririk</h2>
-            <p><?= e(ph_text(1)) ?></p>
-            <p><?= e(ph_text(1)) ?></p>
+            <span class="eyebrow"><?= e($SITE['about_page']['intro_eyebrow']) ?></span>
+            <h2 class="section-title"><?= e($SITE['about_page']['intro_title']) ?></h2>
+            <?php foreach (preg_split('/\n{2,}/', trim($SITE['about_page']['intro_text'])) as $par): ?>
+                <p><?= nl2br(e($par)) ?></p>
+            <?php endforeach; ?>
         </div>
     </div>
 </section>
@@ -59,20 +60,19 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
         <div class="about-split" style="align-items:start">
             <div class="about-text" data-reveal>
                 <span class="eyebrow">Missiyamız</span>
-                <h2 class="section-title">Hər detala önəm veririk</h2>
-                <p><?= e(ph_text(1)) ?></p>
+                <h2 class="section-title"><?= e($SITE['about_page']['mission_title']) ?></h2>
+                <?php foreach (preg_split('/\n{2,}/', trim($SITE['about_page']['mission_text'])) as $par): ?><p><?= nl2br(e($par)) ?></p><?php endforeach; ?>
             </div>
             <div class="about-text" data-reveal>
                 <span class="eyebrow">Yanaşmamız</span>
-                <h2 class="section-title">Layihələndirmədən quraşdırmaya</h2>
-                <p><?= e(ph_text(1)) ?></p>
+                <h2 class="section-title"><?= e($SITE['about_page']['approach_title']) ?></h2>
+                <?php foreach (preg_split('/\n{2,}/', trim($SITE['about_page']['approach_text'])) as $par): ?><p><?= nl2br(e($par)) ?></p><?php endforeach; ?>
             </div>
         </div>
         <div class="stats-row">
-            <div class="stat" data-reveal><div class="stat-num">150+</div><div class="stat-label">Tamamlanmış layihə</div></div>
-            <div class="stat" data-reveal><div class="stat-num">12</div><div class="stat-label">İl təcrübə</div></div>
-            <div class="stat" data-reveal><div class="stat-num">40+</div><div class="stat-label">Komanda üzvü</div></div>
-            <div class="stat" data-reveal><div class="stat-num">98%</div><div class="stat-label">Məmnun müştəri</div></div>
+            <?php foreach ($SITE['about_page']['stats'] as $st): ?>
+                <div class="stat" data-reveal><div class="stat-num"><?= e($st['num']) ?></div><div class="stat-label"><?= e($st['label']) ?></div></div>
+            <?php endforeach; ?>
         </div>
     </div>
 </section>

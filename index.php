@@ -47,9 +47,9 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
 <section class="section section-alt">
     <div class="container">
         <div class="section-head">
-            <span class="eyebrow">Layihələr</span>
-            <h2 class="section-title">Seçilmiş işlərimiz</h2>
-            <p class="section-desc">Restoran, otel və fərdi evlər üzrə tamamladığımız bəzi layihələr.</p>
+            <span class="eyebrow"><?= e($SITE['home']['projects_eyebrow']) ?></span>
+            <h2 class="section-title"><?= e($SITE['home']['projects_title']) ?></h2>
+            <p class="section-desc"><?= e($SITE['home']['projects_desc']) ?></p>
         </div>
         <div class="card-grid">
             <?php foreach (array_slice(visible_sorted($PROJECTS), 0, 3) as $p): ?>
@@ -77,8 +77,8 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
 <section class="section section-alt">
     <div class="container">
         <div class="section-head">
-            <span class="eyebrow">Xidmətlər</span>
-            <h2 class="section-title">Nə təklif edirik</h2>
+            <span class="eyebrow"><?= e($SITE['home']['services_eyebrow']) ?></span>
+            <h2 class="section-title"><?= e($SITE['home']['services_title']) ?></h2>
         </div>
         <div class="services-grid">
             <?php foreach (visible_sorted($SERVICES) as $s): ?>
@@ -96,8 +96,8 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
 <section class="section">
     <div class="container">
         <div class="section-head center">
-            <span class="eyebrow">Müştərilər</span>
-            <h2 class="section-title">Bizə etibar edənlər</h2>
+            <span class="eyebrow"><?= e($SITE['home']['clients_eyebrow']) ?></span>
+            <h2 class="section-title"><?= e($SITE['home']['clients_title']) ?></h2>
         </div>
         <?php include $_SERVER['DOCUMENT_ROOT'] . '/includes/clients.php'; ?>
     </div>
@@ -107,9 +107,9 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
 <section class="section">
     <div class="container">
         <div class="cta-band" data-reveal>
-            <h2>Layihəniz üçün təklif alın</h2>
-            <p>İdeyanızı bizimlə bölüşün — komandamız ölçü, dizayn və qiymət təklifini hazırlasın.</p>
-            <a href="/elaqe/" class="btn">Sifariş ver</a>
+            <h2><?= e($SITE['home']['cta_title']) ?></h2>
+            <p><?= e($SITE['home']['cta_text']) ?></p>
+            <a href="/elaqe/" class="btn"><?= e($SITE['home']['cta_btn']) ?></a>
         </div>
     </div>
 </section>

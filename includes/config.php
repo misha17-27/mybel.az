@@ -35,6 +35,8 @@ $DEF_SETTINGS = [
         'instagram' => 'https://instagram.com/',
         'facebook'  => 'https://facebook.com/',
         'whatsapp'  => 'https://wa.me/994500000000',
+        'youtube'   => '',
+        'x'         => '',
     ],
     'work_hours'  => 'B.e – Şənbə: 09:00 – 18:00',
     'hero'        => [
@@ -47,6 +49,36 @@ $DEF_SETTINGS = [
         'title'   => 'Keyfiyyət və dizaynı bir araya gətiririk',
         'text'    => ph_text(1),
         'video'   => '',   // YouTube/Vimeo linki və ya .mp4 faylı (admin paneldən)
+    ],
+    // Ana səhifə bölmə başlıqları
+    'home'        => [
+        'projects_eyebrow' => 'Layihələr',
+        'projects_title'   => 'Seçilmiş işlərimiz',
+        'projects_desc'    => 'Restoran, otel və fərdi evlər üzrə tamamladığımız bəzi layihələr.',
+        'services_eyebrow' => 'Xidmətlər',
+        'services_title'   => 'Nə təklif edirik',
+        'clients_eyebrow'  => 'Müştərilər',
+        'clients_title'    => 'Bizə etibar edənlər',
+        'cta_title'        => 'Layihəniz üçün təklif alın',
+        'cta_text'         => 'İdeyanızı bizimlə bölüşün — komandamız ölçü, dizayn və qiymət təklifini hazırlasın.',
+        'cta_btn'          => 'Sifariş ver',
+    ],
+    // "Şirkət haqqında" səhifəsi
+    'about_page'  => [
+        'lead'           => 'MYBEL Concept — dizayn, keyfiyyət və dəqiqliyi birləşdirən mebel istehsalçısı.',
+        'intro_eyebrow'  => 'Kimik biz',
+        'intro_title'    => 'İdeyanı reallığa çeviririk',
+        'intro_text'     => ph_text(1) . "\n\n" . ph_text(1),
+        'mission_title'  => 'Hər detala önəm veririk',
+        'mission_text'   => ph_text(1),
+        'approach_title' => 'Layihələndirmədən quraşdırmaya',
+        'approach_text'  => ph_text(1),
+        'stats'          => [
+            ['num' => '150+', 'label' => 'Tamamlanmış layihə'],
+            ['num' => '12',   'label' => 'İl təcrübə'],
+            ['num' => '40+',  'label' => 'Komanda üzvü'],
+            ['num' => '98%',  'label' => 'Məmnun müştəri'],
+        ],
     ],
     'seo'         => [
         'home_title' => 'MYBEL Concept — Premium mebel və interyer həlləri | Bakı',

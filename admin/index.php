@@ -3,7 +3,6 @@ require_once __DIR__ . '/includes/bootstrap.php';
 require_login();
 
 $projects = load_json('projects', []);
-$areas    = load_json('areas', []);
 $services = load_json('services', []);
 $clients  = load_json('clients', []);
 $messages = load_json('messages', []);
@@ -15,8 +14,8 @@ require __DIR__ . '/includes/layout_top.php';
 ?>
 <div class="grid grid-4" style="margin-bottom:1.5rem">
   <div class="stat"><div class="num"><?= count($projects) ?></div><div class="lbl"><?= e(t('d_projects')) ?></div></div>
-  <div class="stat"><div class="num"><?= count($areas) ?></div><div class="lbl"><?= e(t('d_areas')) ?></div></div>
   <div class="stat"><div class="num"><?= count($services) ?></div><div class="lbl"><?= e(t('d_services')) ?></div></div>
+  <div class="stat"><div class="num"><?= count($clients) ?></div><div class="lbl"><?= e(t('n_clients')) ?></div></div>
   <div class="stat"><div class="num"><?= $unread ?></div><div class="lbl"><?= e(t('d_new')) ?></div></div>
 </div>
 
