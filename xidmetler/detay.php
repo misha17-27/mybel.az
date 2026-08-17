@@ -77,7 +77,6 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
             </div>
         <?php else: ?>
             <p class="muted">Bu xidmət üzrə layihələr tezliklə əlavə olunacaq.</p>
-            <p style="margin-top:1rem"><a href="/elaqe/" class="btn">Sifariş ver</a></p>
         <?php endif; ?>
     </div>
 </article>
