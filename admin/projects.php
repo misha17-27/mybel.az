@@ -4,6 +4,7 @@ require_once __DIR__ . '/includes/upload.php';
 require_login();
 
 $projects = load_json('projects', []);
+$services = load_json('services', []);
 
 /* ---------------- POST ---------------- */
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -68,6 +69,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($idx === null) $projects[] = $data; else $projects[$idx] = $data;
         usort($projects, fn($a,$b) => ($a['order']??0) <=> ($b['order']??0));
         save_json('projects', $projects);
+
+        // Layihə tərəfindən seçilmiş xidmətləri sinxronlaşdır (services.json)
+        $pid = $data['id'];
+        $sel = $_POST['services'] ?? [];
+        $services = load_json('services', []);
+        foreach ($services as &$sv) {
+            $list = $sv['projects'] ?? [];
+            $has = in_array($pid, $list, true);
+            $want = in_array($sv['id'], $sel, true);
+            if ($want && !$has) $list[] = $pid;
+            if (!$want && $has) $list = array_values(array_filter($list, fn($x) => $x !== $pid));
+            $sv['projects'] = array_values($list);
+        }
+        unset($sv);
+        save_json('services', $services);
+
         flash(t('p_saved'));
         redirect('/admin/projects.php');
     }
@@ -114,7 +131,21 @@ require __DIR__ . '/includes/layout_top.php';
         <div class="field"><label>&nbsp;</label><label class="check"><input type="checkbox" name="show" <?= ($editing['show']??true)?'checked':'' ?>> <?= e(t('show_site')) ?></label></div>
       </div>
       <div class="field"><label><?= e(t('p_excerpt')) ?></label><textarea name="excerpt" style="min-height:70px"><?= e($editing['excerpt']) ?></textarea></div>
-      <div class="field"><label><?= t('p_body') ?></label><textarea name="body" style="min-height:150px"><?= e($editing['body']) ?></textarea></div>
+      <div class="field"><label><?= e(t('p_body')) ?></label><textarea name="body" style="min-height:150px"><?= e($editing['body']) ?></textarea></div>
+
+      <?php $linkedServices = []; foreach ($services as $sv) if (in_array($editing['id'], $sv['projects'] ?? [], true)) $linkedServices[] = $sv['id']; ?>
+      <div class="field">
+        <label><?= e(t('p_services')) ?></label>
+        <p class="hint" style="margin-top:0"><?= e(t('p_services_h')) ?></p>
+        <div class="inline" style="flex-wrap:wrap;gap:.5rem">
+          <?php foreach ($services as $sv): ?>
+            <label class="check" style="border:1px solid var(--line);border-radius:8px;padding:.45rem .7rem">
+              <input type="checkbox" name="services[]" value="<?= e($sv['id']) ?>" <?= in_array($sv['id'],$linkedServices,true)?'checked':'' ?>>
+              <?= e($sv['title']) ?>
+            </label>
+          <?php endforeach; ?>
+        </div>
+      </div>
 
       <div class="field">
         <label><?= e(t('p_cover')) ?></label>
