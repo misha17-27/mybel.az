@@ -278,6 +278,21 @@ button { font: inherit; cursor: pointer; }
 .stat-label { font-size: .9rem; color: var(--muted); }
 
 /* =====================================================================
+   SOSİAL İKONLAR
+   ===================================================================== */
+.social-icons { display: flex; flex-wrap: wrap; gap: .6rem; }
+.social-icon {
+    width: 44px; height: 44px; border-radius: 50%;
+    border: 1px solid var(--line); display: grid; place-items: center;
+    color: var(--ink); transition: background .2s var(--ease), color .2s var(--ease), border-color .2s var(--ease), transform .2s var(--ease);
+}
+.social-icon svg { width: 20px; height: 20px; }
+.social-icon:hover { background: var(--brand); border-color: var(--brand); color: #fff; transform: translateY(-2px); }
+/* Tünd footer üçün */
+.site-footer .social-icon { border-color: rgba(255,255,255,.22); color: rgba(255,255,255,.85); }
+.site-footer .social-icon:hover { background: var(--brand); border-color: var(--brand); color: #fff; }
+
+/* =====================================================================
    VIDEO
    ===================================================================== */
 .video-frame { position: relative; aspect-ratio: 16/9; border-radius: var(--radius); overflow: hidden; background: #000; box-shadow: var(--shadow); max-width: 960px; margin-inline: auto; }
@@ -324,6 +339,10 @@ button { font: inherit; cursor: pointer; }
 .footer-col a:hover { color: var(--brand); }
 .footer-social { display: flex; gap: 1rem; margin-top: 1.2rem; }
 .footer-social a { font-size: .85rem; }
+.footer-contact li { display: flex; align-items: center; gap: .6rem; }
+.fc-ic { flex: 0 0 18px; display: inline-grid; place-items: center; color: var(--brand); }
+.fc-ic svg { width: 18px; height: 18px; }
+.site-footer .social-icons { margin-top: 1.3rem; }
 .footer-bottom { border-top: 1px solid rgba(255,255,255,.12); padding-block: 1.4rem; font-size: .85rem; }
 
 /* =====================================================================

@@ -21,16 +21,12 @@
         <div class="footer-col">
             <h3>Əlaqə</h3>
             <ul class="footer-contact">
-                <li><a href="tel:<?= e($SITE['phone_raw']) ?>"><?= e($SITE['phone']) ?></a></li>
-                <li><a href="mailto:<?= e($SITE['email']) ?>"><?= e($SITE['email']) ?></a></li>
-                <li><?= e($SITE['address']) ?></li>
-                <li><?= e($SITE['work_hours']) ?></li>
+                <li><span class="fc-ic"><?= icon('phone') ?></span><a href="tel:<?= e($SITE['phone_raw']) ?>"><?= e($SITE['phone']) ?></a></li>
+                <li><span class="fc-ic"><?= icon('mail') ?></span><a href="mailto:<?= e($SITE['email']) ?>"><?= e($SITE['email']) ?></a></li>
+                <li><span class="fc-ic"><?= icon('pin') ?></span><span><?= e($SITE['address']) ?></span></li>
+                <li><span class="fc-ic"><?= icon('clock') ?></span><span><?= e($SITE['work_hours']) ?></span></li>
             </ul>
-            <div class="footer-social">
-                <a href="<?= e($SITE['social']['instagram']) ?>" rel="noopener" target="_blank" aria-label="Instagram">Instagram</a>
-                <a href="<?= e($SITE['social']['facebook']) ?>" rel="noopener" target="_blank" aria-label="Facebook">Facebook</a>
-                <a href="<?= e($SITE['social']['whatsapp']) ?>" rel="noopener" target="_blank" aria-label="WhatsApp">WhatsApp</a>
-            </div>
+            <?= social_links($SITE) ?>
         </div>
     </div>
 

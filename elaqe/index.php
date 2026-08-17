@@ -115,9 +115,8 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
                 <li><span class="label">Ünvan</span><span><?= e($SITE['address']) ?></span></li>
                 <li><span class="label">İş saatı</span><span><?= e($SITE['work_hours']) ?></span></li>
             </ul>
-            <div class="footer-social" style="margin-top:1.5rem">
-                <a href="<?= e($SITE['social']['instagram']) ?>" target="_blank" rel="noopener" class="btn btn-outline btn-sm">Instagram</a>
-                <a href="<?= e($SITE['social']['whatsapp']) ?>" target="_blank" rel="noopener" class="btn btn-outline btn-sm">WhatsApp</a>
+            <div style="margin-top:1.5rem">
+                <?= social_links($SITE) ?>
             </div>
         </aside>
     </div>
