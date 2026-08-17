@@ -14,6 +14,7 @@
                 <li><a href="/layiheler/">Layihələr</a></li>
                 <li><a href="/xidmetler/">Xidmətlər</a></li>
                 <li><a href="/musteriler/">Müştərilər</a></li>
+                <li><a href="/elaqe/">Əlaqə</a></li>
             </ul>
         </div>
 
