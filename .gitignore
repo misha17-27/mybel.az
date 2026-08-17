@@ -10,3 +10,9 @@ Thumbs.db
 # Yüklənən şəkillər serverdə qalır, repoya düşmür.
 /assets/uploads/*
 !/assets/uploads/.htaccess
+
+# Brauzer yarımçıq yükləmələri
+*.crdownload
+
+# İri kontent arxivləri git-ə düşməsin
+*.zip

@@ -13,13 +13,10 @@ $THEMES = [
     3 => ['key' => 'minimal', 'name' => 'Minimal'],
 ];
 
-// ?theme=1..3 -> cookie -> default(1)
-$theme = 1;
+// Təsdiqlənmiş dizayn: Versiya 2 (Modern). ?theme= yalnız daxili önizləmə üçün saxlanılır.
+$theme = 2;
 if (isset($_GET['theme']) && isset($THEMES[(int)$_GET['theme']])) {
     $theme = (int)$_GET['theme'];
-    setcookie('mybel_theme', (string)$theme, time() + 60 * 60 * 24 * 30, '/');
-} elseif (isset($_COOKIE['mybel_theme']) && isset($THEMES[(int)$_COOKIE['mybel_theme']])) {
-    $theme = (int)$_COOKIE['mybel_theme'];
 }
 $theme_key = $THEMES[$theme]['key'];
 

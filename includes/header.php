@@ -41,14 +41,4 @@ function theme_link($path, $n) {
     </div>
 </header>
 
-<!-- Tema önizləmə paneli (yalnız seçim üçün — real saytda silinə bilər) -->
-<div class="theme-switcher" role="region" aria-label="Dizayn versiyası seçimi">
-    <span class="theme-switcher-label">Dizayn:</span>
-    <?php foreach ($THEMES as $n => $t): ?>
-        <a href="<?= theme_link($path, $n) ?>"
-           class="theme-dot<?= $theme === $n ? ' is-active' : '' ?>"
-           title="<?= e($t['name']) ?>"><?= $n ?></a>
-    <?php endforeach; ?>
-</div>
-
 <main id="main">
