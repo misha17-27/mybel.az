@@ -29,11 +29,16 @@ function theme_link($path, $n) {
                 <span></span><span></span><span></span>
             </button>
             <ul class="nav-list" id="navList">
+                <li class="nav-m-head">
+                    <a href="/" class="nav-m-logo" aria-label="<?= e($SITE['name']) ?>"><img src="/assets/img/logo.png" alt="<?= e($SITE['name']) ?>" width="110" height="104"></a>
+                    <button class="nav-close" id="navClose" aria-label="Menyunu bağla">&times;</button>
+                </li>
                 <?php foreach ($nav as $key => [$label, $href]): ?>
                     <li>
                         <a href="<?= e($href) ?>"<?= $current_section === $key ? ' aria-current="page"' : '' ?>><?= e($label) ?></a>
                     </li>
                 <?php endforeach; ?>
+                <li class="nav-m-socials"><?= social_links($SITE) ?></li>
             </ul>
         </nav>
     </div>

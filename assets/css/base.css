@@ -97,6 +97,7 @@ button { font: inherit; cursor: pointer; }
 
 .nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: 0; padding: .4rem; }
 .nav-toggle span { width: 26px; height: 2px; background: var(--ink); transition: .3s; }
+.nav-m-head, .nav-m-socials { display: none; }   /* yalnız mobil menyuda */
 
 /* ---- Theme switcher (preview) ---- */
 .theme-switcher {
@@ -361,15 +362,22 @@ button { font: inherit; cursor: pointer; }
     .site-header { backdrop-filter: none; -webkit-backdrop-filter: none; background: var(--bg); }
     .nav-toggle { display: flex; z-index: 120; }
     .nav-list {
-        position: fixed; inset: 0; width: 100%; height: 100%; z-index: 90;
-        flex-direction: column; align-items: center; justify-content: center; gap: 1.75rem;
-        background: var(--bg); padding: 6rem 1.5rem 2rem; overflow-y: auto;
+        position: fixed; inset: 0; width: 100%; height: 100%; z-index: 200;
+        flex-direction: column; align-items: center; justify-content: center; gap: 1.6rem;
+        background: var(--bg); padding: 6rem 1.5rem 6rem; overflow-y: auto;
         transform: translateX(100%); transition: transform .35s var(--ease);
     }
     .nav-list.is-open { transform: none; }
     .nav-list > li { text-align: center; }
     .nav-list > li:not(.nav-cta) > a { font-size: 1.4rem; }
-    .nav-cta { margin-top: .5rem; }
+    /* üst zolaq: loqo (sol) + bağla (sağ) */
+    .nav-m-head { display: flex; position: absolute; top: 0; left: 0; right: 0;
+        align-items: center; justify-content: space-between; padding: .9rem 1.25rem; }
+    .nav-m-logo img { width: 84px; height: auto; padding: 0; }
+    .nav-close { background: none; border: 0; font-size: 2.6rem; line-height: 1; color: var(--ink); cursor: pointer; padding: 0 .4rem; }
+    /* alt: sosial ikonlar */
+    .nav-m-socials { display: block; position: absolute; left: 0; right: 0; bottom: 1.6rem; }
+    .nav-m-socials .social-icons { justify-content: center; }
     body.nav-open { overflow: hidden; }
     .form-row.two { grid-template-columns: 1fr; }
 }

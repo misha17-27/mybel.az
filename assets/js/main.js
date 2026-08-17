@@ -11,13 +11,17 @@
             toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
             document.body.classList.toggle('nav-open', open);
         });
+        // Bağla düyməsi (X)
+        var navClose = document.getElementById('navClose');
+        var closeMenu = function () {
+            navList.classList.remove('is-open');
+            toggle.setAttribute('aria-expanded', 'false');
+            document.body.classList.remove('nav-open');
+        };
+        if (navClose) navClose.addEventListener('click', closeMenu);
         // Link kliklənəndə menyunu bağla
         navList.querySelectorAll('a').forEach(function (a) {
-            a.addEventListener('click', function () {
-                navList.classList.remove('is-open');
-                toggle.setAttribute('aria-expanded', 'false');
-                document.body.classList.remove('nav-open');
-            });
+            a.addEventListener('click', closeMenu);
         });
     }
 
