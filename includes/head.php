@@ -77,7 +77,7 @@ $ld = ['@context' => 'https://schema.org', '@graph' => $graph];
     <!-- Fontlar -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Stil: ortaq baza + aktiv tema -->
     <link rel="stylesheet" href="<?= e(asset('/assets/css/base.css')) ?>">

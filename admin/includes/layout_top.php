@@ -55,7 +55,7 @@ $langBase = $curPath . ($baseQs ? "?$baseQs&" : '?');
 <meta name="robots" content="noindex, nofollow">
 <title><?= e($PAGE_TITLE) ?> — MYBEL admin</title>
 <link rel="icon" href="/assets/img/logo.png">
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/admin/assets/admin.css?v=2">
 </head>
 <body>

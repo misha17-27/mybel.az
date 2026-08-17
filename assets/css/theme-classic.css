@@ -12,12 +12,12 @@
     --bg-soft:    #f2ebe0;
     --white:      #ffffff;
     --radius:     6px;
-    --font-head:  'Playfair Display', Georgia, serif;
-    --font-body:  'Manrope', system-ui, sans-serif;
+    --font-head:  'Montserrat', system-ui, sans-serif;
+    --font-body:  'Montserrat', system-ui, sans-serif;
     --shadow:     0 14px 40px rgba(60,40,20,.10);
 }
 
-[data-theme="classic"] .eyebrow { font-style: italic; text-transform: none; letter-spacing: .05em; font-family: 'Playfair Display', serif; font-weight: 500; font-size: 1rem; }
+[data-theme="classic"] .eyebrow { font-style: italic; text-transform: none; letter-spacing: .05em; font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 1rem; }
 [data-theme="classic"] h1, [data-theme="classic"] h2, [data-theme="classic"] h3 { font-weight: 600; letter-spacing: -.01em; }
 
 /* Hero: mərkəzləşdirilmiş, klassik */

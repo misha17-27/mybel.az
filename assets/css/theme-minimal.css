@@ -12,8 +12,8 @@
     --bg-soft:    #fafafa;
     --white:      #ffffff;
     --radius:     0px;
-    --font-head:  'Manrope', system-ui, sans-serif;
-    --font-body:  'Manrope', system-ui, sans-serif;
+    --font-head:  'Montserrat', system-ui, sans-serif;
+    --font-body:  'Montserrat', system-ui, sans-serif;
     --shadow:     none;
     --section-y:  clamp(3.5rem, 9vw, 8rem);
 }

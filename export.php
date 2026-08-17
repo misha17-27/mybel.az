@@ -66,7 +66,7 @@ foreach ($themes as $n => $key) {
 
     // 6) versiya nişanı əlavə et (yuxarı künc)
     $badge = '<div style="position:fixed;left:16px;bottom:16px;z-index:300;background:#c75b2a;color:#fff;'
-           . 'padding:.5rem .9rem;border-radius:999px;font:600 13px Manrope,sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.25)">'
+           . 'padding:.5rem .9rem;border-radius:999px;font:600 13px Montserrat,sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.25)">'
            . 'Versiya ' . $n . ' — ' . ucfirst($key) . '</div>';
     $html = str_replace('</body>', $badge . "\n</body>", $html);
 

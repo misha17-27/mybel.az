@@ -4,7 +4,7 @@
   --brand:#c75b2a; --brand-dark:#a8481f; --brand-soft:#f6ece5;
   --sidebar:#14130f; --sidebar-ink:#c9c7c2; --sidebar-active:#c75b2a;
   --ok:#1c7a3e; --ok-bg:#e7f6ec; --err:#b3261e; --err-bg:#fdeaea; --radius:12px;
-  --font:'Manrope',system-ui,Segoe UI,Roboto,sans-serif;
+  --font:'Montserrat',system-ui,Segoe UI,Roboto,sans-serif;
 }
 *{box-sizing:border-box}
 body{margin:0;font-family:var(--font);background:var(--bg);color:var(--ink);font-size:15px;line-height:1.5}
