@@ -16,3 +16,6 @@ Thumbs.db
 
 # İri kontent arxivləri git-ə düşməsin
 *.zip
+
+# Böyük layihə arxivləri qovluğu (repoya düşməsin)
+/mybel-layiheler/
