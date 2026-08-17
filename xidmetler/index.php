@@ -23,11 +23,12 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
     <div class="container">
         <div class="services-grid">
             <?php foreach (visible_sorted($SERVICES) as $s): ?>
-                <div class="service-card" data-reveal>
+                <a class="service-card" href="/xidmetler/<?= e(service_slug($s)) ?>/" data-reveal>
                     <div class="service-icon"><?= icon($s['icon']) ?></div>
                     <h2 style="font-size:1.25rem;margin-bottom:.5rem"><?= e($s['title']) ?></h2>
                     <p><?= e($s['desc']) ?></p>
-                </div>
+                    <span class="card-link" style="margin-top:.8rem">Ətraflı</span>
+                </a>
             <?php endforeach; ?>
         </div>
     </div>

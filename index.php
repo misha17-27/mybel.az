@@ -82,11 +82,11 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
         </div>
         <div class="services-grid">
             <?php foreach (visible_sorted($SERVICES) as $s): ?>
-                <div class="service-card" data-reveal>
+                <a class="service-card" href="/xidmetler/<?= e(service_slug($s)) ?>/" data-reveal>
                     <div class="service-icon"><?= icon($s['icon']) ?></div>
                     <h3><?= e($s['title']) ?></h3>
                     <p><?= e($s['desc']) ?></p>
-                </div>
+                </a>
             <?php endforeach; ?>
         </div>
     </div>

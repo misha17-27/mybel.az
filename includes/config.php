@@ -111,12 +111,12 @@ $DEF_AREAS = [
 
 // ---------- DEFAULT: xidmətlər ----------
 $DEF_SERVICES = [
-    ['id'=>'s1','icon'=>'kitchen','title'=>'Mətbəx mebeli','desc'=>'Fərdi ölçülü, müasir və klassik mətbəx dəstləri.','show'=>true,'order'=>0],
-    ['id'=>'s2','icon'=>'table','title'=>'Restoran masaları','desc'=>'Davamlı və estetik masa, oturacaq və bar həlləri.','show'=>true,'order'=>1],
-    ['id'=>'s3','icon'=>'bed','title'=>'Otel otaqları','desc'=>'Otel otaqlarının tam mebel təchizatı və dizaynı.','show'=>true,'order'=>2],
-    ['id'=>'s4','icon'=>'wardrobe','title'=>'Qarderob və şkaflar','desc'=>'Fərdi qarderob otaqları və gömmə şkaflar.','show'=>true,'order'=>3],
-    ['id'=>'s5','icon'=>'sofa','title'=>'Yumşaq mebel','desc'=>'Divan, kreslo və yumşaq mebelin sifarişlə istehsalı.','show'=>true,'order'=>4],
-    ['id'=>'s6','icon'=>'design','title'=>'İnteryer dizayn','desc'=>'Layihələndirmə, 3D vizuallaşdırma və məsləhət.','show'=>true,'order'=>5],
+    ['id'=>'s1','slug'=>'metbex-mebeli','icon'=>'kitchen','title'=>'Mətbəx mebeli','desc'=>'Fərdi ölçülü, müasir və klassik mətbəx dəstləri.','body'=>'','projects'=>[],'show'=>true,'order'=>0],
+    ['id'=>'s2','slug'=>'restoran-masalari','icon'=>'table','title'=>'Restoran masaları','desc'=>'Davamlı və estetik masa, oturacaq və bar həlləri.','body'=>'','projects'=>[],'show'=>true,'order'=>1],
+    ['id'=>'s3','slug'=>'otel-otaqlari','icon'=>'bed','title'=>'Otel otaqları','desc'=>'Otel otaqlarının tam mebel təchizatı və dizaynı.','body'=>'','projects'=>[],'show'=>true,'order'=>2],
+    ['id'=>'s4','slug'=>'qarderob-ve-skaflar','icon'=>'wardrobe','title'=>'Qarderob və şkaflar','desc'=>'Fərdi qarderob otaqları və gömmə şkaflar.','body'=>'','projects'=>[],'show'=>true,'order'=>3],
+    ['id'=>'s5','slug'=>'yumsaq-mebel','icon'=>'sofa','title'=>'Yumşaq mebel','desc'=>'Divan, kreslo və yumşaq mebelin sifarişlə istehsalı.','body'=>'','projects'=>[],'show'=>true,'order'=>4],
+    ['id'=>'s6','slug'=>'interyer-dizayn','icon'=>'design','title'=>'İnteryer dizayn','desc'=>'Layihələndirmə, 3D vizuallaşdırma və məsləhət.','body'=>'','projects'=>[],'show'=>true,'order'=>5],
 ];
 
 // ---------- DEFAULT: müştərilər ----------
@@ -170,6 +170,20 @@ function find_by_slug(array $list, $slug) {
 function cat_name($key) {
     global $CATEGORIES;
     return $CATEGORIES[$key] ?? $key;
+}
+
+/** Xidmət üçün slug (yoxdursa başlıqdan) */
+function service_slug($s) {
+    return !empty($s['slug']) ? $s['slug'] : slugify($s['title'] ?? '');
+}
+
+/** Xidmətə bağlı görünən layihələr */
+function service_projects($service, $allProjects) {
+    $ids = $service['projects'] ?? [];
+    if (empty($ids)) return [];
+    $out = array_filter($allProjects, fn($p) => in_array($p['id'], $ids, true) && ($p['show'] ?? true));
+    usort($out, fn($a, $b) => ($a['order'] ?? 0) <=> ($b['order'] ?? 0));
+    return array_values($out);
 }
 
 /**

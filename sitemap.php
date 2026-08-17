@@ -13,6 +13,7 @@ $urls = [
     ['/elaqe/', '0.6', 'yearly'],
 ];
 foreach ($PROJECTS as $p) $urls[] = ['/layiheler/' . $p['slug'] . '/', '0.7', 'monthly'];
+foreach ($SERVICES as $s) $urls[] = ['/xidmetler/' . service_slug($s) . '/', '0.6', 'monthly'];
 
 echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
 echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";

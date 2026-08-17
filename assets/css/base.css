@@ -187,6 +187,7 @@ button { font: inherit; cursor: pointer; }
    ===================================================================== */
 .services-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: clamp(1rem, 2vw, 1.6rem); }
 .service-card {
+    display: block; color: inherit;
     padding: 2rem 1.8rem; border-radius: var(--radius); background: var(--white);
     border: 1px solid var(--line); transition: .3s var(--ease);
 }

@@ -18,6 +18,11 @@ if (preg_match('#^/layiheler/([a-z0-9\-]+)/?$#', $uri, $m)) {
     require __DIR__ . '/layiheler/detay.php';
     return true;
 }
+if (preg_match('#^/xidmetler/([a-z0-9\-]+)/?$#', $uri, $m)) {
+    $_GET['slug'] = $m[1];
+    require __DIR__ . '/xidmetler/detay.php';
+    return true;
+}
 if ($uri === '/sitemap.xml') { require __DIR__ . '/sitemap.php'; return true; }
 
 // Mövcud real fayl (assets, placeholder.php, css, js...)
