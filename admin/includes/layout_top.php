@@ -28,7 +28,6 @@ $NAV = [
   [t('g_content'), [
     ['texts',t('n_texts'),'/admin/texts.php','text'],
     ['projects',t('n_projects'),'/admin/projects.php','grid'],
-    ['areas',t('n_areas'),'/admin/areas.php','layers'],
     ['services',t('n_services'),'/admin/services.php','grid'],
     ['clients',t('n_clients'),'/admin/clients.php','users'],
     ['contacts',t('n_contacts'),'/admin/contacts.php','phone'],

@@ -6,7 +6,6 @@ $nav = [
     ''           => ['Ana səhifə',        '/'],
     'haqqimizda' => ['Şirkət haqqında',   '/haqqimizda/'],
     'layiheler'  => ['Layihələr',         '/layiheler/'],
-    'fealiyyet'  => ['Fəaliyyət sahələri','/fealiyyet/'],
     'xidmetler'  => ['Xidmətlər',         '/xidmetler/'],
     'musteriler' => ['Müştərilər',        '/musteriler/'],
     'elaqe'      => ['Əlaqə',             '/elaqe/'],

@@ -73,30 +73,6 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
     </div>
 </section>
 
-<!-- ============ FƏALİYYƏT SAHƏLƏRİ ============ -->
-<section class="section">
-    <div class="container">
-        <div class="section-head center">
-            <span class="eyebrow">Fəaliyyət sahələri</span>
-            <h2 class="section-title">Hansı sahələrdə çalışırıq</h2>
-        </div>
-        <div class="card-grid">
-            <?php foreach (visible_sorted($AREAS) as $a): ?>
-                <article class="card" data-reveal>
-                    <a class="card-media" href="/fealiyyet/<?= e($a['slug']) ?>/">
-                        <img src="<?= e($a['cover']) ?>" alt="<?= e($a['title']) ?>" loading="lazy" width="1200" height="800">
-                    </a>
-                    <div class="card-body">
-                        <h3 class="card-title"><?= e($a['title']) ?></h3>
-                        <p class="card-excerpt"><?= e($a['excerpt']) ?></p>
-                        <a class="card-link" href="/fealiyyet/<?= e($a['slug']) ?>/">Ətraflı</a>
-                    </div>
-                </article>
-            <?php endforeach; ?>
-        </div>
-    </div>
-</section>
-
 <!-- ============ XİDMƏTLƏR ============ -->
 <section class="section section-alt">
     <div class="container">

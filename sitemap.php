@@ -8,13 +8,11 @@ $urls = [
     ['/', '1.0', 'weekly'],
     ['/haqqimizda/', '0.7', 'monthly'],
     ['/layiheler/', '0.9', 'weekly'],
-    ['/fealiyyet/', '0.8', 'monthly'],
     ['/xidmetler/', '0.8', 'monthly'],
     ['/musteriler/', '0.5', 'monthly'],
     ['/elaqe/', '0.6', 'yearly'],
 ];
 foreach ($PROJECTS as $p) $urls[] = ['/layiheler/' . $p['slug'] . '/', '0.7', 'monthly'];
-foreach ($AREAS as $a)    $urls[] = ['/fealiyyet/' . $a['slug'] . '/', '0.6', 'monthly'];
 
 echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
 echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";

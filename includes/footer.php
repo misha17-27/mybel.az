@@ -12,7 +12,6 @@
             <ul>
                 <li><a href="/haqqimizda/">Şirkət haqqında</a></li>
                 <li><a href="/layiheler/">Layihələr</a></li>
-                <li><a href="/fealiyyet/">Fəaliyyət sahələri</a></li>
                 <li><a href="/xidmetler/">Xidmətlər</a></li>
                 <li><a href="/musteriler/">Müştərilər</a></li>
             </ul>
@@ -31,8 +30,9 @@
     </div>
 
     <div class="footer-bottom">
-        <div class="container">
+        <div class="container footer-bottom-inner">
             <p>&copy; <?= date('Y') ?> <?= e($SITE['legal']) ?>. Bütün hüquqlar qorunur.</p>
+            <p class="footer-credit">Site by <a href="https://webline.az" target="_blank" rel="noopener">Webline.az</a></p>
         </div>
     </div>
 </footer>

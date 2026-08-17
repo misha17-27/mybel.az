@@ -13,10 +13,6 @@ DirectoryIndex index.php
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteRule ^layiheler/([a-z0-9-]+)/?$ layiheler/detay.php?slug=$1 [L,QSA]
 
-    # Təmiz URL: /fealiyyet/<slug>/ -> detay.php?slug=<slug>
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^fealiyyet/([a-z0-9-]+)/?$ fealiyyet/detay.php?slug=$1 [L,QSA]
 </IfModule>
 
 # Xüsusi 404
