@@ -23,7 +23,9 @@
 [data-theme="modern"] .home-hero {
     position: relative; color: #fff; overflow: hidden;
     background: #14130f;
-    padding-block: clamp(4rem, 12vw, 9rem);
+    min-height: calc(100svh - 76px);
+    display: flex; align-items: center;
+    padding-block: clamp(1.5rem, 5vh, 3.5rem);
 }
 [data-theme="modern"] .home-hero::before {
     content: ""; position: absolute; inset: 0;
@@ -33,7 +35,7 @@
     z-index: 0;
 }
 [data-theme="modern"] .home-hero .container { position: relative; z-index: 1; }
-[data-theme="modern"] .home-hero .hero-title { font-size: clamp(2.6rem, 8vw, 6rem); line-height: 1.02; }
+[data-theme="modern"] .home-hero .hero-title { font-size: clamp(2.3rem, 6.2vw, 4.6rem); line-height: 1.04; margin-block: .3rem; }
 [data-theme="modern"] .home-hero .hero-lead { color: rgba(255,255,255,.72); }
 [data-theme="modern"] .home-hero .eyebrow { color: var(--brand); }
 [data-theme="modern"] .hero-figure { display: none; }
