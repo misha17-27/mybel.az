@@ -220,9 +220,11 @@ button { font: inherit; cursor: pointer; }
 .client-cell:hover img { filter: none; opacity: 1; }
 @keyframes clients-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-/* Statik grid — bütün loqoları göstərmək üçün (Müştərilər səhifəsi) */
-.clients-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
-.clients-grid .client-cell { width: auto; border-right: 0; }
+/* Statik grid — bütün loqoları göstərmək üçün (Müştərilər səhifəsi).
+   Hər loqo öz xanasında; boş yerlər sadəcə boş qalır (fon yoxdur). */
+.clients-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); }
+.clients-grid .client-cell { width: auto; background: transparent; border: 1px solid var(--line); margin: 0 -1px -1px 0; }
+.clients-grid .client-cell:hover { background: var(--bg-soft); }
 .clients-grid .client-cell a { display: grid; place-items: center; width: 100%; height: 100%; }
 
 /* =====================================================================
