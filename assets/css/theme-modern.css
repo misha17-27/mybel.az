@@ -46,9 +46,9 @@
 [data-theme="modern"] .card { border-radius: var(--radius); }
 [data-theme="modern"] .card-title { font-weight: 800; }
 [data-theme="modern"] .card-tag { text-transform: uppercase; font-size: .68rem; letter-spacing: .06em; }
-[data-theme="modern"] .service-card { background: var(--ink); color: #fff; border-color: transparent; }
+[data-theme="modern"] .service-card { background: #211d17; color: #fff; border: 1px solid rgba(255,255,255,.10); }
 [data-theme="modern"] .service-card p { color: rgba(255,255,255,.65); }
-[data-theme="modern"] .service-card:hover { transform: translateY(-6px) scale(1.01); }
+[data-theme="modern"] .service-card:hover { transform: translateY(-6px) scale(1.01); border-color: var(--brand); background: #272219; }
 [data-theme="modern"] .service-icon { background: rgba(226,98,44,.18); }
 [data-theme="modern"] .section-alt { background: var(--ink); color: #fff; }
 [data-theme="modern"] .section-alt .section-desc, [data-theme="modern"] .section-alt .stat-label { color: rgba(255,255,255,.65); }
