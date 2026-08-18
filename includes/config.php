@@ -80,6 +80,13 @@ $DEF_SETTINGS = [
             ['num' => '98%',  'label' => 'Məmnun müştəri'],
         ],
     ],
+    // Daxili siyahı səhifələrinin başlıqları (hero)
+    'pages'       => [
+        'layiheler'  => ['title' => 'Layihələr',   'subtitle' => 'Tamamladığımız işlərlə tanış olun — hər biri fərdi dizayn və peşəkar icra ilə.'],
+        'xidmetler'  => ['title' => 'Xidmətlər',    'subtitle' => 'Layihələndirmədən istehsala və quraşdırmaya qədər tam mebel xidmətləri.'],
+        'musteriler' => ['title' => 'Müştərilər',   'subtitle' => 'İllər ərzində bizə etibar edən brend və şirkətlər.'],
+        'elaqe'      => ['title' => 'Əlaqə',         'subtitle' => 'Layihəniz və ya sualınızla bağlı bizimlə əlaqə saxlayın.'],
+    ],
     'seo'         => [
         'home_title' => 'MYBEL Concept — Premium mebel və interyer həlləri | Bakı',
         'home_desc'  => 'MYBEL Concept — restoran, otel və fərdi evlər üçün fərdi dizayn mebel istehsalı. Mətbəx mebeli, restoran masaları, otel otaqları üçün tam interyer həlləri.',

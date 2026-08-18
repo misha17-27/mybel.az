@@ -21,8 +21,8 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
         <nav class="breadcrumb" aria-label="Naviqasiya izi">
             <a href="/">Ana səhifə</a><span>/</span><strong>Layihələr</strong>
         </nav>
-        <h1>Layihələr</h1>
-        <p>Tamamladığımız işlərlə tanış olun — hər biri fərdi dizayn və peşəkar icra ilə.</p>
+        <h1><?= e($SITE['pages']['layiheler']['title']) ?></h1>
+        <p><?= e($SITE['pages']['layiheler']['subtitle']) ?></p>
     </div>
 </section>
 

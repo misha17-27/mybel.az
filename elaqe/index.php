@@ -60,8 +60,8 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
         <nav class="breadcrumb" aria-label="Naviqasiya izi">
             <a href="/">Ana səhifə</a><span>/</span><strong>Əlaqə</strong>
         </nav>
-        <h1>Əlaqə</h1>
-        <p>Layihəniz və ya sualınızla bağlı bizimlə əlaqə saxlayın.</p>
+        <h1><?= e($SITE['pages']['elaqe']['title']) ?></h1>
+        <p><?= e($SITE['pages']['elaqe']['subtitle']) ?></p>
     </div>
 </section>
 

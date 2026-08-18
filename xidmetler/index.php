@@ -14,8 +14,8 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
         <nav class="breadcrumb" aria-label="Naviqasiya izi">
             <a href="/">Ana səhifə</a><span>/</span><strong>Xidmətlər</strong>
         </nav>
-        <h1>Xidmətlər</h1>
-        <p>Layihələndirmədən istehsala və quraşdırmaya qədər tam mebel xidmətləri.</p>
+        <h1><?= e($SITE['pages']['xidmetler']['title']) ?></h1>
+        <p><?= e($SITE['pages']['xidmetler']['subtitle']) ?></p>
     </div>
 </section>
 
