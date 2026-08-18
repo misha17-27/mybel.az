@@ -43,12 +43,13 @@ $DEF_SETTINGS = [
         'eyebrow' => 'Premium mebel & interyer',
         'title'   => 'Məkanınıza dəyər qatan fərdi mebel həlləri',
         'lead'    => 'Restoran, otel və fərdi evlər üçün layihələndirmədən quraşdırmaya qədər tam interyer və mebel istehsalı.',
+        'image'   => IMG . 'hero.jpg',
     ],
     'about'       => [
         'eyebrow' => 'Şirkət haqqında',
         'title'   => 'Keyfiyyət və dizaynı bir araya gətiririk',
         'text'    => ph_text(1),
-        'video'   => '',   // YouTube/Vimeo linki və ya .mp4 faylı (admin paneldən)
+        'image'   => IMG . 'corner-orange.jpg',
     ],
     // Ana səhifə bölmə başlıqları
     'home'        => [
@@ -66,6 +67,8 @@ $DEF_SETTINGS = [
     // "Şirkət haqqında" səhifəsi
     'about_page'  => [
         'lead'           => 'MYBEL Concept — dizayn, keyfiyyət və dəqiqliyi birləşdirən mebel istehsalçısı.',
+        'image'          => IMG . 'living-neutral.jpg',
+        'video'          => '',   // YouTube/Vimeo linki və ya .mp4 (bu səhifədə göstərilir)
         'intro_eyebrow'  => 'Kimik biz',
         'intro_title'    => 'İdeyanı reallığa çeviririk',
         'intro_text'     => ph_text(1) . "\n\n" . ph_text(1),

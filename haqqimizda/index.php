@@ -22,7 +22,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
 <section class="section">
     <div class="container about-split">
         <div data-reveal>
-            <img src="/assets/img/demo/living-neutral.jpg" alt="MYBEL Concept interyer işi" width="900" height="820">
+            <img src="<?= e($SITE['about_page']['image'] ?: '/assets/img/demo/living-neutral.jpg') ?>" alt="MYBEL Concept interyer işi" width="900" height="820">
         </div>
         <div class="about-text" data-reveal>
             <span class="eyebrow"><?= e($SITE['about_page']['intro_eyebrow']) ?></span>
@@ -41,7 +41,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
             <span class="eyebrow">Video</span>
             <h2 class="section-title">Şirkətimiz haqqında video</h2>
         </div>
-        <?php $about_video = $SITE['about']['video'] ?? ''; ?>
+        <?php $about_video = $SITE['about_page']['video'] ?? ''; ?>
         <?php if ($about_video !== ''): ?>
             <?= video_embed($about_video) ?>
         <?php else: ?>

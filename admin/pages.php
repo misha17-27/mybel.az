@@ -1,7 +1,17 @@
 <?php
 require_once __DIR__ . '/includes/bootstrap.php';
+require_once __DIR__ . '/includes/upload.php';
 require_login();
 $s = load_json('settings', []);
+
+/** Şəkil: yeni yükləmə > URL sahəsi > köhnə */
+function pg_img($fileKey, $urlKey, $current) {
+    $err = null; $up = upload_image($_FILES[$fileKey] ?? [], $err);
+    if ($up) return $up;
+    $url = trim($_POST[$urlKey] ?? '');
+    if ($url !== '') return $url;
+    return $current;
+}
 
 $PAGE_DEFS = [
     'home'       => t('pg_home'),
@@ -22,12 +32,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'eyebrow' => trim($_POST['hero_eyebrow'] ?? ''),
             'title'   => trim($_POST['hero_title'] ?? ''),
             'lead'    => trim($_POST['hero_lead'] ?? ''),
+            'image'   => pg_img('hero_image_file', 'hero_image_url', $SITE['hero']['image'] ?? ''),
         ];
         $s['about'] = [
             'eyebrow' => trim($_POST['about_eyebrow'] ?? ''),
             'title'   => trim($_POST['about_title'] ?? ''),
             'text'    => trim($_POST['about_text'] ?? ''),
-            'video'   => trim($_POST['about_video'] ?? ''),
+            'image'   => pg_img('about_image_file', 'about_image_url', $SITE['about']['image'] ?? ''),
         ];
         $s['home'] = [
             'projects_eyebrow' => trim($_POST['h_projects_eyebrow'] ?? ''),
@@ -49,6 +60,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         $s['about_page'] = [
             'lead'           => trim($_POST['ap_lead'] ?? ''),
+            'image'          => pg_img('ap_image_file', 'ap_image_url', $SITE['about_page']['image'] ?? ''),
+            'video'          => trim($_POST['ap_video'] ?? ''),
             'intro_eyebrow'  => trim($_POST['ap_intro_eyebrow'] ?? ''),
             'intro_title'    => trim($_POST['ap_intro_title'] ?? ''),
             'intro_text'     => trim($_POST['ap_intro_text'] ?? ''),
@@ -101,7 +114,7 @@ $pages = $SITE['pages'];
   </div>
 
 <?php elseif ($editing === 'home'): ?>
-  <form method="post">
+  <form method="post" enctype="multipart/form-data">
     <?= csrf_field() ?><input type="hidden" name="page" value="home">
     <div class="item-head"><h2><?= e(t('pg_home')) ?></h2><a href="/admin/pages.php" class="btn btn-outline btn-sm">← <?= e(t('back_list')) ?></a></div>
     <div class="card">
@@ -109,13 +122,24 @@ $pages = $SITE['pages'];
       <div class="field"><label><?= e(t('t_eyebrow')) ?></label><input type="text" name="hero_eyebrow" value="<?= e($hero['eyebrow']) ?>"></div>
       <div class="field"><label><?= e(t('t_hero_title')) ?></label><textarea name="hero_title" style="min-height:70px"><?= e($hero['title']) ?></textarea></div>
       <div class="field"><label><?= e(t('t_hero_lead')) ?></label><textarea name="hero_lead" style="min-height:70px"><?= e($hero['lead']) ?></textarea></div>
+      <div class="field">
+        <label><?= e(t('pg_image')) ?></label>
+        <?php if (!empty($hero['image'])): ?><img class="thumb" style="width:150px;height:80px;margin-bottom:.5rem" src="<?= e($hero['image']) ?>" alt=""><?php endif; ?>
+        <input type="file" name="hero_image_file" accept="image/*">
+        <input type="text" name="hero_image_url" placeholder="<?= e(t('p_or_url')) ?>" style="margin-top:.5rem">
+      </div>
     </div>
     <div class="card">
       <h2><?= e(t('t_about')) ?></h2>
       <div class="field"><label><?= e(t('t_eyebrow')) ?></label><input type="text" name="about_eyebrow" value="<?= e($about['eyebrow']) ?>"></div>
       <div class="field"><label><?= e(t('title_f')) ?></label><input type="text" name="about_title" value="<?= e($about['title']) ?>"></div>
       <div class="field"><label><?= e(t('t_about_text')) ?></label><textarea name="about_text" style="min-height:110px"><?= e($about['text']) ?></textarea></div>
-      <div class="field"><label><?= e(t('t_video')) ?></label><input type="text" name="about_video" value="<?= e($about['video'] ?? '') ?>" placeholder="https://youtu.be/... / .mp4"><small class="hint" style="display:block;margin-top:.3rem"><?= e(t('t_video_h')) ?></small></div>
+      <div class="field">
+        <label><?= e(t('pg_image')) ?></label>
+        <?php if (!empty($about['image'])): ?><img class="thumb" style="width:150px;height:80px;margin-bottom:.5rem" src="<?= e($about['image']) ?>" alt=""><?php endif; ?>
+        <input type="file" name="about_image_file" accept="image/*">
+        <input type="text" name="about_image_url" placeholder="<?= e(t('p_or_url')) ?>" style="margin-top:.5rem">
+      </div>
     </div>
     <div class="card">
       <h2><?= e(t('th_home')) ?></h2>
@@ -146,11 +170,24 @@ $pages = $SITE['pages'];
   </form>
 
 <?php elseif ($editing === 'about'): ?>
-  <form method="post">
+  <form method="post" enctype="multipart/form-data">
     <?= csrf_field() ?><input type="hidden" name="page" value="about">
     <div class="item-head"><h2><?= e(t('pg_about')) ?></h2><a href="/admin/pages.php" class="btn btn-outline btn-sm">← <?= e(t('back_list')) ?></a></div>
     <div class="card">
       <div class="field"><label><?= e(t('ta_lead')) ?></label><input type="text" name="ap_lead" value="<?= e($ap['lead']) ?>"></div>
+      <div class="row row-2">
+        <div class="field">
+          <label><?= e(t('pg_image')) ?></label>
+          <?php if (!empty($ap['image'])): ?><img class="thumb" style="width:150px;height:80px;margin-bottom:.5rem" src="<?= e($ap['image']) ?>" alt=""><?php endif; ?>
+          <input type="file" name="ap_image_file" accept="image/*">
+          <input type="text" name="ap_image_url" placeholder="<?= e(t('p_or_url')) ?>" style="margin-top:.5rem">
+        </div>
+        <div class="field">
+          <label><?= e(t('t_video')) ?></label>
+          <input type="text" name="ap_video" value="<?= e($ap['video'] ?? '') ?>" placeholder="https://youtu.be/... / .mp4">
+          <small class="hint" style="display:block;margin-top:.3rem"><?= e(t('t_video_h')) ?></small>
+        </div>
+      </div>
       <h3 style="margin:.4rem 0"><?= e(t('ta_intro')) ?></h3>
       <div class="row row-2">
         <div class="field"><label><?= e(t('t_eyebrow')) ?></label><input type="text" name="ap_intro_eyebrow" value="<?= e($ap['intro_eyebrow']) ?>"></div>

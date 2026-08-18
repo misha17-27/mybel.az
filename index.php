@@ -21,7 +21,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
             <a href="/elaqe/" class="btn btn-outline">Bizimlə əlaqə</a>
         </div>
         <figure class="hero-figure">
-            <img src="/assets/img/demo/hero.jpg" alt="MYBEL Concept — müasir interyer və mebel nümunəsi" width="1600" height="700">
+            <img src="<?= e($SITE['hero']['image'] ?: '/assets/img/demo/hero.jpg') ?>" alt="MYBEL Concept — müasir interyer və mebel nümunəsi" width="1600" height="700">
         </figure>
     </div>
 </section>
@@ -38,7 +38,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
             <a href="/haqqimizda/" class="btn-ghost">Ətraflı </a>
         </div>
         <div data-reveal>
-            <img src="/assets/img/demo/corner-orange.jpg" alt="MYBEL Concept interyer detalı" width="900" height="760">
+            <img src="<?= e($SITE['about']['image'] ?: '/assets/img/demo/corner-orange.jpg') ?>" alt="MYBEL Concept interyer detalı" width="900" height="760">
         </div>
     </div>
 </section>
