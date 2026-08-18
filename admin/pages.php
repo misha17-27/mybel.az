@@ -133,7 +133,7 @@ $pages = $SITE['pages'];
       <h2><?= e(t('t_about')) ?></h2>
       <div class="field"><label><?= e(t('t_eyebrow')) ?></label><input type="text" name="about_eyebrow" value="<?= e($about['eyebrow']) ?>"></div>
       <div class="field"><label><?= e(t('title_f')) ?></label><input type="text" name="about_title" value="<?= e($about['title']) ?>"></div>
-      <div class="field"><label><?= e(t('t_about_text')) ?></label><textarea name="about_text" style="min-height:110px"><?= e($about['text']) ?></textarea></div>
+      <div class="field"><label><?= e(t('t_about_text')) ?></label><textarea name="about_text" class="richtext" style="min-height:110px"><?= e($about['text']) ?></textarea></div>
       <div class="field">
         <label><?= e(t('pg_image')) ?></label>
         <?php if (!empty($about['image'])): ?><img class="thumb" style="width:150px;height:80px;margin-bottom:.5rem" src="<?= e($about['image']) ?>" alt=""><?php endif; ?>
@@ -193,14 +193,14 @@ $pages = $SITE['pages'];
         <div class="field"><label><?= e(t('t_eyebrow')) ?></label><input type="text" name="ap_intro_eyebrow" value="<?= e($ap['intro_eyebrow']) ?>"></div>
         <div class="field"><label><?= e(t('title_f')) ?></label><input type="text" name="ap_intro_title" value="<?= e($ap['intro_title']) ?>"></div>
       </div>
-      <div class="field"><label><?= e(t('ta_text')) ?></label><textarea name="ap_intro_text" style="min-height:110px"><?= e($ap['intro_text']) ?></textarea></div>
+      <div class="field"><label><?= e(t('ta_text')) ?></label><textarea name="ap_intro_text" class="richtext" style="min-height:110px"><?= e($ap['intro_text']) ?></textarea></div>
       <div class="row row-2">
         <div class="field"><label><?= e(t('ta_mission')) ?> — <?= e(t('title_f')) ?></label><input type="text" name="ap_mission_title" value="<?= e($ap['mission_title']) ?>"></div>
         <div class="field"><label><?= e(t('ta_approach')) ?> — <?= e(t('title_f')) ?></label><input type="text" name="ap_approach_title" value="<?= e($ap['approach_title']) ?>"></div>
       </div>
       <div class="row row-2">
-        <div class="field"><label><?= e(t('ta_mission')) ?> — <?= e(t('ta_text')) ?></label><textarea name="ap_mission_text" style="min-height:90px"><?= e($ap['mission_text']) ?></textarea></div>
-        <div class="field"><label><?= e(t('ta_approach')) ?> — <?= e(t('ta_text')) ?></label><textarea name="ap_approach_text" style="min-height:90px"><?= e($ap['approach_text']) ?></textarea></div>
+        <div class="field"><label><?= e(t('ta_mission')) ?> — <?= e(t('ta_text')) ?></label><textarea name="ap_mission_text" class="richtext" style="min-height:90px"><?= e($ap['mission_text']) ?></textarea></div>
+        <div class="field"><label><?= e(t('ta_approach')) ?> — <?= e(t('ta_text')) ?></label><textarea name="ap_approach_text" class="richtext" style="min-height:90px"><?= e($ap['approach_text']) ?></textarea></div>
       </div>
       <h3 style="margin:.4rem 0"><?= e(t('ta_stats')) ?></h3>
       <div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(200px,1fr))">

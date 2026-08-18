@@ -27,9 +27,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
         <div class="about-text" data-reveal>
             <span class="eyebrow"><?= e($SITE['about_page']['intro_eyebrow']) ?></span>
             <h2 class="section-title"><?= e($SITE['about_page']['intro_title']) ?></h2>
-            <?php foreach (preg_split('/\n{2,}/', trim($SITE['about_page']['intro_text'])) as $par): ?>
-                <p><?= nl2br(e($par)) ?></p>
-            <?php endforeach; ?>
+            <?= rich_text($SITE['about_page']['intro_text']) ?>
         </div>
     </div>
 </section>
@@ -61,12 +59,12 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
             <div class="about-text" data-reveal>
                 <span class="eyebrow">Missiyamız</span>
                 <h2 class="section-title"><?= e($SITE['about_page']['mission_title']) ?></h2>
-                <?php foreach (preg_split('/\n{2,}/', trim($SITE['about_page']['mission_text'])) as $par): ?><p><?= nl2br(e($par)) ?></p><?php endforeach; ?>
+                <?= rich_text($SITE['about_page']['mission_text']) ?>
             </div>
             <div class="about-text" data-reveal>
                 <span class="eyebrow">Yanaşmamız</span>
                 <h2 class="section-title"><?= e($SITE['about_page']['approach_title']) ?></h2>
-                <?php foreach (preg_split('/\n{2,}/', trim($SITE['about_page']['approach_text'])) as $par): ?><p><?= nl2br(e($par)) ?></p><?php endforeach; ?>
+                <?= rich_text($SITE['about_page']['approach_text']) ?>
             </div>
         </div>
         <div class="stats-row">

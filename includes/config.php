@@ -229,6 +229,22 @@ function service_projects($service, $allProjects) {
 }
 
 /**
+ * Zəngin mətn (WYSIWYG) çıxışı. HTML varsa olduğu kimi, köhnə düz mətn abzaslara bölünür.
+ */
+function rich_text($v) {
+    $v = trim((string)$v);
+    if ($v === '') return '';
+    if (preg_match('/<(p|br|ul|ol|li|h[1-6]|strong|em|u|b|i|blockquote|a)\b/i', $v)) {
+        return $v; // artıq HTML (redaktordan)
+    }
+    $out = '';
+    foreach (preg_split('/\n{2,}/', $v) as $par) {
+        $out .= '<p>' . nl2br(e($par)) . '</p>';
+    }
+    return $out;
+}
+
+/**
  * Video linkindən responsiv embed qaytarır (YouTube/Vimeo/mp4).
  * Boş olarsa boş sətir qaytarır.
  */

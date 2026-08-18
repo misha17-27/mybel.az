@@ -32,9 +32,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
         <div class="about-text" data-reveal>
             <span class="eyebrow"><?= e($SITE['about']['eyebrow']) ?></span>
             <h2 class="section-title"><?= e($SITE['about']['title']) ?></h2>
-            <?php foreach (preg_split('/\n{2,}/', trim($SITE['about']['text'])) as $par): ?>
-                <p><?= nl2br(e($par)) ?></p>
-            <?php endforeach; ?>
+            <?= rich_text($SITE['about']['text']) ?>
             <a href="/haqqimizda/" class="btn-ghost">Ətraflı </a>
         </div>
         <div data-reveal>
