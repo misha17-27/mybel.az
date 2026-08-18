@@ -84,7 +84,10 @@ require __DIR__ . '/includes/layout_top.php';
           <td><input type="url" name="link[<?= e($c['id']) ?>]" value="<?= e($c['link']??'') ?>" placeholder="https://..."></td>
           <td style="width:90px"><input type="number" name="order[<?= e($c['id']) ?>]" value="<?= (int)($c['order']??0) ?>"></td>
           <td><label class="check"><input type="checkbox" name="show[<?= e($c['id']) ?>]" <?= ($c['show']??true)?'checked':'' ?>></label></td>
-          <td><button class="btn btn-outline btn-sm" type="submit"><?= e(t('save')) ?></button></td>
+          <td class="inline" style="gap:.4rem">
+            <button class="btn btn-outline btn-sm" type="submit"><?= e(t('save')) ?></button>
+            <button form="delc_<?= e($c['id']) ?>" class="btn btn-danger btn-sm"><?= e(t('delete')) ?></button>
+          </td>
         </tr>
       <?php endforeach; ?>
       </tbody>
@@ -92,13 +95,10 @@ require __DIR__ . '/includes/layout_top.php';
     <div style="margin-top:1rem"><button class="btn" type="submit"><?= e(t('save_all')) ?></button></div>
   </form>
 
-  <div style="margin-top:1rem">
-    <?php foreach ($clients as $c): ?>
-      <form method="post" data-confirm="<?= e(t('delete')) ?>?" style="display:inline-block;margin:.2rem">
-        <?= csrf_field() ?><input type="hidden" name="action" value="delete"><input type="hidden" name="id" value="<?= e($c['id']) ?>">
-        <button class="btn btn-danger btn-sm">✕ <?= e($c['name']) ?></button>
-      </form>
-    <?php endforeach; ?>
-  </div>
+  <?php foreach ($clients as $c): // gizli silmə formaları (sətirdəki düymələr üçün) ?>
+    <form id="delc_<?= e($c['id']) ?>" method="post" data-confirm="<?= e(t('delete')) ?>? — <?= e($c['name']) ?>" hidden>
+      <?= csrf_field() ?><input type="hidden" name="action" value="delete"><input type="hidden" name="id" value="<?= e($c['id']) ?>">
+    </form>
+  <?php endforeach; ?>
 </div>
 <?php require __DIR__ . '/includes/layout_bottom.php'; ?>
