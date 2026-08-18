@@ -8,8 +8,9 @@ if ($activeCat && isset($CATEGORIES[$activeCat])) {
     $list = array_values(array_filter($list, fn($p) => $p['category'] === $activeCat));
 }
 
-$page_title = 'Layihələr — ' . $SITE['name'];
-$page_desc  = 'MYBEL Concept-in restoran, otel və fərdi evlər üzrə tamamladığı mebel və interyer layihələri.';
+$ps = page_seo('layiheler');
+$page_title = $ps['title'] ?: ('Layihələr — ' . $SITE['name']);
+$page_desc  = $ps['desc'] ?: 'MYBEL Concept-in restoran, otel və fərdi evlər üzrə tamamladığı mebel və interyer layihələri.';
 $page_url   = '/layiheler/';
 $breadcrumbs = [['name' => 'Ana səhifə', 'url' => '/'], ['name' => 'Layihələr', 'url' => '/layiheler/']];
 

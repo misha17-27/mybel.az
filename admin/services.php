@@ -38,6 +38,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'projects' => array_values($_POST['projects'] ?? []),
             'order'    => (int)($_POST['order'] ?? 0),
             'show'     => isset($_POST['show']),
+            'seo_title'=> trim($_POST['seo_title'] ?? ''),
+            'seo_desc' => trim($_POST['seo_desc'] ?? ''),
         ];
         if ($idx === null) $services[] = $data; else $services[$idx] = $data;
         usort($services, fn($a,$b)=>($a['order']??0)<=>($b['order']??0));
@@ -91,6 +93,11 @@ require __DIR__ . '/includes/layout_top.php';
           </div>
         <?php endif; ?>
       </div>
+
+      <h3 style="margin:1.4rem 0 .3rem"><?= e(t('pg_seo')) ?></h3>
+      <p class="hint" style="margin-top:0"><?= e(t('pg_seo_h')) ?></p>
+      <div class="field"><label><?= e(t('pg_seo_title')) ?></label><input type="text" name="seo_title" value="<?= e($editing['seo_title'] ?? '') ?>" maxlength="70"></div>
+      <div class="field"><label><?= e(t('pg_seo_desc')) ?></label><textarea name="seo_desc" style="min-height:70px" maxlength="180"><?= e($editing['seo_desc'] ?? '') ?></textarea></div>
 
       <button class="btn" type="submit"><?= e(t('save')) ?></button>
     </form>

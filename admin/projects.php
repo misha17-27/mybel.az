@@ -63,8 +63,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'show'     => isset($_POST['show']),
             'excerpt'  => trim($_POST['excerpt'] ?? ''),
             'body'     => trim($_POST['body'] ?? ''),
-            'cover'    => $cover,
-            'gallery'  => $gallery,
+            'cover'     => $cover,
+            'gallery'   => $gallery,
+            'seo_title' => trim($_POST['seo_title'] ?? ''),
+            'seo_desc'  => trim($_POST['seo_desc'] ?? ''),
         ];
         if ($idx === null) $projects[] = $data; else $projects[$idx] = $data;
         usort($projects, fn($a,$b) => ($a['order']??0) <=> ($b['order']??0));
@@ -169,6 +171,11 @@ require __DIR__ . '/includes/layout_top.php';
         <input type="file" name="gallery_files[]" accept="image/*" multiple>
         <input type="text" name="gallery_urls" placeholder="<?= e(t('p_or_urls')) ?>" style="margin-top:.5rem">
       </div>
+
+      <h3 style="margin:1.4rem 0 .3rem"><?= e(t('pg_seo')) ?></h3>
+      <p class="hint" style="margin-top:0"><?= e(t('pg_seo_h')) ?></p>
+      <div class="field"><label><?= e(t('pg_seo_title')) ?></label><input type="text" name="seo_title" value="<?= e($editing['seo_title'] ?? '') ?>" maxlength="70"></div>
+      <div class="field"><label><?= e(t('pg_seo_desc')) ?></label><textarea name="seo_desc" style="min-height:70px" maxlength="180"><?= e($editing['seo_desc'] ?? '') ?></textarea></div>
 
       <button class="btn" type="submit"><?= e(t('save')) ?></button>
     </form>

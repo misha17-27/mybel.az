@@ -22,8 +22,8 @@ $idx = array_search($slug, $keys, true);
 $prev = $idx > 0 ? $PROJECTS[$idx - 1] : null;
 $next = $idx < count($PROJECTS) - 1 ? $PROJECTS[$idx + 1] : null;
 
-$page_title = $item['title'] . ' — Layihələr | ' . $SITE['name'];
-$page_desc  = $item['excerpt'];
+$page_title = ($item['seo_title'] ?? '') ?: ($item['title'] . ' — Layihələr | ' . $SITE['name']);
+$page_desc  = ($item['seo_desc'] ?? '') ?: $item['excerpt'];
 $page_url   = '/layiheler/' . $item['slug'] . '/';
 $page_type  = 'article';
 $page_image = $item['cover'];

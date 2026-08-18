@@ -21,8 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($upf) $fav = $upf; elseif (trim($_POST['favicon_url'] ?? '') !== '') $fav = trim($_POST['favicon_url']);
 
     $s['seo'] = [
-        'home_title'  => trim($_POST['home_title'] ?? ''),
-        'home_desc'   => trim($_POST['home_desc'] ?? ''),
+        'home_title'  => $seo['home_title'] ?? '',   // artıq "Səhifələr" bölməsində
+        'home_desc'   => $seo['home_desc'] ?? '',
         'og_image'    => $og,
         'favicon'     => $fav,
         'robots'      => ($_POST['robots'] ?? 'index') === 'noindex' ? 'noindex' : 'index',
@@ -47,8 +47,7 @@ $seo = $SITE['seo'];
   <div class="card">
     <h2><?= e(t('o_title')) ?></h2>
     <p class="hint"><?= e(t('o_h')) ?></p>
-    <div class="field"><label><?= e(t('o_mt')) ?></label><input type="text" name="home_title" value="<?= e($seo['home_title']??'') ?>" maxlength="70"></div>
-    <div class="field"><label><?= e(t('o_md')) ?></label><textarea name="home_desc" style="min-height:80px" maxlength="180"><?= e($seo['home_desc']??'') ?></textarea></div>
+    <div class="alert" style="background:var(--brand-soft);color:var(--brand-dark);border:1px solid #eecfbf"><?= e(t('o_home_note')) ?> <a href="/admin/pages.php" style="text-decoration:underline"><?= e(t('n_pages')) ?> →</a></div>
     <div class="field"><label><?= e(t('o_keywords')) ?></label><input type="text" name="keywords" value="<?= e($seo['keywords']??'') ?>"><small class="hint" style="display:block;margin-top:.3rem"><?= e(t('o_keywords_h')) ?></small></div>
     <div class="field"><label><?= e(t('o_vis')) ?></label>
       <select name="robots">

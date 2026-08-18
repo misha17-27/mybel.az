@@ -77,6 +77,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'subtitle' => trim($_POST['subtitle'] ?? ''),
         ];
     }
+    if (isset($PAGE_DEFS[$pg])) {
+        $s['page_seo'][$pg] = ['title' => trim($_POST['seo_title'] ?? ''), 'desc' => trim($_POST['seo_desc'] ?? '')];
+    }
     save_json('settings', $s);
     flash(t('pg_saved'));
     redirect('/admin/pages.php');
@@ -92,6 +95,19 @@ require __DIR__ . '/includes/layout_top.php';
 $hero = $SITE['hero']; $about = $SITE['about']; $home = $SITE['home'];
 $ap = $SITE['about_page']; $stats = $ap['stats'] ?? [];
 $pages = $SITE['pages'];
+$pseo = $editing ? page_seo($editing) : ['title' => '', 'desc' => ''];
+
+/** SEO kartı (bütün səhifə formalarında istifadə olunur) */
+function seo_card($pseo) {
+    ob_start(); ?>
+    <div class="card">
+      <h2><?= e(t('pg_seo')) ?></h2>
+      <p class="hint"><?= e(t('pg_seo_h')) ?></p>
+      <div class="field"><label><?= e(t('pg_seo_title')) ?></label><input type="text" name="seo_title" value="<?= e($pseo['title']) ?>" maxlength="70"></div>
+      <div class="field"><label><?= e(t('pg_seo_desc')) ?></label><textarea name="seo_desc" style="min-height:70px" maxlength="180"><?= e($pseo['desc']) ?></textarea></div>
+    </div>
+    <?php return ob_get_clean();
+}
 ?>
 <?php if ($editing === null): ?>
   <!-- ===== SİYAHI ===== -->
@@ -117,6 +133,7 @@ $pages = $SITE['pages'];
   <form method="post" enctype="multipart/form-data">
     <?= csrf_field() ?><input type="hidden" name="page" value="home">
     <div class="item-head"><h2><?= e(t('pg_home')) ?></h2><a href="/admin/pages.php" class="btn btn-outline btn-sm">← <?= e(t('back_list')) ?></a></div>
+    <?= seo_card($pseo) ?>
     <div class="card">
       <h2><?= e(t('t_hero')) ?></h2>
       <div class="field"><label><?= e(t('t_eyebrow')) ?></label><input type="text" name="hero_eyebrow" value="<?= e($hero['eyebrow']) ?>"></div>
@@ -173,6 +190,7 @@ $pages = $SITE['pages'];
   <form method="post" enctype="multipart/form-data">
     <?= csrf_field() ?><input type="hidden" name="page" value="about">
     <div class="item-head"><h2><?= e(t('pg_about')) ?></h2><a href="/admin/pages.php" class="btn btn-outline btn-sm">← <?= e(t('back_list')) ?></a></div>
+    <?= seo_card($pseo) ?>
     <div class="card">
       <div class="field"><label><?= e(t('ta_lead')) ?></label><input type="text" name="ap_lead" value="<?= e($ap['lead']) ?>"></div>
       <div class="row row-2">
@@ -218,12 +236,13 @@ $pages = $SITE['pages'];
 <?php else: $pd = $pages[$editing] ?? ['title'=>'','subtitle'=>'']; ?>
   <form method="post">
     <?= csrf_field() ?><input type="hidden" name="page" value="<?= e($editing) ?>">
+    <div class="item-head"><h2><?= e($PAGE_DEFS[$editing]) ?></h2><a href="/admin/pages.php" class="btn btn-outline btn-sm">← <?= e(t('back_list')) ?></a></div>
     <div class="card">
-      <div class="item-head"><h2><?= e($PAGE_DEFS[$editing]) ?></h2><a href="/admin/pages.php" class="btn btn-outline btn-sm">← <?= e(t('back_list')) ?></a></div>
       <div class="field"><label><?= e(t('pg_hero_title')) ?></label><input type="text" name="title" value="<?= e($pd['title']) ?>"></div>
       <div class="field"><label><?= e(t('pg_subtitle')) ?></label><textarea name="subtitle" style="min-height:80px"><?= e($pd['subtitle']) ?></textarea></div>
-      <button class="btn" type="submit"><?= e(t('save')) ?></button>
     </div>
+    <?= seo_card($pseo) ?>
+    <button class="btn" type="submit"><?= e(t('save')) ?></button>
   </form>
 <?php endif; ?>
 <?php require __DIR__ . '/includes/layout_bottom.php'; ?>

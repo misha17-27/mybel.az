@@ -1,8 +1,9 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'] . '/includes/bootstrap.php';
 $current_section = 'haqqimizda';
-$page_title = 'Şirkət haqqında — ' . $SITE['name'];
-$page_desc  = 'MYBEL Concept — restoran, otel və fərdi evlər üçün fərdi mebel istehsalı sahəsində peşəkar komanda. Şirkətimiz haqqında.';
+$ps = page_seo('about');
+$page_title = $ps['title'] ?: ('Şirkət haqqında — ' . $SITE['name']);
+$page_desc  = $ps['desc'] ?: 'MYBEL Concept — restoran, otel və fərdi evlər üçün fərdi mebel istehsalı sahəsində peşəkar komanda.';
 $page_url   = '/haqqimizda/';
 $breadcrumbs = [['name' => 'Ana səhifə', 'url' => '/'], ['name' => 'Şirkət haqqında', 'url' => '/haqqimizda/']];
 

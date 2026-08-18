@@ -1,8 +1,9 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'] . '/includes/bootstrap.php';
 $current_section = 'musteriler';
-$page_title = 'Müştərilər — ' . $SITE['name'];
-$page_desc  = 'MYBEL Concept-ə etibar edən müştərilər və tərəfdaşlar.';
+$ps = page_seo('musteriler');
+$page_title = $ps['title'] ?: ('Müştərilər — ' . $SITE['name']);
+$page_desc  = $ps['desc'] ?: 'MYBEL Concept-ə etibar edən müştərilər və tərəfdaşlar.';
 $page_url   = '/musteriler/';
 $breadcrumbs = [['name' => 'Ana səhifə', 'url' => '/'], ['name' => 'Müştərilər', 'url' => '/musteriler/']];
 

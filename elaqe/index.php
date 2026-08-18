@@ -64,8 +64,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-$page_title = 'Əlaqə — ' . $SITE['name'];
-$page_desc  = 'MYBEL Concept ilə əlaqə: telefon, e-poçt, ünvan və sifariş formu.';
+$ps = page_seo('elaqe');
+$page_title = $ps['title'] ?: ('Əlaqə — ' . $SITE['name']);
+$page_desc  = $ps['desc'] ?: 'MYBEL Concept ilə əlaqə: telefon, e-poçt, ünvan və sifariş formu.';
 $page_url   = '/elaqe/';
 $breadcrumbs = [['name' => 'Ana səhifə', 'url' => '/'], ['name' => 'Əlaqə', 'url' => '/elaqe/']];
 

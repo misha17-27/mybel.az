@@ -85,7 +85,8 @@ $ADMIN_T = [
   'unchanged'=>'•••• без изменений',
   'th_home'=>'Разделы главной страницы','th_projects'=>'Секция «Проекты»','th_services'=>'Секция «Услуги»','th_clients'=>'Секция «Клиенты»','th_cta'=>'Призыв к действию (CTA)','th_desc'=>'Описание','th_btn'=>'Текст кнопки',
   'ta_page'=>'Страница «О компании»','ta_lead'=>'Подзаголовок (под заголовком)','ta_intro'=>'Блок «Кто мы»','ta_mission'=>'Миссия','ta_approach'=>'Подход','ta_stats'=>'Цифры (статистика)','ta_num'=>'Число','ta_label'=>'Подпись','ta_text'=>'Текст',
-  'n_pages'=>'Страницы','pg_all'=>'Все страницы','pg_all_h'=>'Выберите страницу, чтобы отредактировать её тексты.','pg_col'=>'Страница','pg_saved'=>'Страница сохранена.','pg_hero_title'=>'Заголовок страницы (H1)','pg_subtitle'=>'Подзаголовок','pg_image'=>'Изображение','pg_home'=>'Главная','pg_about'=>'О компании','pg_projects'=>'Проекты','pg_services'=>'Услуги','pg_clients'=>'Клиенты','pg_contact'=>'Контакты','t_common_h'=>'Глобальные тексты: используются в футере, SEO и по всему сайту.',
+  'n_pages'=>'Страницы','pg_all'=>'Все страницы','pg_all_h'=>'Выберите страницу, чтобы отредактировать её тексты.','pg_col'=>'Страница','pg_saved'=>'Страница сохранена.','pg_hero_title'=>'Заголовок страницы (H1)','pg_subtitle'=>'Подзаголовок','pg_image'=>'Изображение',
+  'pg_seo'=>'SEO страницы','pg_seo_title'=>'Meta-заголовок (Title)','pg_seo_desc'=>'Meta-описание (Description)','pg_seo_h'=>'Что видит Google в результатах. Пусто — подставится по умолчанию.','o_home_note'=>'Заголовок и описание каждой страницы (в т.ч. главной) — в разделе «Страницы».','pg_home'=>'Главная','pg_about'=>'О компании','pg_projects'=>'Проекты','pg_services'=>'Услуги','pg_clients'=>'Клиенты','pg_contact'=>'Контакты','t_common_h'=>'Глобальные тексты: используются в футере, SEO и по всему сайту.',
 ],
 'en' => [
   'g_main'=>'MAIN','g_content'=>'CONTENT','g_settings'=>'SETTINGS',
@@ -137,7 +138,8 @@ $ADMIN_T = [
   'unchanged'=>'•••• unchanged',
   'th_home'=>'Home page sections','th_projects'=>'“Projects” section','th_services'=>'“Services” section','th_clients'=>'“Clients” section','th_cta'=>'Call to action (CTA)','th_desc'=>'Description','th_btn'=>'Button text',
   'ta_page'=>'“About” page','ta_lead'=>'Subtitle (under the heading)','ta_intro'=>'“Who we are” block','ta_mission'=>'Mission','ta_approach'=>'Approach','ta_stats'=>'Stats (numbers)','ta_num'=>'Number','ta_label'=>'Caption','ta_text'=>'Text',
-  'n_pages'=>'Pages','pg_all'=>'All pages','pg_all_h'=>'Pick a page to edit its texts.','pg_col'=>'Page','pg_saved'=>'Page saved.','pg_hero_title'=>'Page heading (H1)','pg_subtitle'=>'Subtitle','pg_image'=>'Image','pg_home'=>'Home','pg_about'=>'About','pg_projects'=>'Projects','pg_services'=>'Services','pg_clients'=>'Clients','pg_contact'=>'Contact','t_common_h'=>'Global texts: used in the footer, SEO and across the site.',
+  'n_pages'=>'Pages','pg_all'=>'All pages','pg_all_h'=>'Pick a page to edit its texts.','pg_col'=>'Page','pg_saved'=>'Page saved.','pg_hero_title'=>'Page heading (H1)','pg_subtitle'=>'Subtitle','pg_image'=>'Image',
+  'pg_seo'=>'Page SEO','pg_seo_title'=>'Meta title','pg_seo_desc'=>'Meta description','pg_seo_h'=>'What Google shows in results. Empty — a default is used.','o_home_note'=>'Title and description of each page (incl. home) — in the “Pages” section.','pg_home'=>'Home','pg_about'=>'About','pg_projects'=>'Projects','pg_services'=>'Services','pg_clients'=>'Clients','pg_contact'=>'Contact','t_common_h'=>'Global texts: used in the footer, SEO and across the site.',
 ],
 'az' => [
   'g_main'=>'ƏSAS','g_content'=>'MƏZMUN','g_settings'=>'AYARLAR',
@@ -189,6 +191,7 @@ $ADMIN_T = [
   'unchanged'=>'•••• dəyişmədən',
   'th_home'=>'Ana səhifə bölmələri','th_projects'=>'“Layihələr” bölməsi','th_services'=>'“Xidmətlər” bölməsi','th_clients'=>'“Müştərilər” bölməsi','th_cta'=>'Çağırış (CTA)','th_desc'=>'Təsvir','th_btn'=>'Düymə mətni',
   'ta_page'=>'“Şirkət haqqında” səhifəsi','ta_lead'=>'Alt başlıq (başlığın altında)','ta_intro'=>'“Kimik biz” bloku','ta_mission'=>'Missiya','ta_approach'=>'Yanaşma','ta_stats'=>'Rəqəmlər (statistika)','ta_num'=>'Rəqəm','ta_label'=>'Yazı','ta_text'=>'Mətn',
-  'n_pages'=>'Səhifələr','pg_all'=>'Bütün səhifələr','pg_all_h'=>'Mətnlərini redaktə etmək üçün səhifə seçin.','pg_col'=>'Səhifə','pg_saved'=>'Səhifə saxlanıldı.','pg_hero_title'=>'Səhifə başlığı (H1)','pg_subtitle'=>'Alt başlıq','pg_image'=>'Şəkil','pg_home'=>'Ana səhifə','pg_about'=>'Şirkət haqqında','pg_projects'=>'Layihələr','pg_services'=>'Xidmətlər','pg_clients'=>'Müştərilər','pg_contact'=>'Əlaqə','t_common_h'=>'Qlobal mətnlər: futer, SEO və bütün saytda istifadə olunur.',
+  'n_pages'=>'Səhifələr','pg_all'=>'Bütün səhifələr','pg_all_h'=>'Mətnlərini redaktə etmək üçün səhifə seçin.','pg_col'=>'Səhifə','pg_saved'=>'Səhifə saxlanıldı.','pg_hero_title'=>'Səhifə başlığı (H1)','pg_subtitle'=>'Alt başlıq','pg_image'=>'Şəkil',
+  'pg_seo'=>'Səhifə SEO','pg_seo_title'=>'Meta başlıq (Title)','pg_seo_desc'=>'Meta təsvir (Description)','pg_seo_h'=>'Google nəticələrdə göstərir. Boş — standart istifadə olunur.','o_home_note'=>'Hər səhifənin (ana səhifə daxil) başlıq və təsviri “Səhifələr” bölməsindədir.','pg_home'=>'Ana səhifə','pg_about'=>'Şirkət haqqında','pg_projects'=>'Layihələr','pg_services'=>'Xidmətlər','pg_clients'=>'Müştərilər','pg_contact'=>'Əlaqə','t_common_h'=>'Qlobal mətnlər: futer, SEO və bütün saytda istifadə olunur.',
 ],
 ];

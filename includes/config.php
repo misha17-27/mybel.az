@@ -90,6 +90,15 @@ $DEF_SETTINGS = [
         'musteriler' => ['title' => 'Müştərilər',   'subtitle' => 'İllər ərzində bizə etibar edən brend və şirkətlər.'],
         'elaqe'      => ['title' => 'Əlaqə',         'subtitle' => 'Layihəniz və ya sualınızla bağlı bizimlə əlaqə saxlayın.'],
     ],
+    // Hər səhifə üçün SEO (meta title/description). Boş olarsa avtomatik.
+    'page_seo'    => [
+        'home'       => ['title' => 'MYBEL Concept — Premium mebel və interyer həlləri | Bakı', 'desc' => 'MYBEL Concept — restoran, otel və fərdi evlər üçün fərdi dizayn mebel istehsalı. Mətbəx mebeli, restoran masaları, otel otaqları üçün tam interyer həlləri.'],
+        'about'      => ['title' => 'Şirkət haqqında — MYBEL Concept', 'desc' => 'MYBEL Concept haqqında — restoran, otel və fərdi evlər üçün peşəkar mebel istehsalçısı.'],
+        'layiheler'  => ['title' => 'Layihələr — MYBEL Concept', 'desc' => 'MYBEL Concept-in restoran, otel və fərdi evlər üzrə tamamladığı mebel və interyer layihələri.'],
+        'xidmetler'  => ['title' => 'Xidmətlər — MYBEL Concept', 'desc' => 'Mətbəx mebeli, restoran masaları, otel otaqları, qarderob və interyer dizayn xidmətləri.'],
+        'musteriler' => ['title' => 'Müştərilər — MYBEL Concept', 'desc' => 'MYBEL Concept-ə etibar edən müştərilər və tərəfdaşlar.'],
+        'elaqe'      => ['title' => 'Əlaqə — MYBEL Concept', 'desc' => 'MYBEL Concept ilə əlaqə: telefon, e-poçt, ünvan və sifariş formu.'],
+    ],
     'seo'         => [
         'home_title'  => 'MYBEL Concept — Premium mebel və interyer həlləri | Bakı',
         'home_desc'   => 'MYBEL Concept — restoran, otel və fərdi evlər üçün fərdi dizayn mebel istehsalı. Mətbəx mebeli, restoran masaları, otel otaqları üçün tam interyer həlləri.',
@@ -218,6 +227,13 @@ function find_by_slug(array $list, $slug) {
 function cat_name($key) {
     global $CATEGORIES;
     return $CATEGORIES[$key] ?? $key;
+}
+
+/** Səhifə SEO-su (meta title/desc) — settings['page_seo'] */
+function page_seo($key) {
+    global $SITE;
+    $ps = $SITE['page_seo'][$key] ?? [];
+    return ['title' => $ps['title'] ?? '', 'desc' => $ps['desc'] ?? ''];
 }
 
 /** Xidmət üçün slug (yoxdursa başlıqdan) */

@@ -21,8 +21,8 @@ if (!$item) {
 
 $related = service_projects($item, $PROJECTS);
 
-$page_title = $item['title'] . ' — Xidmətlər | ' . $SITE['name'];
-$page_desc  = $item['desc'] ?? '';
+$page_title = ($item['seo_title'] ?? '') ?: ($item['title'] . ' — Xidmətlər | ' . $SITE['name']);
+$page_desc  = ($item['seo_desc'] ?? '') ?: ($item['desc'] ?? '');
 $page_url   = '/xidmetler/' . service_slug($item) . '/';
 $page_type  = 'article';
 $breadcrumbs = [

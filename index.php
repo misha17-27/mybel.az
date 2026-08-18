@@ -1,8 +1,9 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'] . '/includes/bootstrap.php';
 $current_section = '';
-$page_title = $SITE['seo']['home_title'] ?: ($SITE['name'] . ' — ' . $SITE['tagline']);
-$page_desc  = $SITE['seo']['home_desc'] ?: $SITE['description'];
+$ps = page_seo('home');
+$page_title = $ps['title'] ?: ($SITE['seo']['home_title'] ?: ($SITE['name'] . ' — ' . $SITE['tagline']));
+$page_desc  = $ps['desc'] ?: ($SITE['seo']['home_desc'] ?: $SITE['description']);
 $page_image = $SITE['seo']['og_image'] ?: '/assets/img/logo.png';
 $page_url   = '/';
 

@@ -1,8 +1,9 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'] . '/includes/bootstrap.php';
 $current_section = 'xidmetler';
-$page_title = 'Xidmətlər — ' . $SITE['name'];
-$page_desc  = 'MYBEL Concept xidmətləri: mətbəx mebeli, restoran masaları, otel otaqları, qarderob, yumşaq mebel və interyer dizayn.';
+$ps = page_seo('xidmetler');
+$page_title = $ps['title'] ?: ('Xidmətlər — ' . $SITE['name']);
+$page_desc  = $ps['desc'] ?: 'MYBEL Concept xidmətləri: mətbəx mebeli, restoran masaları, otel otaqları, qarderob, yumşaq mebel və interyer dizayn.';
 $page_url   = '/xidmetler/';
 $breadcrumbs = [['name' => 'Ana səhifə', 'url' => '/'], ['name' => 'Xidmətlər', 'url' => '/xidmetler/']];
 
