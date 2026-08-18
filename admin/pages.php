@@ -133,7 +133,6 @@ function seo_card($pseo) {
   <form method="post" enctype="multipart/form-data">
     <?= csrf_field() ?><input type="hidden" name="page" value="home">
     <div class="item-head"><h2><?= e(t('pg_home')) ?></h2><a href="/admin/pages.php" class="btn btn-outline btn-sm">← <?= e(t('back_list')) ?></a></div>
-    <?= seo_card($pseo) ?>
     <div class="card">
       <h2><?= e(t('t_hero')) ?></h2>
       <div class="field"><label><?= e(t('t_eyebrow')) ?></label><input type="text" name="hero_eyebrow" value="<?= e($hero['eyebrow']) ?>"></div>
@@ -183,6 +182,7 @@ function seo_card($pseo) {
       </div>
       <div class="field"><label><?= e(t('th_desc')) ?></label><input type="text" name="h_cta_text" value="<?= e($home['cta_text']) ?>"></div>
     </div>
+    <?= seo_card($pseo) ?>
     <button class="btn" type="submit"><?= e(t('save_all')) ?></button>
   </form>
 
@@ -190,7 +190,6 @@ function seo_card($pseo) {
   <form method="post" enctype="multipart/form-data">
     <?= csrf_field() ?><input type="hidden" name="page" value="about">
     <div class="item-head"><h2><?= e(t('pg_about')) ?></h2><a href="/admin/pages.php" class="btn btn-outline btn-sm">← <?= e(t('back_list')) ?></a></div>
-    <?= seo_card($pseo) ?>
     <div class="card">
       <div class="field"><label><?= e(t('ta_lead')) ?></label><input type="text" name="ap_lead" value="<?= e($ap['lead']) ?>"></div>
       <div class="row row-2">
@@ -230,6 +229,7 @@ function seo_card($pseo) {
         <?php endfor; ?>
       </div>
     </div>
+    <?= seo_card($pseo) ?>
     <button class="btn" type="submit"><?= e(t('save_all')) ?></button>
   </form>
 
