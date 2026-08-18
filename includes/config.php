@@ -91,10 +91,16 @@ $DEF_SETTINGS = [
         'elaqe'      => ['title' => 'Əlaqə',         'subtitle' => 'Layihəniz və ya sualınızla bağlı bizimlə əlaqə saxlayın.'],
     ],
     'seo'         => [
-        'home_title' => 'MYBEL Concept — Premium mebel və interyer həlləri | Bakı',
-        'home_desc'  => 'MYBEL Concept — restoran, otel və fərdi evlər üçün fərdi dizayn mebel istehsalı. Mətbəx mebeli, restoran masaları, otel otaqları üçün tam interyer həlləri.',
-        'og_image'   => '/assets/img/logo.png',
-        'robots'     => 'index',
+        'home_title'  => 'MYBEL Concept — Premium mebel və interyer həlləri | Bakı',
+        'home_desc'   => 'MYBEL Concept — restoran, otel və fərdi evlər üçün fərdi dizayn mebel istehsalı. Mətbəx mebeli, restoran masaları, otel otaqları üçün tam interyer həlləri.',
+        'og_image'    => '/assets/img/logo.png',
+        'robots'      => 'index',
+        'keywords'    => 'mebel, interyer dizayn, restoran mebeli, otel mebeli, mətbəx mebeli, Bakı',
+        'favicon'     => '/assets/img/logo.png',
+        'ga_id'       => '',        // GA4: G-XXXXXXXXXX
+        'gsc_verify'  => '',        // Google Search Console təsdiq kodu
+        'org_type'    => 'FurnitureStore',
+        'price_range' => '$$',
     ],
     'security'    => [
         'turnstile_enabled' => false,

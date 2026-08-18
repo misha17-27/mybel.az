@@ -15,11 +15,14 @@ $urls = [
 foreach ($PROJECTS as $p) $urls[] = ['/layiheler/' . $p['slug'] . '/', '0.7', 'monthly'];
 foreach ($SERVICES as $s) $urls[] = ['/xidmetler/' . service_slug($s) . '/', '0.6', 'monthly'];
 
+$lastmod = date('Y-m-d', @filemtime(data_path('projects')) ?: time());
+
 echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
 echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
 foreach ($urls as [$loc, $pri, $freq]) {
     echo "  <url>\n";
     echo "    <loc>" . htmlspecialchars($base . $loc, ENT_QUOTES) . "</loc>\n";
+    echo "    <lastmod>$lastmod</lastmod>\n";
     echo "    <changefreq>$freq</changefreq>\n";
     echo "    <priority>$pri</priority>\n";
     echo "  </url>\n";
