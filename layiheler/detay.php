@@ -65,7 +65,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
         </div>
 
         <?php if (!empty($item['gallery'])): ?>
-            <h2 class="section-title" style="margin:2.5rem 0 1rem;font-size:1.5rem">Qalereya</h2>
+            <h2 class="section-title" style="margin:2.5rem 0 1.8rem;font-size:1.5rem">Qalereya</h2>
             <div class="gallery-grid">
                 <?php foreach ($item['gallery'] as $i => $g): ?>
                     <img src="<?= e($g) ?>" data-full="<?= e($g) ?>" data-lightbox alt="<?= e($item['title']) ?> — şəkil <?= $i + 1 ?>" loading="lazy" width="1200" height="800">
