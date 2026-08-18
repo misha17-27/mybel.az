@@ -87,6 +87,14 @@
         });
     }
 
+    // ---- Telefon sahəsi: yalnız rəqəm və telefon simvolları ----
+    document.querySelectorAll('input[data-phone]').forEach(function (inp) {
+        inp.addEventListener('input', function () {
+            var v = inp.value.replace(/[^\d+()\-\s]/g, '');
+            if (v !== inp.value) inp.value = v;
+        });
+    });
+
     // ---- Reveal-on-scroll animasiya ----
     if ('IntersectionObserver' in window) {
         var io = new IntersectionObserver(function (entries) {
