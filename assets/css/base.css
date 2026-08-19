@@ -183,6 +183,12 @@ button { font: inherit; cursor: pointer; }
 .filter-bar a:hover { border-color: var(--brand); color: var(--brand); }
 .filter-bar a.is-active { background: var(--ink); color: #fff; border-color: var(--ink); }
 
+/* Səhifələmə */
+.pagination { display: flex; flex-wrap: wrap; gap: .4rem; justify-content: center; margin-top: 3rem; }
+.page-link { min-width: 42px; height: 42px; padding: 0 .7rem; border: 1px solid var(--line); border-radius: 8px; display: grid; place-items: center; font-weight: 600; color: var(--ink); transition: .2s; }
+.page-link:hover { border-color: var(--brand); color: var(--brand); }
+.page-link.is-active { background: var(--ink); color: #fff; border-color: var(--ink); }
+
 /* =====================================================================
    SERVICES
    ===================================================================== */

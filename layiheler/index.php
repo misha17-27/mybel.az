@@ -8,6 +8,15 @@ if ($activeCat && isset($CATEGORIES[$activeCat])) {
     $list = array_values(array_filter($list, fn($p) => $p['category'] === $activeCat));
 }
 
+// Səhifələmə: hər səhifədə 12 layihə
+$perPage = 12;
+$total = count($list);
+$totalPages = max(1, (int)ceil($total / $perPage));
+$page = max(1, (int)($_GET['page'] ?? 1));
+if ($page > $totalPages) $page = $totalPages;
+$pageItems = array_slice($list, ($page - 1) * $perPage, $perPage);
+$pageQ = $activeCat ? '?cat=' . rawurlencode($activeCat) . '&' : '?';
+
 $ps = page_seo('layiheler');
 $page_title = $ps['title'] ?: ('Layihələr — ' . $SITE['name']);
 $page_desc  = $ps['desc'] ?: 'MYBEL Concept-in restoran, otel və fərdi evlər üzrə tamamladığı mebel və interyer layihələri.';
@@ -40,7 +49,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
             <p>Bu kateqoriyada hələ layihə yoxdur.</p>
         <?php else: ?>
         <div class="card-grid">
-            <?php foreach ($list as $p): ?>
+            <?php foreach ($pageItems as $p): ?>
                 <article class="card" data-reveal>
                     <a class="card-media" href="/layiheler/<?= e($p['slug']) ?>/">
                         <span class="card-tag"><?= e(cat_name($p['category'])) ?></span>
@@ -55,6 +64,16 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
                 </article>
             <?php endforeach; ?>
         </div>
+
+        <?php if ($totalPages > 1): ?>
+        <nav class="pagination" aria-label="Səhifələr">
+            <?php if ($page > 1): ?><a class="page-link" href="<?= e($pageQ . 'page=' . ($page - 1)) ?>" aria-label="Əvvəlki">←</a><?php endif; ?>
+            <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                <a class="page-link<?= $i === $page ? ' is-active' : '' ?>" href="<?= e($pageQ . 'page=' . $i) ?>"><?= $i ?></a>
+            <?php endfor; ?>
+            <?php if ($page < $totalPages): ?><a class="page-link" href="<?= e($pageQ . 'page=' . ($page + 1)) ?>" aria-label="Növbəti">→</a><?php endif; ?>
+        </nav>
+        <?php endif; ?>
         <?php endif; ?>
     </div>
 </section>
