@@ -12,9 +12,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif (turnstile_active($SITE) && !turnstile_verify($SITE['security']['turnstile_secret'], $_POST['cf-turnstile-response'] ?? null, $_SERVER['REMOTE_ADDR'] ?? null)) {
         $error = t('login_robot');
     } else {
-        $email = trim($_POST['email'] ?? '');
-        $pass  = (string)($_POST['password'] ?? '');
-        $u = find_user_by_email($email);
+        $loginId = trim($_POST['login'] ?? '');
+        $pass    = (string)($_POST['password'] ?? '');
+        $u = find_user_by_login($loginId);
         if ($u && ($u['active'] ?? true) && password_verify($pass, $u['pass'])) {
             // login uğurlu
             session_regenerate_id(true);
@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <title><?= e(t('login_title')) ?> — MYBEL</title>
 <link rel="icon" href="/assets/img/logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/admin/assets/admin.css?v=2">
+<link rel="stylesheet" href="/admin/assets/admin.css?v=3">
 <?php if (turnstile_active($SITE)): ?><script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script><?php endif; ?>
 </head>
 <body>
@@ -52,13 +52,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php if ($error): ?><div class="alert alert-error"><?= e($error) ?></div><?php endif; ?>
     <?= csrf_field() ?>
     <div class="field">
-      <label for="email"><?= e(t('email')) ?></label>
-      <input type="email" id="email" name="email" value="<?= e($_POST['email'] ?? '') ?>" autocomplete="username" required>
+      <label for="login"><?= e(t('login_id')) ?></label>
+      <input type="text" id="login" name="login" value="<?= e($_POST['login'] ?? '') ?>" autocomplete="username" required>
     </div>
     <div class="field">
       <label for="password"><?= e(t('password')) ?></label>
-      <input type="password" id="password" name="password" autocomplete="current-password" required>
+      <div class="pass-wrap">
+        <input type="password" id="password" name="password" autocomplete="current-password" required>
+        <button type="button" class="pass-toggle" aria-label="<?= e(t('show_pass')) ?>"
+          onclick="var i=document.getElementById('password');i.type=i.type==='password'?'text':'password';this.classList.toggle('on')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
+        </button>
+      </div>
     </div>
+    <div style="text-align:right;margin:-.4rem 0 1rem"><a href="/admin/forgot.php" style="font-size:.85rem;color:var(--brand)"><?= e(t('login_forgot')) ?></a></div>
     <input type="text" name="website" style="position:absolute;left:-9999px" tabindex="-1" aria-hidden="true">
     <?php if (turnstile_active($SITE)): ?>
       <div class="field"><div class="cf-turnstile" data-sitekey="<?= e($SITE['security']['turnstile_site']) ?>"></div></div>

@@ -51,6 +51,38 @@ function find_user_by_id(?string $id): ?array {
     return null;
 }
 
+/** e-poçt VƏ YA istifadəçi adı (name) ilə tap */
+function find_user_by_login(string $login): ?array {
+    $login = trim($login);
+    if ($login === '') return null;
+    foreach (all_users() as $u) {
+        if (strcasecmp($u['email'], $login) === 0 || strcasecmp($u['name'], $login) === 0) return $u;
+    }
+    return null;
+}
+
+// ---- Şifrə sıfırlama tokenləri (data/resets.json) ----
+function create_reset_token(string $uid): string {
+    $tokens = load_json('resets', []);
+    $now = time();
+    foreach ($tokens as $k => $t) if (($t['exp'] ?? 0) < $now) unset($tokens[$k]);
+    $token = bin2hex(random_bytes(32));
+    $tokens[$token] = ['uid' => $uid, 'exp' => $now + 3600];
+    save_json('resets', $tokens);
+    return $token;
+}
+function reset_token_user(?string $token): ?array {
+    if (!$token) return null;
+    $t = (load_json('resets', []))[$token] ?? null;
+    if (!$t || ($t['exp'] ?? 0) < time()) return null;
+    return find_user_by_id($t['uid']);
+}
+function consume_reset_token(string $token): void {
+    $tokens = load_json('resets', []);
+    unset($tokens[$token]);
+    save_json('resets', $tokens);
+}
+
 // ---- CSRF ----
 function csrf_token(): string {
     if (empty($_SESSION['csrf'])) $_SESSION['csrf'] = bin2hex(random_bytes(32));
