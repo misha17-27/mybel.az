@@ -69,7 +69,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
                         </a>
                         <div class="card-body">
                             <h3 class="card-title"><?= e($p['title']) ?></h3>
-                            <p class="card-meta"><?= e($p['location']) ?> · <?= e($p['year']) ?></p>
+                            <?php if (!empty($p['location']) || !empty($p['year'])): ?><p class="card-meta"><?= e(trim($p['location'] . (($p['location'] && $p['year']) ? ' · ' : '') . $p['year'])) ?></p><?php endif; ?>
                             <a class="card-link" href="/layiheler/<?= e($p['slug']) ?>/">Layihəyə bax</a>
                         </div>
                     </article>

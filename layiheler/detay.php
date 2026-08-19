@@ -44,7 +44,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
             <strong><?= e($item['title']) ?></strong>
         </nav>
         <h1><?= e($item['title']) ?></h1>
-        <p><?= e($item['excerpt']) ?></p>
+        <?php if (!empty($item['excerpt'])): ?><p><?= e($item['excerpt']) ?></p><?php endif; ?>
     </div>
 </section>
 
@@ -56,13 +56,15 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
 
         <div class="detail-facts">
             <div><div class="fact-label">Kateqoriya</div><div class="fact-value"><?= e(cat_name($item['category'])) ?></div></div>
-            <div><div class="fact-label">Məkan</div><div class="fact-value"><?= e($item['location']) ?></div></div>
-            <div><div class="fact-label">İl</div><div class="fact-value"><?= e($item['year']) ?></div></div>
+            <?php if (!empty($item['location'])): ?><div><div class="fact-label">Məkan</div><div class="fact-value"><?= e($item['location']) ?></div></div><?php endif; ?>
+            <?php if (!empty($item['year'])): ?><div><div class="fact-label">İl</div><div class="fact-value"><?= e($item['year']) ?></div></div><?php endif; ?>
         </div>
 
+        <?php if (!empty(trim($item['body']))): ?>
         <div class="detail-body" data-reveal>
-            <?= $item['body'] // güvənli daxili məzmun ?>
+            <?= $item['body'] // redaktordan HTML ?>
         </div>
+        <?php endif; ?>
 
         <?php if (!empty($item['gallery'])): ?>
             <h2 class="section-title" style="margin:2.5rem 0 1.8rem;font-size:1.5rem">Qalereya</h2>

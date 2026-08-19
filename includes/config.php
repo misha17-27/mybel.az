@@ -183,6 +183,13 @@ for ($i = 1; $i <= 10; $i++) {
 }
 
 // ---------- YÜKLƏ (yoxdursa seed) ----------
+// Real layihələr seed faylından (import zamanı yaradılır); yoxdursa demo qalır
+$SEED_PROJECTS_FILE = __DIR__ . '/seed-projects.json';
+if (is_file($SEED_PROJECTS_FILE)) {
+    $seeded = json_decode(file_get_contents($SEED_PROJECTS_FILE), true);
+    if (is_array($seeded) && $seeded) $DEF_PROJECTS = $seeded;
+}
+
 $SITE      = load_or_seed('settings', $DEF_SETTINGS);
 $PROJECTS  = load_or_seed('projects', $DEF_PROJECTS);
 $AREAS     = load_or_seed('areas',    $DEF_AREAS);
@@ -194,8 +201,11 @@ $SITE = array_replace_recursive($DEF_SETTINGS, $SITE);
 
 // ---------- Kateqoriyalar (statik) ----------
 $CATEGORIES = [
-    'restoranlar' => 'Restoranlar',
     'oteller'     => 'Otellər',
+    'ictimai'     => 'İctimai binalar',
+    'kommersiya'  => 'Kommersiya',
+    'tehsil'      => 'Təhsil',
+    'idman'       => 'İdman',
     'ferdi-evler' => 'Fərdi evlər',
 ];
 
