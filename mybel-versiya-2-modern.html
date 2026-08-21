@@ -297,9 +297,15 @@ button { font: inherit; cursor: pointer; }
 .detail-facts { display: flex; flex-wrap: wrap; gap: 1.5rem 2.5rem; padding: 1.4rem 0; border-block: 1px solid var(--line); margin-bottom: 2rem; }
 .fact-label { font-size: .78rem; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); }
 .fact-value { font-weight: 600; font-size: 1.05rem; }
-.gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin-top: 1rem; }
-.gallery-grid img { width: 100%; aspect-ratio: 3/2; object-fit: cover; border-radius: var(--radius); cursor: zoom-in; transition: transform .3s var(--ease); }
-.gallery-grid img:hover { transform: scale(1.02); }
+/* Masonry (Pinterest-tipli) — CSS sütunları ilə, foto öz nisbətini saxlayır */
+.gallery-grid { columns: 3 300px; column-gap: 1rem; margin-top: 1rem; }
+.gallery-grid img {
+    width: 100%; height: auto; display: block; margin-bottom: 1rem;
+    break-inside: avoid; border-radius: var(--radius); cursor: zoom-in;
+    transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+}
+.gallery-grid img:hover { transform: scale(1.015); box-shadow: 0 12px 30px rgba(0,0,0,.16); }
+@media (max-width: 640px) { .gallery-grid { columns: 2 160px; column-gap: .6rem; } .gallery-grid img { margin-bottom: .6rem; } }
 .detail-nav { display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--line); }
 .detail-nav-link { font-weight: 600; color: var(--ink); transition: color .2s; }
 .detail-nav-link:hover { color: var(--brand); }
