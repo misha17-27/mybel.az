@@ -283,7 +283,7 @@ button { font: inherit; cursor: pointer; }
 .alert { padding: 1rem 1.2rem; border-radius: 8px; margin-bottom: 1.5rem; font-weight: 500; }
 .alert-success { background: #e7f6ec; color: #1c7a3e; border: 1px solid #bfe6cc; }
 .alert-error { background: #fdeaea; color: #b3261e; border: 1px solid #f3c2c0; }
-.map-embed { width: 100%; aspect-ratio: 16/6; border: 0; border-radius: var(--radius); margin-top: 2.5rem; }
+.map-embed { width: 100%; height: 300px; border: 0; border-radius: var(--radius); margin-top: 2.5rem; }
 
 /* =====================================================================
    ABOUT
