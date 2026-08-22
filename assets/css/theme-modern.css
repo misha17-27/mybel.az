@@ -54,6 +54,9 @@
 [data-theme="modern"] .service-icon { background: rgba(226,98,44,.18); }
 [data-theme="modern"] .section-alt { background: var(--ink); color: #fff; }
 [data-theme="modern"] .section-alt .section-desc, [data-theme="modern"] .section-alt .stat-label { color: rgba(255,255,255,.65); }
+[data-theme="modern"] .section-alt .about-text p { color: rgba(255,255,255,.8); }
+[data-theme="modern"] .section-alt .about-text h2, [data-theme="modern"] .section-alt .about-text h3 { color: #fff; }
+[data-theme="modern"] .section-alt .detail-body p { color: rgba(255,255,255,.8); }
 [data-theme="modern"] .cta-band { background: linear-gradient(120deg, var(--brand), var(--brand-dark)); }
 [data-theme="modern"] .cta-band p { color: rgba(255,255,255,.9); }
 [data-theme="modern"] .cta-band .btn { background: #fff; color: var(--ink); }
