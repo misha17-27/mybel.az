@@ -76,6 +76,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'title'    => trim($_POST['title'] ?? ''),
             'subtitle' => trim($_POST['subtitle'] ?? ''),
         ];
+        // Xidmətlər səhifəsinin hero-su ayrıca "xidmetler_page" blokundan oxunur —
+        // sektor/proses defaultları toxunulmur (array_replace_recursive onları qoruyur).
+        if ($pg === 'xidmetler') {
+            $s['xidmetler_page']['sectors_title'] = trim($_POST['title'] ?? '');
+            $s['xidmetler_page']['sectors_desc']  = trim($_POST['subtitle'] ?? '');
+        }
     }
     if (isset($PAGE_DEFS[$pg])) {
         $s['page_seo'][$pg] = ['title' => trim($_POST['seo_title'] ?? ''), 'desc' => trim($_POST['seo_desc'] ?? '')];
@@ -233,7 +239,10 @@ function seo_card($pseo) {
     <button class="btn" type="submit"><?= e(t('save_all')) ?></button>
   </form>
 
-<?php else: $pd = $pages[$editing] ?? ['title'=>'','subtitle'=>'']; ?>
+<?php else:
+    $pd = $editing === 'xidmetler'
+        ? ['title' => $SITE['xidmetler_page']['sectors_title'] ?? '', 'subtitle' => $SITE['xidmetler_page']['sectors_desc'] ?? '']
+        : ($pages[$editing] ?? ['title' => '', 'subtitle' => '']); ?>
   <form method="post">
     <?= csrf_field() ?><input type="hidden" name="page" value="<?= e($editing) ?>">
     <div class="item-head"><h2><?= e($PAGE_DEFS[$editing]) ?></h2><a href="/admin/pages.php" class="btn btn-outline btn-sm">← <?= e(t('back_list')) ?></a></div>
