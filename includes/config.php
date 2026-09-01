@@ -90,6 +90,34 @@ $DEF_SETTINGS = [
         'musteriler' => ['title' => 'Müştərilər',   'subtitle' => 'İllər ərzində bizə etibar edən brend və şirkətlər.'],
         'elaqe'      => ['title' => 'Əlaqə',         'subtitle' => 'Layihəniz və ya sualınızla bağlı bizimlə əlaqə saxlayın.'],
     ],
+    // "Xidmətlər" səhifəsi — sahələr (ikon grid) + iş prosesi (10 addım)
+    'xidmetler_page' => [
+        'sectors_title' => 'Xidmət göstərdiyimiz sahələr',
+        'sectors_desc'  => 'Mybel Concept dünən olduğu kimi, bu gün də məkanların ruhunu yeniləyən, funksionallıqla estetikanı birləşdirən fərdi mebel layihələrini gözləntilərinizdən daha yüksək səviyyədə həyata keçirir.',
+        'sectors'       => [
+            ['icon' => 'hotel',      'name' => 'Hotellər'],
+            ['icon' => 'restaurant', 'name' => 'Restoranlar'],
+            ['icon' => 'education',  'name' => 'Təhsil müəssisələri'],
+            ['icon' => 'medical',    'name' => 'Tibb müəssisələri'],
+            ['icon' => 'business',   'name' => 'Biznes mərkəzləri'],
+            ['icon' => 'office',     'name' => 'Ofislər'],
+            ['icon' => 'home',       'name' => 'Fərdi evlər'],
+        ],
+        'process_eyebrow' => 'Layihə mərhələləri',
+        'process_title'   => 'Xidmətlər',
+        'process'         => [
+            ['title' => 'Mebel dizaynı', 'desc' => 'Məkanın xüsusiyyətləri, büdcə, komfort və müştərinin istəkləri nəzərə alınaraq unikal mebel konsepsiyası hazırlanır.'],
+            ['title' => 'Ölçüləndirmə və məkan analizi', 'desc' => 'Məkanın ölçüləri və texniki xüsusiyyətləri araşdırılır, mebellərin funksional və düzgün yerləşdirilməsi planlaşdırılır.'],
+            ['title' => '2D texniki layihələndirmə', 'desc' => 'Mebellərin ölçülərini, konstruksiyasını və yerləşməsini əks etdirən detallı 2D texniki layihələr hazırlanır.'],
+            ['title' => 'Moodboard və konsept təqdimatı', 'desc' => 'Layihənin rəng palitrası, materialları, teksturaları və ümumi üslubunu əks etdirən moodboard təqdim olunur.'],
+            ['title' => '3D modelləmə və vizuallaşdırma', 'desc' => 'Mebellər məkanın real ölçülərinə uyğun olaraq 3D formatda hazırlanır. Müştəri istehsala başlamazdan əvvəl layihənin yekun görünüşünü görə bilir.'],
+            ['title' => 'Material və aksesuar seçimi', 'desc' => 'Layihənin dizaynına, istifadə məqsədinə və büdcəsinə uyğun Avropa istehsalı olan yüksək standartlı, sertifikatlı material və aksesuarlar seçilir.'],
+            ['title' => 'İstehsalatın planlaşdırılması', 'desc' => 'Layihə təsdiqləndikdən sonra istehsal mərhələləri, texniki detallar və təhvil müddəti professional komanda tərəfindən planlaşdırılır.'],
+            ['title' => 'Fərdi mebel istehsalı', 'desc' => 'Təsdiqlənmiş dizayn və texniki layihə əsasında yüksək keyfiyyətli, funksional və uzunömürlü mebellər hazırlanır.'],
+            ['title' => 'Layihəyə və keyfiyyətə nəzarət', 'desc' => 'Dizayn komandası ilkin mərhələdən yekun təhvilədək layihənin bütün proseslərinə, işçilik keyfiyyətinə və müəyyən edilmiş müddətlərə nəzarət edir.'],
+            ['title' => 'Yekun təhvil', 'desc' => 'Hazırlanmış mebellər bütün texniki və estetik detalları yoxlanıldıqdan sonra müştəriyə təhvil verilir.'],
+        ],
+    ],
     // Hər səhifə üçün SEO (meta title/description). Boş olarsa avtomatik.
     'page_seo'    => [
         'home'       => ['title' => 'MYBEL Concept — Premium mebel və interyer həlləri | Bakı', 'desc' => 'MYBEL Concept — restoran, otel və fərdi evlər üçün fərdi dizayn mebel istehsalı. Mətbəx mebeli, restoran masaları, otel otaqları üçün tam interyer həlləri.'],
