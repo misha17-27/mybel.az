@@ -33,41 +33,8 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
     </div>
 </section>
 
-<!-- ============ VİDEO ============ -->
-<section class="section">
-    <div class="container">
-        <div class="section-head center">
-            <span class="eyebrow">Video</span>
-            <h2 class="section-title">Şirkətimiz haqqında video</h2>
-        </div>
-        <?php $about_video = $SITE['about_page']['video'] ?? ''; ?>
-        <?php if ($about_video !== ''): ?>
-            <?= video_embed($about_video) ?>
-        <?php else: ?>
-            <div class="video-placeholder" data-reveal>
-                <div>
-                    <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin:0 auto .6rem"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/></svg>
-                    <p>Video buraya əlavə olunacaq</p>
-                </div>
-            </div>
-        <?php endif; ?>
-    </div>
-</section>
-
 <section class="section section-alt">
     <div class="container">
-        <div class="about-split" style="align-items:start">
-            <div class="about-text" data-reveal>
-                <span class="eyebrow">Missiyamız</span>
-                <h2 class="section-title"><?= e($SITE['about_page']['mission_title']) ?></h2>
-                <?= rich_text($SITE['about_page']['mission_text']) ?>
-            </div>
-            <div class="about-text" data-reveal>
-                <span class="eyebrow">Yanaşmamız</span>
-                <h2 class="section-title"><?= e($SITE['about_page']['approach_title']) ?></h2>
-                <?= rich_text($SITE['about_page']['approach_text']) ?>
-            </div>
-        </div>
         <div class="stats-row">
             <?php foreach ($SITE['about_page']['stats'] as $st): ?>
                 <div class="stat" data-reveal><div class="stat-num"><?= e($st['num']) ?></div><div class="stat-label"><?= e($st['label']) ?></div></div>

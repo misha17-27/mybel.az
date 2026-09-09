@@ -61,14 +61,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $s['about_page'] = [
             'lead'           => trim($_POST['ap_lead'] ?? ''),
             'image'          => pg_img('ap_image_file', 'ap_image_url', $SITE['about_page']['image'] ?? ''),
-            'video'          => trim($_POST['ap_video'] ?? ''),
             'intro_eyebrow'  => trim($_POST['ap_intro_eyebrow'] ?? ''),
             'intro_title'    => trim($_POST['ap_intro_title'] ?? ''),
             'intro_text'     => trim($_POST['ap_intro_text'] ?? ''),
-            'mission_title'  => trim($_POST['ap_mission_title'] ?? ''),
-            'mission_text'   => trim($_POST['ap_mission_text'] ?? ''),
-            'approach_title' => trim($_POST['ap_approach_title'] ?? ''),
-            'approach_text'  => trim($_POST['ap_approach_text'] ?? ''),
             'stats'          => $stats,
         ];
     } elseif (in_array($pg, ['layiheler', 'xidmetler', 'musteriler', 'elaqe'], true)) {
@@ -198,18 +193,11 @@ function seo_card($pseo) {
     <div class="item-head"><h2><?= e(t('pg_about')) ?></h2><a href="/admin/pages.php" class="btn btn-outline btn-sm">← <?= e(t('back_list')) ?></a></div>
     <div class="card">
       <div class="field"><label><?= e(t('ta_lead')) ?></label><input type="text" name="ap_lead" value="<?= e($ap['lead']) ?>"></div>
-      <div class="row row-2">
-        <div class="field">
-          <label><?= e(t('pg_image')) ?></label>
-          <?php if (!empty($ap['image'])): ?><img class="thumb" style="width:150px;height:80px;margin-bottom:.5rem" src="<?= e($ap['image']) ?>" alt=""><?php endif; ?>
-          <input type="file" name="ap_image_file" accept="image/*">
-          <input type="text" name="ap_image_url" placeholder="<?= e(t('p_or_url')) ?>" style="margin-top:.5rem">
-        </div>
-        <div class="field">
-          <label><?= e(t('t_video')) ?></label>
-          <input type="text" name="ap_video" value="<?= e($ap['video'] ?? '') ?>" placeholder="https://youtu.be/... / .mp4">
-          <small class="hint" style="display:block;margin-top:.3rem"><?= e(t('t_video_h')) ?></small>
-        </div>
+      <div class="field">
+        <label><?= e(t('pg_image')) ?></label>
+        <?php if (!empty($ap['image'])): ?><img class="thumb" style="width:150px;height:80px;margin-bottom:.5rem" src="<?= e($ap['image']) ?>" alt=""><?php endif; ?>
+        <input type="file" name="ap_image_file" accept="image/*">
+        <input type="text" name="ap_image_url" placeholder="<?= e(t('p_or_url')) ?>" style="margin-top:.5rem">
       </div>
       <h3 style="margin:.4rem 0"><?= e(t('ta_intro')) ?></h3>
       <div class="row row-2">
@@ -217,14 +205,6 @@ function seo_card($pseo) {
         <div class="field"><label><?= e(t('title_f')) ?></label><input type="text" name="ap_intro_title" value="<?= e($ap['intro_title']) ?>"></div>
       </div>
       <div class="field"><label><?= e(t('ta_text')) ?></label><textarea name="ap_intro_text" class="richtext" style="min-height:110px"><?= e($ap['intro_text']) ?></textarea></div>
-      <div class="row row-2">
-        <div class="field"><label><?= e(t('ta_mission')) ?> — <?= e(t('title_f')) ?></label><input type="text" name="ap_mission_title" value="<?= e($ap['mission_title']) ?>"></div>
-        <div class="field"><label><?= e(t('ta_approach')) ?> — <?= e(t('title_f')) ?></label><input type="text" name="ap_approach_title" value="<?= e($ap['approach_title']) ?>"></div>
-      </div>
-      <div class="row row-2">
-        <div class="field"><label><?= e(t('ta_mission')) ?> — <?= e(t('ta_text')) ?></label><textarea name="ap_mission_text" class="richtext" style="min-height:90px"><?= e($ap['mission_text']) ?></textarea></div>
-        <div class="field"><label><?= e(t('ta_approach')) ?> — <?= e(t('ta_text')) ?></label><textarea name="ap_approach_text" class="richtext" style="min-height:90px"><?= e($ap['approach_text']) ?></textarea></div>
-      </div>
       <h3 style="margin:.4rem 0"><?= e(t('ta_stats')) ?></h3>
       <div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(200px,1fr))">
         <?php for ($i = 0; $i < 4; $i++): $st = $stats[$i] ?? ['num'=>'','label'=>'']; ?>
