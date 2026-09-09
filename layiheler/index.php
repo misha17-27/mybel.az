@@ -48,20 +48,18 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
         <?php if (empty($list)): ?>
             <p>Bu kateqoriyada hələ layihə yoxdur.</p>
         <?php else: ?>
-        <div class="card-grid">
+        <div class="projects-grid">
             <?php foreach ($pageItems as $p): ?>
-                <article class="card" data-reveal>
-                    <a class="card-media" href="/layiheler/<?= e($p['slug']) ?>/">
-                        <span class="card-tag"><?= e(cat_name($p['category'])) ?></span>
-                        <img src="<?= e($p['cover']) ?>" alt="<?= e($p['title']) ?>" loading="lazy" width="1200" height="800">
-                    </a>
-                    <div class="card-body">
-                        <h2 class="card-title"><?= e($p['title']) ?></h2>
-                        <?php if (!empty($p['location']) || !empty($p['year'])): ?><p class="card-meta"><?= e(trim($p['location'] . (($p['location'] && $p['year']) ? ' · ' : '') . $p['year'])) ?></p><?php endif; ?>
-                        <?php if (!empty($p['excerpt'])): ?><p class="card-excerpt"><?= e($p['excerpt']) ?></p><?php endif; ?>
-                        <a class="card-link" href="/layiheler/<?= e($p['slug']) ?>/">Layihəyə bax</a>
+                <a class="project-tile" href="/layiheler/<?= e($p['slug']) ?>/" data-reveal>
+                    <img src="<?= e($p['cover']) ?>" alt="<?= e($p['title']) ?>" loading="lazy" width="1200" height="800">
+                    <span class="project-cat"><?= e(cat_name($p['category'])) ?></span>
+                    <div class="project-info">
+                        <h2 class="project-title"><?= e($p['title']) ?></h2>
+                        <?php if (!empty($p['location']) || !empty($p['year'])): ?><span class="project-meta"><?= e(trim($p['location'] . (($p['location'] && $p['year']) ? ' · ' : '') . $p['year'])) ?></span><?php endif; ?>
+                        <?php if (!empty($p['excerpt'])): ?><p class="project-excerpt"><?= e($p['excerpt']) ?></p><?php endif; ?>
+                        <span class="project-more">Layihəyə bax →</span>
                     </div>
-                </article>
+                </a>
             <?php endforeach; ?>
         </div>
 
