@@ -79,14 +79,16 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
             <span class="eyebrow"><?= e($SITE['home']['services_eyebrow']) ?></span>
             <h2 class="section-title"><?= e($SITE['home']['services_title']) ?></h2>
         </div>
-        <div class="services-grid">
-            <?php foreach (visible_sorted($SERVICES) as $s): ?>
-                <a class="service-card" href="/xidmetler/<?= e(service_slug($s)) ?>/" data-reveal>
-                    <div class="service-icon"><?= icon($s['icon']) ?></div>
-                    <h3><?= e($s['title']) ?></h3>
-                    <p><?= e($s['desc']) ?></p>
+        <div class="sectors-grid">
+            <?php foreach ($SITE['xidmetler_page']['sectors'] as $sec): ?>
+                <a class="sector-item" href="/xidmetler/" data-reveal>
+                    <div class="sector-icon"><?= icon($sec['icon']) ?></div>
+                    <span class="sector-name"><?= e($sec['name']) ?></span>
                 </a>
             <?php endforeach; ?>
+        </div>
+        <div style="margin-top:2.5rem">
+            <a href="/xidmetler/" class="btn btn-outline">Xidmətlər</a>
         </div>
     </div>
 </section>
