@@ -75,9 +75,12 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
 <!-- ============ XİDMƏTLƏR ============ -->
 <section class="section section-alt">
     <div class="container">
-        <div class="section-head">
-            <span class="eyebrow"><?= e($SITE['home']['services_eyebrow']) ?></span>
-            <h2 class="section-title"><?= e($SITE['home']['services_title']) ?></h2>
+        <div class="section-head-row">
+            <div class="section-head" style="margin-bottom:0">
+                <span class="eyebrow"><?= e($SITE['home']['services_eyebrow']) ?></span>
+                <h2 class="section-title"><?= e($SITE['home']['services_title']) ?></h2>
+            </div>
+            <a href="/xidmetler/" class="btn btn-outline">Xidmətlər</a>
         </div>
         <div class="sectors-grid">
             <?php foreach ($SITE['xidmetler_page']['sectors'] as $sec): ?>
@@ -86,9 +89,6 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
                     <span class="sector-name"><?= e($sec['name']) ?></span>
                 </a>
             <?php endforeach; ?>
-        </div>
-        <div style="margin-top:2.5rem">
-            <a href="/xidmetler/" class="btn btn-outline">Xidmətlər</a>
         </div>
     </div>
 </section>

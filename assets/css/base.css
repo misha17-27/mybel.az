@@ -122,6 +122,8 @@ button { font: inherit; cursor: pointer; }
 .section { padding-block: var(--section-y); }
 .section-alt { background: var(--bg-soft); }
 .section-head { max-width: 720px; margin-bottom: clamp(2rem, 4vw, 3.5rem); }
+.section-head-row { display: flex; justify-content: space-between; align-items: flex-end; gap: 1.2rem; flex-wrap: wrap; margin-bottom: clamp(2rem, 4vw, 3.5rem); }
+.section-head-row .btn { flex-shrink: 0; }
 .section-head.center { margin-inline: auto; text-align: center; }
 .eyebrow {
     display: inline-block; font-size: .8rem; letter-spacing: .18em; text-transform: uppercase;
