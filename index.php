@@ -13,6 +13,10 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
 
 <!-- ============ HERO ============ -->
 <section class="hero home-hero">
+    <video class="hero-video" autoplay muted loop playsinline preload="auto"
+           poster="<?= e($SITE['hero']['image'] ?: '/assets/img/demo/hero.jpg') ?>" aria-hidden="true">
+        <source src="<?= e(asset('/assets/video/slideshow.mp4')) ?>" type="video/mp4">
+    </video>
     <div class="container">
         <span class="eyebrow"><?= e($SITE['hero']['eyebrow']) ?></span>
         <h1 class="hero-title"><?= nl2br(e($SITE['hero']['title'])) ?></h1>
@@ -21,9 +25,6 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
             <a href="/layiheler/" class="btn">Layihələrimiz</a>
             <a href="/elaqe/" class="btn btn-outline">Bizimlə əlaqə</a>
         </div>
-        <figure class="hero-figure">
-            <img src="<?= e($SITE['hero']['image'] ?: '/assets/img/demo/hero.jpg') ?>" alt="MYBEL Concept — müasir interyer və mebel nümunəsi" width="1600" height="700">
-        </figure>
     </div>
 </section>
 

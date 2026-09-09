@@ -19,3 +19,6 @@ Thumbs.db
 
 # Böyük layihə arxivləri qovluğu (repoya düşməsin)
 /mybel-layiheler/
+
+# Hero videosunun orijinalı (80MB) — repoya düşməsin; veb versiyası assets/video/-dədir
+/slideshow.mp4
