@@ -33,6 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'title'   => trim($_POST['hero_title'] ?? ''),
             'lead'    => trim($_POST['hero_lead'] ?? ''),
             'image'   => pg_img('hero_image_file', 'hero_image_url', $SITE['hero']['image'] ?? ''),
+            'video'   => trim($_POST['hero_video'] ?? ''),
         ];
         $s['about'] = [
             'eyebrow' => trim($_POST['about_eyebrow'] ?? ''),
@@ -66,17 +67,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'intro_text'     => trim($_POST['ap_intro_text'] ?? ''),
             'stats'          => $stats,
         ];
-    } elseif (in_array($pg, ['layiheler', 'xidmetler', 'musteriler', 'elaqe'], true)) {
+    } elseif ($pg === 'xidmetler') {
+        $sectors = [];
+        foreach (($_POST['sec_name'] ?? []) as $i => $nm) {
+            $nm = trim($nm);
+            if ($nm === '') continue;
+            $sectors[] = ['icon' => trim($_POST['sec_icon'][$i] ?? 'home'), 'name' => $nm];
+        }
+        $process = [];
+        foreach (($_POST['pr_title'] ?? []) as $i => $tt) {
+            $tt = trim($tt); $dd = trim($_POST['pr_desc'][$i] ?? '');
+            if ($tt === '' && $dd === '') continue;
+            $process[] = ['title' => $tt, 'desc' => $dd];
+        }
+        $s['xidmetler_page'] = [
+            'sectors_title'   => trim($_POST['sectors_title'] ?? ''),
+            'sectors_desc'    => trim($_POST['sectors_desc'] ?? ''),
+            'sectors'         => $sectors,
+            'process_eyebrow' => trim($_POST['process_eyebrow'] ?? ''),
+            'process_title'   => trim($_POST['process_title'] ?? ''),
+            'process'         => $process,
+        ];
+        // köhnə uyğunluq üçün pages.xidmetler başlığını da saxla
+        $s['pages']['xidmetler'] = ['title' => trim($_POST['sectors_title'] ?? ''), 'subtitle' => trim($_POST['sectors_desc'] ?? '')];
+    } elseif (in_array($pg, ['layiheler', 'musteriler', 'elaqe'], true)) {
         $s['pages'][$pg] = [
             'title'    => trim($_POST['title'] ?? ''),
             'subtitle' => trim($_POST['subtitle'] ?? ''),
         ];
-        // Xidmətlər səhifəsinin hero-su ayrıca "xidmetler_page" blokundan oxunur —
-        // sektor/proses defaultları toxunulmur (array_replace_recursive onları qoruyur).
-        if ($pg === 'xidmetler') {
-            $s['xidmetler_page']['sectors_title'] = trim($_POST['title'] ?? '');
-            $s['xidmetler_page']['sectors_desc']  = trim($_POST['subtitle'] ?? '');
-        }
     }
     if (isset($PAGE_DEFS[$pg])) {
         $s['page_seo'][$pg] = ['title' => trim($_POST['seo_title'] ?? ''), 'desc' => trim($_POST['seo_desc'] ?? '')];
@@ -144,6 +162,11 @@ function seo_card($pseo) {
         <?php if (!empty($hero['image'])): ?><img class="thumb" style="width:150px;height:80px;margin-bottom:.5rem" src="<?= e($hero['image']) ?>" alt=""><?php endif; ?>
         <input type="file" name="hero_image_file" accept="image/*">
         <input type="text" name="hero_image_url" placeholder="<?= e(t('p_or_url')) ?>" style="margin-top:.5rem">
+      </div>
+      <div class="field">
+        <label><?= e(t('t_hero_video')) ?></label>
+        <input type="text" name="hero_video" value="<?= e($hero['video'] ?? '') ?>" placeholder="/assets/video/slideshow.mp4">
+        <small class="hint" style="display:block;margin-top:.3rem"><?= e(t('t_hero_video_h')) ?></small>
       </div>
     </div>
     <div class="card">
@@ -219,10 +242,55 @@ function seo_card($pseo) {
     <button class="btn" type="submit"><?= e(t('save_all')) ?></button>
   </form>
 
-<?php else:
-    $pd = $editing === 'xidmetler'
-        ? ['title' => $SITE['xidmetler_page']['sectors_title'] ?? '', 'subtitle' => $SITE['xidmetler_page']['sectors_desc'] ?? '']
-        : ($pages[$editing] ?? ['title' => '', 'subtitle' => '']); ?>
+<?php elseif ($editing === 'xidmetler'):
+    $xp = $SITE['xidmetler_page'];
+    $ICONS = ['hotel','restaurant','education','medical','business','office','home','kitchen','table','bed','wardrobe','sofa','design'];
+    $secRows = $xp['sectors'] ?? []; while (count($secRows) < 10) $secRows[] = ['icon'=>'home','name'=>''];
+    $prRows  = $xp['process'] ?? []; while (count($prRows) < 12) $prRows[] = ['title'=>'','desc'=>'']; ?>
+  <form method="post">
+    <?= csrf_field() ?><input type="hidden" name="page" value="xidmetler">
+    <div class="item-head"><h2><?= e($PAGE_DEFS['xidmetler']) ?></h2><a href="/admin/pages.php" class="btn btn-outline btn-sm">← <?= e(t('back_list')) ?></a></div>
+    <div class="card">
+      <div class="field"><label><?= e(t('pg_hero_title')) ?></label><input type="text" name="sectors_title" value="<?= e($xp['sectors_title'] ?? '') ?>"></div>
+      <div class="field"><label><?= e(t('pg_subtitle')) ?></label><textarea name="sectors_desc" style="min-height:80px"><?= e($xp['sectors_desc'] ?? '') ?></textarea></div>
+    </div>
+    <div class="card">
+      <h2><?= e(t('xp_sectors')) ?></h2>
+      <p class="hint"><?= e(t('xp_sectors_h')) ?></p>
+      <div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(230px,1fr))">
+        <?php foreach ($secRows as $sec): ?>
+          <div class="item-card" style="margin:0">
+            <div class="field" style="margin-bottom:.5rem"><label><?= e(t('s_icon')) ?></label>
+              <select name="sec_icon[]">
+                <?php foreach ($ICONS as $ic): ?><option value="<?= e($ic) ?>"<?= (($sec['icon'] ?? '') === $ic) ? ' selected' : '' ?>><?= e(t('ic_'.$ic)) ?></option><?php endforeach; ?>
+              </select>
+            </div>
+            <div class="field" style="margin:0"><label><?= e(t('name')) ?></label><input type="text" name="sec_name[]" value="<?= e($sec['name'] ?? '') ?>"></div>
+          </div>
+        <?php endforeach; ?>
+      </div>
+      <p class="hint" style="margin-top:.6rem"><?= e(t('xp_row_hint')) ?></p>
+    </div>
+    <div class="card">
+      <h2><?= e(t('xp_process')) ?></h2>
+      <p class="hint"><?= e(t('xp_process_h')) ?></p>
+      <div class="row row-2">
+        <div class="field"><label><?= e(t('t_eyebrow')) ?></label><input type="text" name="process_eyebrow" value="<?= e($xp['process_eyebrow'] ?? '') ?>"></div>
+        <div class="field"><label><?= e(t('title_f')) ?></label><input type="text" name="process_title" value="<?= e($xp['process_title'] ?? '') ?>"></div>
+      </div>
+      <?php foreach ($prRows as $i => $st): ?>
+        <div class="item-card" style="margin:.5rem 0">
+          <div class="field" style="margin-bottom:.5rem"><label><?= $i+1 ?>. <?= e(t('title_f')) ?></label><input type="text" name="pr_title[]" value="<?= e($st['title'] ?? '') ?>"></div>
+          <div class="field" style="margin:0"><label><?= e(t('ta_text')) ?></label><textarea name="pr_desc[]" style="min-height:60px"><?= e($st['desc'] ?? '') ?></textarea></div>
+        </div>
+      <?php endforeach; ?>
+      <p class="hint" style="margin-top:.6rem"><?= e(t('xp_row_hint')) ?></p>
+    </div>
+    <?= seo_card($pseo) ?>
+    <button class="btn" type="submit"><?= e(t('save_all')) ?></button>
+  </form>
+
+<?php else: $pd = $pages[$editing] ?? ['title'=>'','subtitle'=>'']; ?>
   <form method="post">
     <?= csrf_field() ?><input type="hidden" name="page" value="<?= e($editing) ?>">
     <div class="item-head"><h2><?= e($PAGE_DEFS[$editing]) ?></h2><a href="/admin/pages.php" class="btn btn-outline btn-sm">← <?= e(t('back_list')) ?></a></div>

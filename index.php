@@ -13,10 +13,15 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
 
 <!-- ============ HERO ============ -->
 <section class="hero home-hero">
+    <?php $hero_video = $SITE['hero']['video'] ?? ''; $hero_poster = $SITE['hero']['image'] ?: '/assets/img/demo/hero.jpg'; ?>
+    <?php if ($hero_video !== ''): ?>
     <video class="hero-video" autoplay muted loop playsinline preload="auto"
-           poster="<?= e($SITE['hero']['image'] ?: '/assets/img/demo/hero.jpg') ?>" aria-hidden="true">
-        <source src="<?= e(asset('/assets/video/slideshow.mp4')) ?>" type="video/mp4">
+           poster="<?= e($hero_poster) ?>" aria-hidden="true">
+        <source src="<?= e(strpos($hero_video, 'http') === 0 ? $hero_video : asset($hero_video)) ?>" type="video/mp4">
     </video>
+    <?php else: ?>
+    <img class="hero-video" src="<?= e($hero_poster) ?>" alt="" aria-hidden="true">
+    <?php endif; ?>
     <div class="container">
         <span class="eyebrow"><?= e($SITE['hero']['eyebrow']) ?></span>
         <h1 class="hero-title"><?= nl2br(e($SITE['hero']['title'])) ?></h1>

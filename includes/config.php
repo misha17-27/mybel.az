@@ -44,6 +44,7 @@ $DEF_SETTINGS = [
         'title'   => 'Məkanınıza dəyər qatan fərdi mebel həlləri',
         'lead'    => 'Restoran, otel və fərdi evlər üçün layihələndirmədən quraşdırmaya qədər tam interyer və mebel istehsalı.',
         'image'   => IMG . 'hero.jpg',
+        'video'   => '/assets/video/slideshow.mp4',  // hero fon videosu (boş = yalnız şəkil)
     ],
     'about'       => [
         'eyebrow' => 'Şirkət haqqında',
