@@ -5,13 +5,14 @@ require_login();
 
 $projects = load_json('projects', []);
 $services = load_json('services', []);
+$EL = $ADMIN_LANG; $IS_TR = ($EL !== 'az');   // AZ = baza, RU/EN = tərcümə
 
 /* ---------------- POST ---------------- */
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     csrf_check();
     $action = $_POST['action'] ?? '';
 
-    if ($action === 'delete') {
+    if ($action === 'delete' && !$IS_TR) {
         $id = $_POST['id'] ?? '';
         $projects = array_values(array_filter($projects, fn($p) => $p['id'] !== $id));
         save_json('projects', $projects);
@@ -21,6 +22,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($action === 'save') {
         $id = $_POST['id'] ?? '';
+        if ($IS_TR) {   // yalnız tərcümə sahələri -> data/translations.json
+            if ($id !== '') {
+                $td = content_tr_data();
+                $cur = $td[$EL]['projects'][$id] ?? [];
+                foreach (['title','excerpt','body','location','seo_title','seo_desc'] as $k) $cur[$k] = trim($_POST[$k] ?? '');
+                $td[$EL]['projects'][$id] = $cur;
+                content_tr_save($td);
+                flash(t('p_saved'));
+            }
+            redirect('/admin/projects.php' . ($id ? '?edit=' . $id : ''));
+        }
         $idx = null;
         foreach ($projects as $i => $p) if ($p['id'] === $id) $idx = $i;
 
@@ -94,11 +106,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 /* ---------------- Görünüş ---------------- */
 $editing = null;
-if (isset($_GET['new'])) {
+if (isset($_GET['new']) && !$IS_TR) {
     $editing = ['id'=>'','slug'=>'','title'=>'','category'=>'restoranlar','location'=>'','year'=>'','order'=>count($projects),'show'=>true,'excerpt'=>'','body'=>'','cover'=>'','gallery'=>[]];
 } elseif (isset($_GET['edit'])) {
     foreach ($projects as $p) if ($p['id'] === $_GET['edit']) $editing = $p;
 }
+if ($editing !== null && $IS_TR && ($editing['id'] ?? '') !== '') {
+    $trp = content_tr_merged()[$EL]['projects'][$editing['id']] ?? [];
+    foreach (['title','excerpt','body','location','seo_title','seo_desc'] as $k) if (isset($trp[$k]) && $trp[$k] !== '') $editing[$k] = $trp[$k];
+}
+$trban = $IS_TR ? '<div class="card" style="border:1px solid var(--brand)"><p class="hint" style="margin:0">' . e(t('tr_note')) . ' — ' . strtoupper($EL) . '</p></div>' : '';
 
 $PAGE_TITLE = t('n_projects');
 $ACTIVE = 'projects';
@@ -114,7 +131,8 @@ require __DIR__ . '/includes/layout_top.php';
       <?= csrf_field() ?>
       <input type="hidden" name="action" value="save">
       <input type="hidden" name="id" value="<?= e($editing['id']) ?>">
-
+      <?= $trban ?>
+      <?php if (!$IS_TR): ?>
       <div class="row row-2">
         <div class="field"><label><?= e(t('title_f')) ?> *</label><input type="text" name="title" value="<?= e($editing['title']) ?>" required></div>
         <div class="field"><label><?= e(t('p_slug')) ?></label><input type="text" name="slug" value="<?= e($editing['slug']) ?>" placeholder="<?= e(t('p_slug_ph')) ?>"></div>
@@ -132,9 +150,14 @@ require __DIR__ . '/includes/layout_top.php';
         <div class="field"><label><?= e(t('p_order_hint')) ?></label><input type="number" name="order" value="<?= (int)$editing['order'] ?>"></div>
         <div class="field"><label>&nbsp;</label><label class="check"><input type="checkbox" name="show" <?= ($editing['show']??true)?'checked':'' ?>> <?= e(t('show_site')) ?></label></div>
       </div>
+      <?php else: ?>
+      <div class="field"><label><?= e(t('title_f')) ?> *</label><input type="text" name="title" value="<?= e($editing['title']) ?>" required></div>
+      <div class="field"><label><?= e(t('p_loc')) ?></label><input type="text" name="location" value="<?= e($editing['location']) ?>"></div>
+      <?php endif; ?>
       <div class="field"><label><?= e(t('p_excerpt')) ?></label><textarea name="excerpt" style="min-height:70px"><?= e($editing['excerpt']) ?></textarea></div>
       <div class="field"><label><?= e(t('p_body')) ?></label><textarea name="body" class="richtext" style="min-height:150px"><?= e($editing['body']) ?></textarea></div>
 
+      <?php if (!$IS_TR): ?>
       <?php $linkedServices = []; foreach ($services as $sv) if (in_array($editing['id'], $sv['projects'] ?? [], true)) $linkedServices[] = $sv['id']; ?>
       <div class="field">
         <label><?= e(t('p_services')) ?></label>
@@ -171,6 +194,7 @@ require __DIR__ . '/includes/layout_top.php';
         <input type="file" name="gallery_files[]" accept="image/*" multiple>
         <input type="text" name="gallery_urls" placeholder="<?= e(t('p_or_urls')) ?>" style="margin-top:.5rem">
       </div>
+      <?php endif; ?>
 
       <h3 style="margin:1.4rem 0 .3rem"><?= e(t('pg_seo')) ?></h3>
       <p class="hint" style="margin-top:0"><?= e(t('pg_seo_h')) ?></p>
@@ -182,10 +206,11 @@ require __DIR__ . '/includes/layout_top.php';
   </div>
 
 <?php else: ?>
+  <?= $trban ?>
   <div class="card">
     <div class="item-head">
       <div><h2><?= e(t('p_all')) ?></h2><p class="hint" style="margin:0"><?= e(t('p_all_h')) ?></p></div>
-      <a href="/admin/projects.php?new=1" class="btn"><?= e(t('p_new_btn')) ?></a>
+      <?php if (!$IS_TR): ?><a href="/admin/projects.php?new=1" class="btn"><?= e(t('p_new_btn')) ?></a><?php endif; ?>
     </div>
     <table>
       <thead><tr><th><?= e(t('photo')) ?></th><th><?= e(t('name')) ?></th><th><?= e(t('p_cat')) ?></th><th><?= e(t('p_year')) ?></th><th><?= e(t('order')) ?></th><th><?= e(t('show')) ?></th><th></th></tr></thead>
@@ -201,10 +226,12 @@ require __DIR__ . '/includes/layout_top.php';
           <td><?= ($p['show']??true) ? '✅' : '—' ?></td>
           <td class="inline" style="gap:.4rem">
             <a href="/admin/projects.php?edit=<?= e($p['id']) ?>" class="btn btn-outline btn-sm"><?= e(t('edit')) ?></a>
+            <?php if (!$IS_TR): ?>
             <form method="post" data-confirm="<?= e(t('p_confirm')) ?>" style="margin:0">
               <?= csrf_field() ?><input type="hidden" name="action" value="delete"><input type="hidden" name="id" value="<?= e($p['id']) ?>">
               <button class="btn btn-danger btn-sm"><?= e(t('delete')) ?></button>
             </form>
+            <?php endif; ?>
           </td>
         </tr>
       <?php endforeach; ?>

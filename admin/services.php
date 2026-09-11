@@ -6,12 +6,13 @@ $services = load_json('services', []);
 $projects = load_json('projects', []);
 usort($projects, fn($a,$b)=>($a['order']??0)<=>($b['order']??0));
 $ICONS = ['kitchen'=>t('ic_kitchen'),'table'=>t('ic_table'),'bed'=>t('ic_bed'),'wardrobe'=>t('ic_wardrobe'),'sofa'=>t('ic_sofa'),'design'=>t('ic_design')];
+$EL = $ADMIN_LANG; $IS_TR = ($EL !== 'az');   // AZ = baza, RU/EN = tərcümə
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     csrf_check();
     $action = $_POST['action'] ?? '';
 
-    if ($action === 'delete') {
+    if ($action === 'delete' && !$IS_TR) {
         $id = $_POST['id'] ?? '';
         $services = array_values(array_filter($services, fn($s) => $s['id'] !== $id));
         save_json('services', $services);
@@ -21,6 +22,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($action === 'save') {
         $id = $_POST['id'] ?? '';
+        if ($IS_TR) {   // yalnız tərcümə sahələrini data/translations.json-a yaz
+            if ($id !== '') {
+                $td = content_tr_data();
+                $cur = $td[$EL]['services'][$id] ?? [];
+                foreach (['title','desc','body','seo_title','seo_desc'] as $k) $cur[$k] = trim($_POST[$k] ?? '');
+                $td[$EL]['services'][$id] = $cur;
+                content_tr_save($td);
+                flash(t('s_saved'));
+            }
+            redirect('/admin/services.php' . ($id ? '?edit=' . $id : ''));
+        }
         $idx = null;
         foreach ($services as $i => $s) if ($s['id'] === $id) $idx = $i;
         $title = trim($_POST['title'] ?? '');
@@ -50,8 +62,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $editing = null;
-if (isset($_GET['new'])) $editing = ['id'=>'','slug'=>'','icon'=>'design','title'=>'','desc'=>'','body'=>'','projects'=>[],'order'=>count($services),'show'=>true];
+if (isset($_GET['new']) && !$IS_TR) $editing = ['id'=>'','slug'=>'','icon'=>'design','title'=>'','desc'=>'','body'=>'','projects'=>[],'order'=>count($services),'show'=>true];
 elseif (isset($_GET['edit'])) foreach ($services as $s) if ($s['id'] === $_GET['edit']) $editing = $s;
+if ($editing !== null && $IS_TR && ($editing['id'] ?? '') !== '') {
+    $trs = content_tr_merged()[$EL]['services'][$editing['id']] ?? [];
+    foreach (['title','desc','body','seo_title','seo_desc'] as $k) if (isset($trs[$k]) && $trs[$k] !== '') $editing[$k] = $trs[$k];
+}
+$trban = $IS_TR ? '<div class="card" style="border:1px solid var(--brand)"><p class="hint" style="margin:0">' . e(t('tr_note')) . ' — ' . strtoupper($EL) . '</p></div>' : '';
 
 usort($services, fn($a,$b)=>($a['order']??0)<=>($b['order']??0));
 $PAGE_TITLE = t('s_title');
@@ -66,14 +83,20 @@ require __DIR__ . '/includes/layout_top.php';
     </div>
     <form method="post">
       <?= csrf_field() ?><input type="hidden" name="action" value="save"><input type="hidden" name="id" value="<?= e($editing['id']) ?>">
+      <?= $trban ?>
+      <?php if (!$IS_TR): ?>
       <div class="row row-3">
         <div class="field"><label><?= e(t('title_f')) ?> *</label><input type="text" name="title" value="<?= e($editing['title']) ?>" required></div>
         <div class="field"><label><?= e(t('s_icon')) ?></label><select name="icon"><?php foreach($ICONS as $k=>$v):?><option value="<?= e($k)?>" <?= ($editing['icon']??'')===$k?'selected':''?>><?= e($v)?></option><?php endforeach;?></select></div>
         <div class="field"><label><?= e(t('order')) ?></label><input type="number" name="order" value="<?= (int)($editing['order']??0) ?>"></div>
       </div>
       <div class="field"><label><?= e(t('p_slug')) ?></label><input type="text" name="slug" value="<?= e($editing['slug']??'') ?>" placeholder="<?= e(t('p_slug_ph')) ?>"></div>
+      <?php else: ?>
+      <div class="field"><label><?= e(t('title_f')) ?> *</label><input type="text" name="title" value="<?= e($editing['title']) ?>" required></div>
+      <?php endif; ?>
       <div class="field"><label><?= e(t('s_short')) ?></label><input type="text" name="desc" value="<?= e($editing['desc']??'') ?>"></div>
       <div class="field"><label><?= e(t('s_body')) ?></label><textarea name="body" class="richtext" style="min-height:130px"><?= e($editing['body']??'') ?></textarea></div>
+      <?php if (!$IS_TR): ?>
       <div class="field"><label class="check"><input type="checkbox" name="show" <?= ($editing['show']??true)?'checked':'' ?>> <?= e(t('show_site')) ?></label></div>
 
       <div class="field">
@@ -93,6 +116,7 @@ require __DIR__ . '/includes/layout_top.php';
           </div>
         <?php endif; ?>
       </div>
+      <?php endif; ?>
 
       <h3 style="margin:1.4rem 0 .3rem"><?= e(t('pg_seo')) ?></h3>
       <p class="hint" style="margin-top:0"><?= e(t('pg_seo_h')) ?></p>
@@ -103,10 +127,11 @@ require __DIR__ . '/includes/layout_top.php';
     </form>
   </div>
 <?php else: ?>
+  <?= $trban ?>
   <div class="card">
     <div class="item-head">
       <div><h2><?= e(t('s_all')) ?></h2><p class="hint" style="margin:0"><?= e(t('s_all_h')) ?></p></div>
-      <a href="/admin/services.php?new=1" class="btn"><?= e(t('s_new_btn')) ?></a>
+      <?php if (!$IS_TR): ?><a href="/admin/services.php?new=1" class="btn"><?= e(t('s_new_btn')) ?></a><?php endif; ?>
     </div>
     <table>
       <thead><tr><th><?= e(t('name')) ?></th><th><?= e(t('s_link')) ?></th><th><?= e(t('order')) ?></th><th><?= e(t('show')) ?></th><th></th></tr></thead>
@@ -119,10 +144,12 @@ require __DIR__ . '/includes/layout_top.php';
           <td><?= ($s['show']??true) ? '✅' : '—' ?></td>
           <td class="inline" style="gap:.4rem">
             <a href="/admin/services.php?edit=<?= e($s['id']) ?>" class="btn btn-outline btn-sm"><?= e(t('edit')) ?></a>
+            <?php if (!$IS_TR): ?>
             <form method="post" data-confirm="<?= e(t('delete')) ?>?" style="margin:0">
               <?= csrf_field() ?><input type="hidden" name="action" value="delete"><input type="hidden" name="id" value="<?= e($s['id']) ?>">
               <button class="btn btn-danger btn-sm"><?= e(t('delete')) ?></button>
             </form>
+            <?php endif; ?>
           </td>
         </tr>
       <?php endforeach; ?>

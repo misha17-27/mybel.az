@@ -152,3 +152,17 @@ function get_flashes(): array {
 
 // ---- redirect köməkçisi ----
 function redirect(string $to): void { header('Location: ' . $to); exit; }
+
+// ---- Publik məzmun tərcümələri (ru/en) — admin redaktəsi data/translations.json-a yazılır ----
+/** Baza (kod seed) + admin data override — birləşmiş tərcümələr (formaların doldurulması üçün) */
+function content_tr_merged(): array {
+    $out = [];
+    $seed = dirname(__DIR__, 2) . '/includes/translations.json';
+    if (is_file($seed)) { $j = json_decode(file_get_contents($seed), true); if (is_array($j)) $out = $j; }
+    $d = load_json('translations', []);
+    if (is_array($d) && $d) $out = array_replace_recursive($out, $d);
+    return $out;
+}
+/** Yalnız admin-in saxladığı override (yazı bazası) */
+function content_tr_data(): array { $d = load_json('translations', []); return is_array($d) ? $d : []; }
+function content_tr_save(array $all): void { save_json('translations', $all); }

@@ -3,6 +3,7 @@ require_once __DIR__ . '/includes/bootstrap.php';
 require_once __DIR__ . '/includes/upload.php';
 require_login();
 $s = load_json('settings', []);
+$EL = $ADMIN_LANG; $IS_TR = ($EL !== 'az');   // AZ = əsas (baza), RU/EN = tərcümə
 
 /** Şəkil: yeni yükləmə > URL sahəsi > köhnə */
 function pg_img($fileKey, $urlKey, $current) {
@@ -26,82 +27,71 @@ $PAGE_DEFS = [
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     csrf_check();
     $pg = $_POST['page'] ?? '';
+    $blk = [];   // settings-ə nisbi struktur
 
     if ($pg === 'home') {
-        $s['hero'] = [
-            'eyebrow' => trim($_POST['hero_eyebrow'] ?? ''),
-            'title'   => trim($_POST['hero_title'] ?? ''),
-            'lead'    => trim($_POST['hero_lead'] ?? ''),
-            'image'   => pg_img('hero_image_file', 'hero_image_url', $SITE['hero']['image'] ?? ''),
-            'video'   => trim($_POST['hero_video'] ?? ''),
-        ];
-        $s['about'] = [
-            'eyebrow' => trim($_POST['about_eyebrow'] ?? ''),
-            'title'   => trim($_POST['about_title'] ?? ''),
-            'text'    => trim($_POST['about_text'] ?? ''),
-            'image'   => pg_img('about_image_file', 'about_image_url', $SITE['about']['image'] ?? ''),
-        ];
-        $s['home'] = [
-            'projects_eyebrow' => trim($_POST['h_projects_eyebrow'] ?? ''),
-            'projects_title'   => trim($_POST['h_projects_title'] ?? ''),
-            'projects_desc'    => trim($_POST['h_projects_desc'] ?? ''),
-            'services_eyebrow' => trim($_POST['h_services_eyebrow'] ?? ''),
-            'services_title'   => trim($_POST['h_services_title'] ?? ''),
-            'clients_eyebrow'  => trim($_POST['h_clients_eyebrow'] ?? ''),
-            'clients_title'    => trim($_POST['h_clients_title'] ?? ''),
-            'cta_title'        => trim($_POST['h_cta_title'] ?? ''),
-            'cta_text'         => trim($_POST['h_cta_text'] ?? ''),
-            'cta_btn'          => trim($_POST['h_cta_btn'] ?? ''),
+        $blk['hero'] = ['eyebrow' => trim($_POST['hero_eyebrow'] ?? ''), 'title' => trim($_POST['hero_title'] ?? ''), 'lead' => trim($_POST['hero_lead'] ?? '')];
+        if (!$IS_TR) { $blk['hero']['image'] = pg_img('hero_image_file', 'hero_image_url', $SITE['hero']['image'] ?? ''); $blk['hero']['video'] = trim($_POST['hero_video'] ?? ''); }
+        $blk['about'] = ['eyebrow' => trim($_POST['about_eyebrow'] ?? ''), 'title' => trim($_POST['about_title'] ?? ''), 'text' => trim($_POST['about_text'] ?? '')];
+        if (!$IS_TR) $blk['about']['image'] = pg_img('about_image_file', 'about_image_url', $SITE['about']['image'] ?? '');
+        $blk['home'] = [
+            'projects_eyebrow' => trim($_POST['h_projects_eyebrow'] ?? ''), 'projects_title' => trim($_POST['h_projects_title'] ?? ''), 'projects_desc' => trim($_POST['h_projects_desc'] ?? ''),
+            'services_eyebrow' => trim($_POST['h_services_eyebrow'] ?? ''), 'services_title' => trim($_POST['h_services_title'] ?? ''),
+            'clients_eyebrow' => trim($_POST['h_clients_eyebrow'] ?? ''), 'clients_title' => trim($_POST['h_clients_title'] ?? ''),
+            'cta_title' => trim($_POST['h_cta_title'] ?? ''), 'cta_text' => trim($_POST['h_cta_text'] ?? ''), 'cta_btn' => trim($_POST['h_cta_btn'] ?? ''),
         ];
     } elseif ($pg === 'about') {
         $stats = [];
-        foreach (($_POST['stat_num'] ?? []) as $i => $num) {
-            $num = trim($num); $lbl = trim($_POST['stat_label'][$i] ?? '');
-            if ($num !== '' || $lbl !== '') $stats[] = ['num' => $num, 'label' => $lbl];
+        foreach (($_POST['stat_label'] ?? []) as $i => $lbl) {
+            $lbl = trim($lbl);
+            if ($IS_TR) { $stats[] = ['label' => $lbl]; }
+            else { $num = trim($_POST['stat_num'][$i] ?? ''); if ($num !== '' || $lbl !== '') $stats[] = ['num' => $num, 'label' => $lbl]; }
         }
-        $s['about_page'] = [
-            'lead'           => trim($_POST['ap_lead'] ?? ''),
-            'image'          => pg_img('ap_image_file', 'ap_image_url', $SITE['about_page']['image'] ?? ''),
-            'intro_eyebrow'  => trim($_POST['ap_intro_eyebrow'] ?? ''),
-            'intro_title'    => trim($_POST['ap_intro_title'] ?? ''),
-            'intro_text'     => trim($_POST['ap_intro_text'] ?? ''),
-            'stats'          => $stats,
-        ];
+        $blk['about_page'] = ['lead' => trim($_POST['ap_lead'] ?? ''), 'intro_eyebrow' => trim($_POST['ap_intro_eyebrow'] ?? ''), 'intro_title' => trim($_POST['ap_intro_title'] ?? ''), 'intro_text' => trim($_POST['ap_intro_text'] ?? ''), 'stats' => $stats];
+        if (!$IS_TR) $blk['about_page']['image'] = pg_img('ap_image_file', 'ap_image_url', $SITE['about_page']['image'] ?? '');
     } elseif ($pg === 'xidmetler') {
         $sectors = [];
         foreach (($_POST['sec_name'] ?? []) as $i => $nm) {
             $nm = trim($nm);
-            if ($nm === '') continue;
-            $sectors[] = ['icon' => trim($_POST['sec_icon'][$i] ?? 'home'), 'name' => $nm];
+            if ($IS_TR) { $sectors[] = ['name' => $nm]; }
+            else { if ($nm === '') continue; $sectors[] = ['icon' => trim($_POST['sec_icon'][$i] ?? 'home'), 'name' => $nm]; }
         }
         $process = [];
         foreach (($_POST['pr_title'] ?? []) as $i => $tt) {
             $tt = trim($tt); $dd = trim($_POST['pr_desc'][$i] ?? '');
-            if ($tt === '' && $dd === '') continue;
-            $process[] = ['title' => $tt, 'desc' => $dd];
+            if ($IS_TR) { $process[] = ['title' => $tt, 'desc' => $dd]; }
+            else { if ($tt === '' && $dd === '') continue; $process[] = ['title' => $tt, 'desc' => $dd]; }
         }
-        $s['xidmetler_page'] = [
-            'sectors_title'   => trim($_POST['sectors_title'] ?? ''),
-            'sectors_desc'    => trim($_POST['sectors_desc'] ?? ''),
-            'sectors'         => $sectors,
-            'process_eyebrow' => trim($_POST['process_eyebrow'] ?? ''),
-            'process_title'   => trim($_POST['process_title'] ?? ''),
-            'process'         => $process,
+        $blk['xidmetler_page'] = [
+            'sectors_title' => trim($_POST['sectors_title'] ?? ''), 'sectors_desc' => trim($_POST['sectors_desc'] ?? ''), 'sectors' => $sectors,
+            'process_eyebrow' => trim($_POST['process_eyebrow'] ?? ''), 'process_title' => trim($_POST['process_title'] ?? ''), 'process' => $process,
         ];
-        // köhnə uyğunluq üçün pages.xidmetler başlığını da saxla
-        $s['pages']['xidmetler'] = ['title' => trim($_POST['sectors_title'] ?? ''), 'subtitle' => trim($_POST['sectors_desc'] ?? '')];
+        $blk['pages'] = ['xidmetler' => ['title' => trim($_POST['sectors_title'] ?? ''), 'subtitle' => trim($_POST['sectors_desc'] ?? '')]];
     } elseif (in_array($pg, ['layiheler', 'musteriler', 'elaqe'], true)) {
-        $s['pages'][$pg] = [
-            'title'    => trim($_POST['title'] ?? ''),
-            'subtitle' => trim($_POST['subtitle'] ?? ''),
-        ];
+        $blk['pages'] = [$pg => ['title' => trim($_POST['title'] ?? ''), 'subtitle' => trim($_POST['subtitle'] ?? '')]];
     }
     if (isset($PAGE_DEFS[$pg])) {
-        $s['page_seo'][$pg] = ['title' => trim($_POST['seo_title'] ?? ''), 'desc' => trim($_POST['seo_desc'] ?? '')];
+        $blk['page_seo'] = [$pg => ['title' => trim($_POST['seo_title'] ?? ''), 'desc' => trim($_POST['seo_desc'] ?? '')]];
     }
-    save_json('settings', $s);
+
+    if ($IS_TR) {
+        $td = content_tr_data();
+        $tset = $td[$EL]['settings'] ?? [];
+        foreach ($blk as $k => $v) {
+            if (in_array($k, ['pages', 'page_seo'], true)) $tset[$k] = array_replace($tset[$k] ?? [], $v);
+            else $tset[$k] = $v;
+        }
+        $td[$EL]['settings'] = $tset;
+        content_tr_save($td);
+    } else {
+        foreach ($blk as $k => $v) {
+            if (in_array($k, ['pages', 'page_seo'], true)) $s[$k] = array_replace($s[$k] ?? [], $v);
+            else $s[$k] = $v;
+        }
+        save_json('settings', $s);
+    }
     flash(t('pg_saved'));
-    redirect('/admin/pages.php');
+    redirect('/admin/pages.php' . ($pg ? '?edit=' . $pg : ''));
 }
 
 $editing = $_GET['edit'] ?? null;
@@ -111,12 +101,23 @@ $PAGE_TITLE = t('n_pages');
 $ACTIVE = 'pages';
 require __DIR__ . '/includes/layout_top.php';
 
+// Mənbə massivləri — RU/EN olduqda tərcümə (baza üstündən) ilə örtülür
+$tset = $IS_TR ? (content_tr_merged()[$EL]['settings'] ?? []) : [];
 $hero = $SITE['hero']; $about = $SITE['about']; $home = $SITE['home'];
-$ap = $SITE['about_page']; $stats = $ap['stats'] ?? [];
-$pages = $SITE['pages'];
+$ap = $SITE['about_page']; $pages = $SITE['pages'];
 $pseo = $editing ? page_seo($editing) : ['title' => '', 'desc' => ''];
+if ($IS_TR) {
+    $hero  = array_replace($hero, $tset['hero'] ?? []);
+    $about = array_replace($about, $tset['about'] ?? []);
+    $home  = array_replace($home, $tset['home'] ?? []);
+    $ap    = array_replace_recursive($ap, $tset['about_page'] ?? []);
+    $pages = array_replace_recursive($pages, $tset['pages'] ?? []);
+    if ($editing) $pseo = array_replace($pseo, $tset['page_seo'][$editing] ?? []);
+}
+$stats = $ap['stats'] ?? [];
+$trban = ($IS_TR && $editing) ? '<div class="card" style="border:1px solid var(--brand)"><p class="hint" style="margin:0">' . e(t('tr_note')) . ' — ' . strtoupper($EL) . '</p></div>' : '';
 
-/** SEO kartı (bütün səhifə formalarında istifadə olunur) */
+/** SEO kartı */
 function seo_card($pseo) {
     ob_start(); ?>
     <div class="card">
@@ -129,7 +130,6 @@ function seo_card($pseo) {
 }
 ?>
 <?php if ($editing === null): ?>
-  <!-- ===== SİYAHI ===== -->
   <div class="card">
     <div class="item-head"><div><h2><?= e(t('pg_all')) ?></h2><p class="hint" style="margin:0"><?= e(t('pg_all_h')) ?></p></div></div>
     <table>
@@ -152,11 +152,13 @@ function seo_card($pseo) {
   <form method="post" enctype="multipart/form-data">
     <?= csrf_field() ?><input type="hidden" name="page" value="home">
     <div class="item-head"><h2><?= e(t('pg_home')) ?></h2><a href="/admin/pages.php" class="btn btn-outline btn-sm">← <?= e(t('back_list')) ?></a></div>
+    <?= $trban ?>
     <div class="card">
       <h2><?= e(t('t_hero')) ?></h2>
       <div class="field"><label><?= e(t('t_eyebrow')) ?></label><input type="text" name="hero_eyebrow" value="<?= e($hero['eyebrow']) ?>"></div>
       <div class="field"><label><?= e(t('t_hero_title')) ?></label><textarea name="hero_title" style="min-height:70px"><?= e($hero['title']) ?></textarea></div>
       <div class="field"><label><?= e(t('t_hero_lead')) ?></label><textarea name="hero_lead" style="min-height:70px"><?= e($hero['lead']) ?></textarea></div>
+      <?php if (!$IS_TR): ?>
       <div class="field">
         <label><?= e(t('pg_image')) ?></label>
         <?php if (!empty($hero['image'])): ?><img class="thumb" style="width:150px;height:80px;margin-bottom:.5rem" src="<?= e($hero['image']) ?>" alt=""><?php endif; ?>
@@ -168,18 +170,21 @@ function seo_card($pseo) {
         <input type="text" name="hero_video" value="<?= e($hero['video'] ?? '') ?>" placeholder="/assets/video/slideshow.mp4">
         <small class="hint" style="display:block;margin-top:.3rem"><?= e(t('t_hero_video_h')) ?></small>
       </div>
+      <?php endif; ?>
     </div>
     <div class="card">
       <h2><?= e(t('t_about')) ?></h2>
       <div class="field"><label><?= e(t('t_eyebrow')) ?></label><input type="text" name="about_eyebrow" value="<?= e($about['eyebrow']) ?>"></div>
       <div class="field"><label><?= e(t('title_f')) ?></label><input type="text" name="about_title" value="<?= e($about['title']) ?>"></div>
       <div class="field"><label><?= e(t('t_about_text')) ?></label><textarea name="about_text" class="richtext" style="min-height:110px"><?= e($about['text']) ?></textarea></div>
+      <?php if (!$IS_TR): ?>
       <div class="field">
         <label><?= e(t('pg_image')) ?></label>
         <?php if (!empty($about['image'])): ?><img class="thumb" style="width:150px;height:80px;margin-bottom:.5rem" src="<?= e($about['image']) ?>" alt=""><?php endif; ?>
         <input type="file" name="about_image_file" accept="image/*">
         <input type="text" name="about_image_url" placeholder="<?= e(t('p_or_url')) ?>" style="margin-top:.5rem">
       </div>
+      <?php endif; ?>
     </div>
     <div class="card">
       <h2><?= e(t('th_home')) ?></h2>
@@ -214,14 +219,17 @@ function seo_card($pseo) {
   <form method="post" enctype="multipart/form-data">
     <?= csrf_field() ?><input type="hidden" name="page" value="about">
     <div class="item-head"><h2><?= e(t('pg_about')) ?></h2><a href="/admin/pages.php" class="btn btn-outline btn-sm">← <?= e(t('back_list')) ?></a></div>
+    <?= $trban ?>
     <div class="card">
       <div class="field"><label><?= e(t('ta_lead')) ?></label><input type="text" name="ap_lead" value="<?= e($ap['lead']) ?>"></div>
+      <?php if (!$IS_TR): ?>
       <div class="field">
         <label><?= e(t('pg_image')) ?></label>
         <?php if (!empty($ap['image'])): ?><img class="thumb" style="width:150px;height:80px;margin-bottom:.5rem" src="<?= e($ap['image']) ?>" alt=""><?php endif; ?>
         <input type="file" name="ap_image_file" accept="image/*">
         <input type="text" name="ap_image_url" placeholder="<?= e(t('p_or_url')) ?>" style="margin-top:.5rem">
       </div>
+      <?php endif; ?>
       <h3 style="margin:.4rem 0"><?= e(t('ta_intro')) ?></h3>
       <div class="row row-2">
         <div class="field"><label><?= e(t('t_eyebrow')) ?></label><input type="text" name="ap_intro_eyebrow" value="<?= e($ap['intro_eyebrow']) ?>"></div>
@@ -232,8 +240,8 @@ function seo_card($pseo) {
       <div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(200px,1fr))">
         <?php for ($i = 0; $i < 4; $i++): $st = $stats[$i] ?? ['num'=>'','label'=>'']; ?>
           <div class="item-card" style="margin:0">
-            <div class="field" style="margin-bottom:.5rem"><label><?= e(t('ta_num')) ?></label><input type="text" name="stat_num[]" value="<?= e($st['num']) ?>"></div>
-            <div class="field" style="margin:0"><label><?= e(t('ta_label')) ?></label><input type="text" name="stat_label[]" value="<?= e($st['label']) ?>"></div>
+            <?php if (!$IS_TR): ?><div class="field" style="margin-bottom:.5rem"><label><?= e(t('ta_num')) ?></label><input type="text" name="stat_num[]" value="<?= e($st['num'] ?? '') ?>"></div><?php endif; ?>
+            <div class="field" style="margin:0"><label><?= e(t('ta_label')) ?><?php if ($IS_TR && !empty($st['num'])): ?> <span class="hint">(<?= e($st['num']) ?>)</span><?php endif; ?></label><input type="text" name="stat_label[]" value="<?= e($st['label'] ?? '') ?>"></div>
           </div>
         <?php endfor; ?>
       </div>
@@ -244,12 +252,14 @@ function seo_card($pseo) {
 
 <?php elseif ($editing === 'xidmetler'):
     $xp = $SITE['xidmetler_page'];
+    if ($IS_TR) $xp = array_replace_recursive($xp, $tset['xidmetler_page'] ?? []);
     $ICONS = ['hotel','restaurant','education','medical','business','office','home','kitchen','table','bed','wardrobe','sofa','design'];
     $secRows = $xp['sectors'] ?? []; while (count($secRows) < 10) $secRows[] = ['icon'=>'home','name'=>''];
     $prRows  = $xp['process'] ?? []; while (count($prRows) < 12) $prRows[] = ['title'=>'','desc'=>'']; ?>
   <form method="post">
     <?= csrf_field() ?><input type="hidden" name="page" value="xidmetler">
     <div class="item-head"><h2><?= e($PAGE_DEFS['xidmetler']) ?></h2><a href="/admin/pages.php" class="btn btn-outline btn-sm">← <?= e(t('back_list')) ?></a></div>
+    <?= $trban ?>
     <div class="card">
       <div class="field"><label><?= e(t('pg_hero_title')) ?></label><input type="text" name="sectors_title" value="<?= e($xp['sectors_title'] ?? '') ?>"></div>
       <div class="field"><label><?= e(t('pg_subtitle')) ?></label><textarea name="sectors_desc" style="min-height:80px"><?= e($xp['sectors_desc'] ?? '') ?></textarea></div>
@@ -260,11 +270,13 @@ function seo_card($pseo) {
       <div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(230px,1fr))">
         <?php foreach ($secRows as $sec): ?>
           <div class="item-card" style="margin:0">
+            <?php if (!$IS_TR): ?>
             <div class="field" style="margin-bottom:.5rem"><label><?= e(t('s_icon')) ?></label>
               <select name="sec_icon[]">
                 <?php foreach ($ICONS as $ic): ?><option value="<?= e($ic) ?>"<?= (($sec['icon'] ?? '') === $ic) ? ' selected' : '' ?>><?= e(t('ic_'.$ic)) ?></option><?php endforeach; ?>
               </select>
             </div>
+            <?php endif; ?>
             <div class="field" style="margin:0"><label><?= e(t('name')) ?></label><input type="text" name="sec_name[]" value="<?= e($sec['name'] ?? '') ?>"></div>
           </div>
         <?php endforeach; ?>
@@ -294,6 +306,7 @@ function seo_card($pseo) {
   <form method="post">
     <?= csrf_field() ?><input type="hidden" name="page" value="<?= e($editing) ?>">
     <div class="item-head"><h2><?= e($PAGE_DEFS[$editing]) ?></h2><a href="/admin/pages.php" class="btn btn-outline btn-sm">← <?= e(t('back_list')) ?></a></div>
+    <?= $trban ?>
     <div class="card">
       <div class="field"><label><?= e(t('pg_hero_title')) ?></label><input type="text" name="title" value="<?= e($pd['title']) ?>"></div>
       <div class="field"><label><?= e(t('pg_subtitle')) ?></label><textarea name="subtitle" style="min-height:80px"><?= e($pd['subtitle']) ?></textarea></div>
