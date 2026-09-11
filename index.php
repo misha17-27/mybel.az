@@ -88,11 +88,11 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
             </div>
             <a href="<?= e(u('/xidmetler/')) ?>" class="btn btn-outline"><?= e(__('nav_services')) ?></a>
         </div>
-        <div class="sectors-grid">
-            <?php foreach ($SITE['xidmetler_page']['sectors'] as $sec): ?>
-                <a class="sector-item" href="<?= e(u('/xidmetler/')) ?>" data-reveal>
-                    <div class="sector-icon"><?= icon($sec['icon']) ?></div>
-                    <span class="sector-name"><?= e($sec['name']) ?></span>
+        <div class="svc-list">
+            <?php foreach ($SITE['xidmetler_page']['process'] as $i => $st): ?>
+                <a class="svc-item" href="<?= e(u('/xidmetler/')) ?>" data-reveal>
+                    <span class="svc-num"><?= str_pad((string)($i + 1), 2, '0', STR_PAD_LEFT) ?></span>
+                    <span class="svc-title"><?= e($st['title']) ?></span>
                 </a>
             <?php endforeach; ?>
         </div>

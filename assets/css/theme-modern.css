@@ -61,6 +61,8 @@
 [data-theme="modern"] .section-alt .sector-item:hover { background: #272219; }
 [data-theme="modern"] .section-alt .sector-name { color: #fff; }
 [data-theme="modern"] .section-alt .sector-icon { background: rgba(226,98,44,.18); }
+[data-theme="modern"] .section-alt .svc-item { background: #211d17; border-color: rgba(255,255,255,.10); color: #fff; }
+[data-theme="modern"] .section-alt .svc-item:hover { background: #272219; }
 [data-theme="modern"] .cta-band { background: linear-gradient(120deg, var(--brand), var(--brand-dark)); }
 [data-theme="modern"] .cta-band p { color: rgba(255,255,255,.9); }
 [data-theme="modern"] .cta-band .btn { background: #fff; color: var(--ink); }
