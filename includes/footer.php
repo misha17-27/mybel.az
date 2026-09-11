@@ -21,7 +21,9 @@
         <div class="footer-col">
             <h3><?= e(__('nav_contact')) ?></h3>
             <ul class="footer-contact">
-                <li><span class="fc-ic"><?= icon('phone') ?></span><a href="tel:<?= e($SITE['phone_raw']) ?>"><?= e($SITE['phone']) ?></a></li>
+                <?php foreach (($SITE['phones'] ?? [$SITE['phone']]) as $ph): if (trim((string)$ph) === '') continue; ?>
+                <li><span class="fc-ic"><?= icon('phone') ?></span><a href="tel:<?= e(preg_replace('/[^\d+]/', '', $ph)) ?>"><?= e($ph) ?></a></li>
+                <?php endforeach; ?>
                 <li><span class="fc-ic"><?= icon('mail') ?></span><a href="mailto:<?= e($SITE['email']) ?>"><?= e($SITE['email']) ?></a></li>
                 <li><span class="fc-ic"><?= icon('pin') ?></span><span><?= e($SITE['address']) ?></span></li>
                 <li><span class="fc-ic"><?= icon('clock') ?></span><span><?= e($SITE['work_hours']) ?></span></li>

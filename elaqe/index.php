@@ -128,7 +128,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
 
         <aside>
             <ul class="contact-info">
-                <li><span class="label"><?= e(__('c_phone')) ?></span><a href="tel:<?= e($SITE['phone_raw']) ?>"><?= e($SITE['phone']) ?></a></li>
+                <li><span class="label"><?= e(__('c_phone')) ?></span><span class="contact-phones"><?php foreach (($SITE['phones'] ?? [$SITE['phone']]) as $ph): if (trim((string)$ph) === '') continue; ?><a href="tel:<?= e(preg_replace('/[^\d+]/', '', $ph)) ?>"><?= e($ph) ?></a><?php endforeach; ?></span></li>
                 <li><span class="label"><?= e(__('c_email')) ?></span><a href="mailto:<?= e($SITE['email']) ?>"><?= e($SITE['email']) ?></a></li>
                 <li><span class="label"><?= e(__('ci_addr')) ?></span><span><?= e($SITE['address']) ?></span></li>
                 <li><span class="label"><?= e(__('ci_hours')) ?></span><span><?= e($SITE['work_hours']) ?></span></li>

@@ -3,6 +3,8 @@
     "settings": {
       "tagline": "Премиальная мебель и интерьерные решения",
       "description": "MYBEL Concept — изготовление мебели по индивидуальному дизайну для ресторанов, отелей и частных домов. Кухонная мебель, ресторанные столы, оснащение гостиничных номеров и комплексные интерьерные решения.",
+      "address": "AZ1014, г. Баку, проспект Азадлыг, 77",
+      "work_hours": "Пн–Сб: 09:00 – 18:00",
       "hero": {
         "eyebrow": "Премиальная мебель и интерьер",
         "title": "Индивидуальные мебельные решения, добавляющие ценность вашему пространству",
@@ -108,6 +110,8 @@
     "settings": {
       "tagline": "Premium furniture & interior solutions",
       "description": "MYBEL Concept — custom-designed furniture manufacturing for restaurants, hotels and private homes. Kitchen furniture, restaurant tables, hotel rooms and complete interior solutions.",
+      "address": "AZ1014, Baku, Azadliq avenue, 77",
+      "work_hours": "Mon–Sat: 09:00 – 18:00",
       "hero": {
         "eyebrow": "Premium furniture & interior",
         "title": "Custom furniture solutions that add value to your space",

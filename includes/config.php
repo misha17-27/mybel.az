@@ -42,11 +42,12 @@ $DEF_SETTINGS = [
     'url'         => 'https://mybel.az',
     'locale'      => 'az_AZ',
     'lang'        => 'az',
-    'phone'       => '+994 50 000 00 00',
-    'phone_raw'   => '+994500000000',
+    'phone'       => '+994 99 285 87 78',
+    'phone_raw'   => '+994992858778',
+    'phones'      => ['+994 99 285 87 78', '+994 50 285 87 78', '+994 70 285 87 78'],
     'email'       => 'info@mybel.az',
-    'address'     => 'Bakı, Azərbaycan',
-    'map'         => 'https://www.google.com/maps?q=Baku,+Azerbaijan&output=embed',
+    'address'     => 'AZ1014, Bakı şəhəri, Azadlıq prospekti, 77',
+    'map'         => 'https://www.google.com/maps?q=Azadliq+prospekti+77+Baku&output=embed',
     'social'      => [
         'instagram' => 'https://instagram.com/',
         'facebook'  => 'https://facebook.com/',
@@ -245,6 +246,13 @@ $CLIENTS   = load_or_seed('clients',  $DEF_CLIENTS);
 
 // köhnə seed-lərdə yeni açarlar olmaya bilər — birləşdir
 $SITE = array_replace_recursive($DEF_SETTINGS, $SITE);
+
+// Köhnə placeholder əlaqə dəyərlərini real dəyərlərə yüksəlt (yalnız dəqiq placeholder-i əvəzlə;
+// istifadəçinin admin-də təyin etdiyi real dəyərlərə toxunmur). Serverdəki köhnə seed üçün.
+if (($SITE['phone'] ?? '') === '+994 50 000 00 00') { $SITE['phone'] = $DEF_SETTINGS['phone']; $SITE['phone_raw'] = $DEF_SETTINGS['phone_raw']; }
+if (($SITE['address'] ?? '') === 'Bakı, Azərbaycan') $SITE['address'] = $DEF_SETTINGS['address'];
+if (strpos($SITE['map'] ?? '', 'q=Baku,+Azerbaijan') !== false) $SITE['map'] = $DEF_SETTINGS['map'];
+if (empty($SITE['phones'])) $SITE['phones'] = !empty($SITE['phone']) ? [$SITE['phone']] : $DEF_SETTINGS['phones'];
 
 // ---------- Kateqoriyalar (dilə görə) ----------
 $CAT_ALL = [

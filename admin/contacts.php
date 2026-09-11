@@ -5,8 +5,11 @@ $s = load_json('settings', []);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     csrf_check();
-    $s['phone']     = trim($_POST['phone'] ?? '');
-    $s['phone_raw'] = preg_replace('/[^\d+]/', '', $_POST['phone'] ?? '');
+    $phoneLines = preg_split('/\r\n|\r|\n/', (string)($_POST['phones'] ?? ''));
+    $phones = array_values(array_filter(array_map('trim', $phoneLines), fn($v) => $v !== ''));
+    $s['phones']    = $phones;
+    $s['phone']     = $phones[0] ?? '';
+    $s['phone_raw'] = preg_replace('/[^\d+]/', '', $phones[0] ?? '');
     $s['email']     = trim($_POST['email'] ?? '');
     $s['address']   = trim($_POST['address'] ?? '');
     $s['work_hours']= trim($_POST['work_hours'] ?? '');
@@ -27,22 +30,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $PAGE_TITLE = t('k_title');
 $ACTIVE = 'contacts';
 require __DIR__ . '/includes/layout_top.php';
-$soc = $s['social'] ?? [];
+$soc = $SITE['social'] ?? [];
 $waNum = preg_replace('/\D/', '', $soc['whatsapp'] ?? '');
+$phonesVal = implode("\n", !empty($SITE['phones']) ? $SITE['phones'] : array_filter([$SITE['phone'] ?? '']));
 ?>
 <form method="post">
   <?= csrf_field() ?>
   <div class="card">
     <h2><?= e(t('k_on_site')) ?></h2>
+    <div class="field"><label><?= e(t('k_phone')) ?></label><textarea name="phones" style="min-height:82px" placeholder="+994 99 285 87 78"><?= e($phonesVal) ?></textarea><small class="hint" style="display:block;margin-top:.3rem"><?= e(t('k_phone_h')) ?></small></div>
     <div class="row row-2">
-      <div class="field"><label><?= e(t('k_phone')) ?></label><input type="text" name="phone" value="<?= e($s['phone']??'') ?>"></div>
-      <div class="field"><label><?= e(t('email')) ?></label><input type="email" name="email" value="<?= e($s['email']??'') ?>"></div>
+      <div class="field"><label><?= e(t('email')) ?></label><input type="email" name="email" value="<?= e($SITE['email']??'') ?>"></div>
+      <div class="field"><label><?= e(t('k_hours')) ?></label><input type="text" name="work_hours" value="<?= e($SITE['work_hours']??'') ?>"></div>
     </div>
-    <div class="row row-2">
-      <div class="field"><label><?= e(t('k_addr')) ?></label><input type="text" name="address" value="<?= e($s['address']??'') ?>"></div>
-      <div class="field"><label><?= e(t('k_hours')) ?></label><input type="text" name="work_hours" value="<?= e($s['work_hours']??'') ?>"></div>
-    </div>
-    <div class="field"><label><?= e(t('k_map')) ?></label><input type="text" name="map" value="<?= e($s['map']??'') ?>"></div>
+    <div class="field"><label><?= e(t('k_addr')) ?></label><input type="text" name="address" value="<?= e($SITE['address']??'') ?>"></div>
+    <div class="field"><label><?= e(t('k_map')) ?></label><input type="text" name="map" value="<?= e($SITE['map']??'') ?>"></div>
   </div>
 
   <div class="card">

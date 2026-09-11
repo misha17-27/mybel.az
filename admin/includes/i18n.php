@@ -62,7 +62,7 @@ $ADMIN_T = [
   'c_title'=>'Клиенты','c_add'=>'Добавить клиента','c_add_h'=>'Лучше всего — логотип на прозрачном фоне (PNG/SVG). До 3 МБ.','c_link'=>'Ссылка (необязательно)','c_logo_file'=>'Файл логотипа','c_logo_url'=>'или ссылка на логотип','c_add_btn'=>'Добавить клиента',
   'c_list'=>'Список клиентов','c_list_h'=>'Логотипы показываются бегущей лентой. Порядок — по числу.','c_logo'=>'Лого','c_added'=>'Клиент добавлен.','c_deleted'=>'Клиент удалён.','c_need'=>'Укажите название или логотип.',
   // contacts
-  'k_title'=>'Контакты и соцсети','k_on_site'=>'Контакты на сайте','k_phone'=>'Телефон','k_addr'=>'Адрес','k_hours'=>'Часы работы','k_map'=>'Карта (ссылка для встраивания, embed)',
+  'k_title'=>'Контакты и соцсети','k_on_site'=>'Контакты на сайте','k_phone'=>'Телефон','k_phone_h'=>'По одному номеру в строке.','k_addr'=>'Адрес','k_hours'=>'Часы работы','k_map'=>'Карта (ссылка для встраивания, embed)',
   'k_social'=>'WhatsApp и соцсети','k_social_h'=>'WhatsApp: только цифры номера. Соцсети — полные ссылки (пустые не показываются).','k_wa'=>'Номер WhatsApp','k_saved'=>'Контакты сохранены.',
   // seo
   'o_title'=>'Поисковая оптимизация','o_h'=>'Эти данные видят Google и соцсети при отправке ссылки.','o_mt'=>'Заголовок главной (Title, 50–60 символов)','o_md'=>'Описание (Description, 140–160 символов)',
@@ -126,7 +126,7 @@ $ADMIN_T = [
   'xp_sectors'=>'Sectors (with icons)','xp_sectors_h'=>'Shown as icons on the Services page and home.','xp_process'=>'Services (process steps)','xp_process_h'=>'Numbered list of work stages.','xp_row_hint'=>'Empty rows are not saved.',
   'c_title'=>'Clients','c_add'=>'Add client','c_add_h'=>'Best is a logo on transparent background (PNG/SVG). Up to 3 MB.','c_link'=>'Link (optional)','c_logo_file'=>'Logo file','c_logo_url'=>'or logo link','c_add_btn'=>'Add client',
   'c_list'=>'Client list','c_list_h'=>'Logos scroll as a marquee. Order by number.','c_logo'=>'Logo','c_added'=>'Client added.','c_deleted'=>'Client deleted.','c_need'=>'Provide a name or a logo.',
-  'k_title'=>'Contacts & social','k_on_site'=>'Contacts on site','k_phone'=>'Phone','k_addr'=>'Address','k_hours'=>'Working hours','k_map'=>'Map (embed link)',
+  'k_title'=>'Contacts & social','k_on_site'=>'Contacts on site','k_phone'=>'Phone','k_phone_h'=>'One number per line.','k_addr'=>'Address','k_hours'=>'Working hours','k_map'=>'Map (embed link)',
   'k_social'=>'WhatsApp & social','k_social_h'=>'WhatsApp: digits only. Social: full links (empty are hidden).','k_wa'=>'WhatsApp number','k_saved'=>'Contacts saved.',
   'o_title'=>'Search optimization','o_h'=>'Google and social networks see this when the link is shared.','o_mt'=>'Home title (50–60 chars)','o_md'=>'Description (140–160 chars)',
   'o_og'=>'Social image (1200×630)','o_or'=>'or link /assets/... or https://...','o_vis'=>'Search visibility','o_open'=>'Open to search engines','o_closed'=>'Closed (noindex)','o_saved'=>'SEO saved.',
@@ -184,7 +184,7 @@ $ADMIN_T = [
   'xp_sectors'=>'Sahələr (ikonlu)','xp_sectors_h'=>'«Xidmətlər» səhifəsində və ana səhifədə ikonlarla göstərilir.','xp_process'=>'Xidmətlər (proses addımları)','xp_process_h'=>'İş mərhələlərinin nömrəli siyahısı.','xp_row_hint'=>'Boş sətirlər saxlanmır.',
   'c_title'=>'Müştərilər','c_add'=>'Müştəri əlavə et','c_add_h'=>'Ən yaxşısı — şəffaf fonda loqo (PNG/SVG). 3 MB-a qədər.','c_link'=>'Keçid (istəyə görə)','c_logo_file'=>'Loqo faylı','c_logo_url'=>'və ya loqo keçidi','c_add_btn'=>'Müştəri əlavə et',
   'c_list'=>'Müştəri siyahısı','c_list_h'=>'Loqolar hərəkət edən lentdə göstərilir. Sıra rəqəmə görə.','c_logo'=>'Loqo','c_added'=>'Müştəri əlavə olundu.','c_deleted'=>'Müştəri silindi.','c_need'=>'Ad və ya loqo göstərin.',
-  'k_title'=>'Əlaqə və sosial','k_on_site'=>'Saytda əlaqə','k_phone'=>'Telefon','k_addr'=>'Ünvan','k_hours'=>'İş saatları','k_map'=>'Xəritə (embed keçidi)',
+  'k_title'=>'Əlaqə və sosial','k_on_site'=>'Saytda əlaqə','k_phone'=>'Telefon','k_phone_h'=>'Hər sətirdə bir nömrə.','k_addr'=>'Ünvan','k_hours'=>'İş saatları','k_map'=>'Xəritə (embed keçidi)',
   'k_social'=>'WhatsApp və sosial','k_social_h'=>'WhatsApp: yalnız rəqəmlər. Sosial: tam keçidlər (boşlar göstərilmir).','k_wa'=>'WhatsApp nömrəsi','k_saved'=>'Əlaqə saxlanıldı.',
   'o_title'=>'Axtarış optimizasiyası','o_h'=>'Keçid paylaşılanda Google və sosial şəbəkələr bunu görür.','o_mt'=>'Ana səhifə başlığı (Title, 50–60 simvol)','o_md'=>'Təsvir (Description, 140–160 simvol)',
   'o_og'=>'Sosial şəbəkə şəkli (1200×630)','o_or'=>'və ya keçid /assets/... yaxud https://...','o_vis'=>'Axtarışda görünmə','o_open'=>'Axtarış üçün açıq','o_closed'=>'Bağlı (noindex)','o_saved'=>'SEO saxlanıldı.',
