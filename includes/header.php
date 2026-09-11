@@ -7,9 +7,9 @@ $nav = [
     'haqqimizda' => ['Şirkət haqqında',   '/haqqimizda/'],
     'layiheler'  => ['Layihələr',         '/layiheler/'],
     'xidmetler'  => ['Xidmətlər',         '/xidmetler/'],
-    'musteriler' => ['Müştərilər',        '/musteriler/'],
-    'elaqe'      => ['Əlaqə',             '/elaqe/'],
 ];
+if (!empty($SITE['clients_enabled'])) $nav['musteriler'] = ['Müştərilər', '/musteriler/'];
+$nav['elaqe'] = ['Əlaqə', '/elaqe/'];
 
 // Tema seçici linkləri (cari yolu qoruyaraq)
 $path = strtok($_SERVER['REQUEST_URI'], '?');

@@ -13,7 +13,7 @@
                 <li><a href="/haqqimizda/">Şirkət haqqında</a></li>
                 <li><a href="/layiheler/">Layihələr</a></li>
                 <li><a href="/xidmetler/">Xidmətlər</a></li>
-                <li><a href="/musteriler/">Müştərilər</a></li>
+                <?php if (!empty($SITE['clients_enabled'])): ?><li><a href="/musteriler/">Müştərilər</a></li><?php endif; ?>
                 <li><a href="/elaqe/">Əlaqə</a></li>
             </ul>
         </div>

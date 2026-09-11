@@ -9,9 +9,9 @@ $urls = [
     ['/haqqimizda/', '0.7', 'monthly'],
     ['/layiheler/', '0.9', 'weekly'],
     ['/xidmetler/', '0.8', 'monthly'],
-    ['/musteriler/', '0.5', 'monthly'],
-    ['/elaqe/', '0.6', 'yearly'],
 ];
+if (!empty($SITE['clients_enabled'])) $urls[] = ['/musteriler/', '0.5', 'monthly'];
+$urls[] = ['/elaqe/', '0.6', 'yearly'];
 foreach ($PROJECTS as $p) $urls[] = ['/layiheler/' . $p['slug'] . '/', '0.7', 'monthly'];
 foreach ($SERVICES as $s) $urls[] = ['/xidmetler/' . service_slug($s) . '/', '0.6', 'monthly'];
 

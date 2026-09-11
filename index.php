@@ -100,6 +100,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
 </section>
 
 <!-- ============ MÜŞTƏRİLƏR ============ -->
+<?php if (!empty($SITE['clients_enabled'])): ?>
 <section class="section">
     <div class="container">
         <div class="section-head center">
@@ -109,6 +110,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
         <?php include $_SERVER['DOCUMENT_ROOT'] . '/includes/clients.php'; ?>
     </div>
 </section>
+<?php endif; ?>
 
 <!-- ============ CTA ============ -->
 <section class="section">

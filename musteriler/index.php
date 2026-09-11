@@ -1,5 +1,7 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'] . '/includes/bootstrap.php';
+// "Müştərilər" bölməsi hələlik bağlıdır — birbaşa girişi ana səhifəyə yönləndir
+if (empty($SITE['clients_enabled'])) { header('Location: /', true, 302); exit; }
 $current_section = 'musteriler';
 $ps = page_seo('musteriler');
 $page_title = $ps['title'] ?: ('Müştərilər — ' . $SITE['name']);

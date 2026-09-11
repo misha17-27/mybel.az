@@ -39,6 +39,8 @@ $DEF_SETTINGS = [
         'x'         => '',
     ],
     'work_hours'  => 'B.e – Şənbə: 09:00 – 18:00',
+    'clients_enabled' => false,   // "Müştərilər" bölməsi (nav, ana səhifə, səhifə) hələlik bağlıdır
+
     'hero'        => [
         'eyebrow' => 'Premium mebel & interyer',
         'title'   => 'Məkanınıza dəyər qatan fərdi mebel həlləri',
