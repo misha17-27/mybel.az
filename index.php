@@ -27,8 +27,8 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
         <h1 class="hero-title"><?= nl2br(e($SITE['hero']['title'])) ?></h1>
         <p class="hero-lead"><?= e($SITE['hero']['lead']) ?></p>
         <div class="hero-actions">
-            <a href="/layiheler/" class="btn">Layihələrimiz</a>
-            <a href="/elaqe/" class="btn btn-outline">Bizimlə əlaqə</a>
+            <a href="<?= e(u('/layiheler/')) ?>" class="btn"><?= e(__('btn_our_projects')) ?></a>
+            <a href="<?= e(u('/elaqe/')) ?>" class="btn btn-outline"><?= e(__('btn_contact_us')) ?></a>
         </div>
     </div>
 </section>
@@ -40,7 +40,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
             <span class="eyebrow"><?= e($SITE['about']['eyebrow']) ?></span>
             <h2 class="section-title"><?= e($SITE['about']['title']) ?></h2>
             <?= rich_text($SITE['about']['text']) ?>
-            <a href="/haqqimizda/" class="btn-ghost">Ətraflı </a>
+            <a href="<?= e(u('/haqqimizda/')) ?>" class="btn-ghost"><?= e(__('more')) ?></a>
         </div>
         <div data-reveal>
             <img src="<?= e($SITE['about']['image'] ?: '/assets/img/demo/corner-orange.jpg') ?>" alt="MYBEL Concept interyer detalı" width="900" height="760">
@@ -59,7 +59,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
         <div class="card-grid">
             <?php foreach (array_slice(visible_sorted($PROJECTS), 0, 3) as $p): ?>
                 <article class="card" data-reveal>
-                    <a class="card-media" href="/layiheler/<?= e($p['slug']) ?>/">
+                    <a class="card-media" href="<?= e(u('/layiheler/' . $p['slug'] . '/')) ?>">
                         <span class="card-tag"><?= e(cat_name($p['category'])) ?></span>
                         <img src="<?= e($p['cover']) ?>" alt="<?= e($p['title']) ?>" loading="lazy" width="1200" height="800">
                     </a>
@@ -67,13 +67,13 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
                         <h3 class="card-title"><?= e($p['title']) ?></h3>
                         <?php if (!empty($p['location']) || !empty($p['year'])): ?><p class="card-meta"><?= e(trim($p['location'] . (($p['location'] && $p['year']) ? ' · ' : '') . $p['year'])) ?></p><?php endif; ?>
                         <?php if (!empty($p['excerpt'])): ?><p class="card-excerpt"><?= e($p['excerpt']) ?></p><?php endif; ?>
-                        <a class="card-link" href="/layiheler/<?= e($p['slug']) ?>/">Layihəyə bax</a>
+                        <a class="card-link" href="<?= e(u('/layiheler/' . $p['slug'] . '/')) ?>"><?= e(__('view_project')) ?></a>
                     </div>
                 </article>
             <?php endforeach; ?>
         </div>
         <div style="margin-top:2.5rem">
-            <a href="/layiheler/" class="btn btn-outline">Bütün layihələr</a>
+            <a href="<?= e(u('/layiheler/')) ?>" class="btn btn-outline"><?= e(__('all_projects')) ?></a>
         </div>
     </div>
 </section>
@@ -86,11 +86,11 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
                 <span class="eyebrow"><?= e($SITE['home']['services_eyebrow']) ?></span>
                 <h2 class="section-title"><?= e($SITE['home']['services_title']) ?></h2>
             </div>
-            <a href="/xidmetler/" class="btn btn-outline">Xidmətlər</a>
+            <a href="<?= e(u('/xidmetler/')) ?>" class="btn btn-outline"><?= e(__('nav_services')) ?></a>
         </div>
         <div class="sectors-grid">
             <?php foreach ($SITE['xidmetler_page']['sectors'] as $sec): ?>
-                <a class="sector-item" href="/xidmetler/" data-reveal>
+                <a class="sector-item" href="<?= e(u('/xidmetler/')) ?>" data-reveal>
                     <div class="sector-icon"><?= icon($sec['icon']) ?></div>
                     <span class="sector-name"><?= e($sec['name']) ?></span>
                 </a>
@@ -118,7 +118,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
         <div class="cta-band" data-reveal>
             <h2><?= e($SITE['home']['cta_title']) ?></h2>
             <p><?= e($SITE['home']['cta_text']) ?></p>
-            <a href="/elaqe/" class="btn"><?= e($SITE['home']['cta_btn']) ?></a>
+            <a href="<?= e(u('/elaqe/')) ?>" class="btn"><?= e($SITE['home']['cta_btn']) ?></a>
         </div>
     </div>
 </section>

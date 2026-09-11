@@ -8,18 +8,18 @@
         </div>
 
         <div class="footer-col">
-            <h3>Menyu</h3>
+            <h3><?= e(__('footer_menu')) ?></h3>
             <ul>
-                <li><a href="/haqqimizda/">Şirkət haqqında</a></li>
-                <li><a href="/layiheler/">Layihələr</a></li>
-                <li><a href="/xidmetler/">Xidmətlər</a></li>
-                <?php if (!empty($SITE['clients_enabled'])): ?><li><a href="/musteriler/">Müştərilər</a></li><?php endif; ?>
-                <li><a href="/elaqe/">Əlaqə</a></li>
+                <li><a href="<?= e(u('/haqqimizda/')) ?>"><?= e(__('nav_about')) ?></a></li>
+                <li><a href="<?= e(u('/layiheler/')) ?>"><?= e(__('nav_projects')) ?></a></li>
+                <li><a href="<?= e(u('/xidmetler/')) ?>"><?= e(__('nav_services')) ?></a></li>
+                <?php if (!empty($SITE['clients_enabled'])): ?><li><a href="<?= e(u('/musteriler/')) ?>"><?= e(__('nav_clients')) ?></a></li><?php endif; ?>
+                <li><a href="<?= e(u('/elaqe/')) ?>"><?= e(__('nav_contact')) ?></a></li>
             </ul>
         </div>
 
         <div class="footer-col">
-            <h3>Əlaqə</h3>
+            <h3><?= e(__('nav_contact')) ?></h3>
             <ul class="footer-contact">
                 <li><span class="fc-ic"><?= icon('phone') ?></span><a href="tel:<?= e($SITE['phone_raw']) ?>"><?= e($SITE['phone']) ?></a></li>
                 <li><span class="fc-ic"><?= icon('mail') ?></span><a href="mailto:<?= e($SITE['email']) ?>"><?= e($SITE['email']) ?></a></li>
@@ -32,7 +32,7 @@
 
     <div class="footer-bottom">
         <div class="container footer-bottom-inner">
-            <p>&copy; <?= date('Y') ?> <?= e($SITE['legal']) ?>. Bütün hüquqlar qorunur.</p>
+            <p>&copy; <?= date('Y') ?> <?= e($SITE['legal']) ?>. <?= e(__('rights')) ?></p>
             <p class="footer-credit">Site by <a href="https://webline.az" target="_blank" rel="noopener">Webline.az</a></p>
         </div>
     </div>

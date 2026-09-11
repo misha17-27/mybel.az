@@ -5,6 +5,11 @@ DirectoryIndex index.php
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
+    # Dil prefiksi: /ru/... və /en/... eyni faylları göstərir.
+    # Prefiks daxildən soyulur; məzmun dili PHP-də orijinal REQUEST_URI-dən tanınır.
+    RewriteRule ^(ru|en)/?$ index.php [L]
+    RewriteRule ^(ru|en)/(.+)$ $2 [L]
+
     # sitemap.xml -> sitemap.php
     RewriteRule ^sitemap\.xml$ sitemap.php [L]
 

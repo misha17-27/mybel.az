@@ -5,17 +5,17 @@ $ps = page_seo('about');
 $page_title = $ps['title'] ?: ('Şirkət haqqında — ' . $SITE['name']);
 $page_desc  = $ps['desc'] ?: 'MYBEL Concept — restoran, otel və fərdi evlər üçün fərdi mebel istehsalı sahəsində peşəkar komanda.';
 $page_url   = '/haqqimizda/';
-$breadcrumbs = [['name' => 'Ana səhifə', 'url' => '/'], ['name' => 'Şirkət haqqında', 'url' => '/haqqimizda/']];
+$breadcrumbs = [['name' => __('nav_home'), 'url' => '/'], ['name' => __('nav_about'), 'url' => '/haqqimizda/']];
 
 include $_SERVER['DOCUMENT_ROOT'] . '/includes/head.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
 ?>
 <section class="page-hero">
     <div class="container">
-        <nav class="breadcrumb" aria-label="Naviqasiya izi">
-            <a href="/">Ana səhifə</a><span>/</span><strong>Şirkət haqqında</strong>
+        <nav class="breadcrumb" aria-label="<?= e(__('breadcrumb')) ?>">
+            <a href="<?= e(u('/')) ?>"><?= e(__('nav_home')) ?></a><span>/</span><strong><?= e(__('nav_about')) ?></strong>
         </nav>
-        <h1>Şirkət haqqında</h1>
+        <h1><?= e(__('nav_about')) ?></h1>
         <p><?= e($SITE['about_page']['lead']) ?></p>
     </div>
 </section>
@@ -46,9 +46,9 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
 <section class="section">
     <div class="container">
         <div class="cta-band" data-reveal>
-            <h2>Birlikdə işləyək</h2>
-            <p>Növbəti layihənizi MYBEL Concept ilə həyata keçirin.</p>
-            <a href="/elaqe/" class="btn">Əlaqə saxla</a>
+            <h2><?= e(__('cta_about_title')) ?></h2>
+            <p><?= e(__('cta_about_text')) ?></p>
+            <a href="<?= e(u('/elaqe/')) ?>" class="btn"><?= e(__('cta_about_btn')) ?></a>
         </div>
     </div>
 </section>

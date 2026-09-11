@@ -5,6 +5,12 @@
  */
 $uri = urldecode(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
 
+// Dil prefiksini soy (ru/en) — məzmun dili config.php-də orijinal REQUEST_URI-dən tanınır
+if (preg_match('#^/(ru|en)(/|$)#', $uri)) {
+    $uri = preg_replace('#^/(ru|en)#', '', $uri);
+    if ($uri === '') $uri = '/';
+}
+
 // Təhlükəsizlik: məlumat və daxili qovluqlara birbaşa girişi blokla
 if (preg_match('#^/(data|includes|admin/includes)(/|$)#', $uri) || basename($uri) === '.htaccess') {
     http_response_code(403);

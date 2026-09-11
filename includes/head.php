@@ -5,7 +5,13 @@
  */
 $base = rtrim($SITE['url'], '/');
 $seo  = $SITE['seo'] ?? [];
-$canonical = $base . $page_url;
+// Hər dil üçün mütləq URL (hreflang / canonical üçün)
+$lang_alt = [];
+foreach (['az', 'ru', 'en'] as $lc) {
+    $pfx = $lc === 'az' ? '' : '/' . $lc;
+    $lang_alt[$lc] = $base . $pfx . (($page_url === '/' || $page_url === '') ? '/' : $page_url);
+}
+$canonical = $lang_alt[$LANG] ?? ($base . $page_url);
 $og_image_abs = (strpos($page_image, 'http') === 0) ? $page_image : $base . $page_image;
 $favicon = $seo['favicon'] ?: '/assets/img/logo.png';
 $noindex = (($seo['robots'] ?? 'index') === 'noindex');
@@ -47,14 +53,14 @@ $graph = [$ld_org, $ld_site, $ld_page];
 if (!empty($breadcrumbs)) {
     $items = [];
     foreach ($breadcrumbs as $i => $b) {
-        $items[] = ['@type' => 'ListItem', 'position' => $i + 1, 'name' => $b['name'], 'item' => $base . $b['url']];
+        $items[] = ['@type' => 'ListItem', 'position' => $i + 1, 'name' => $b['name'], 'item' => $base . u($b['url'])];
     }
     $graph[] = ['@type' => 'BreadcrumbList', '@id' => $canonical . '#breadcrumb', 'itemListElement' => $items];
 }
 $ld = ['@context' => 'https://schema.org', '@graph' => $graph];
 ?>
 <!doctype html>
-<html lang="<?= e($SITE['lang']) ?>" data-theme="<?= e($theme_key) ?>">
+<html lang="<?= e($LANG) ?>" data-theme="<?= e($theme_key) ?>">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -68,14 +74,18 @@ $ld = ['@context' => 'https://schema.org', '@graph' => $graph];
     <?php if (!empty($seo['gsc_verify'])): ?><meta name="google-site-verification" content="<?= e($seo['gsc_verify']) ?>">
     <?php endif; ?>
     <link rel="canonical" href="<?= e($canonical) ?>">
-    <link rel="alternate" hreflang="az" href="<?= e($canonical) ?>">
-    <link rel="alternate" hreflang="x-default" href="<?= e($canonical) ?>">
+    <link rel="alternate" hreflang="az" href="<?= e($lang_alt['az']) ?>">
+    <link rel="alternate" hreflang="ru" href="<?= e($lang_alt['ru']) ?>">
+    <link rel="alternate" hreflang="en" href="<?= e($lang_alt['en']) ?>">
+    <link rel="alternate" hreflang="x-default" href="<?= e($lang_alt['az']) ?>">
     <meta name="author" content="<?= e($SITE['legal'] ?: $SITE['name']) ?>">
 
     <!-- Open Graph -->
     <meta property="og:type" content="<?= e($page_type) ?>">
     <meta property="og:site_name" content="<?= e($SITE['name']) ?>">
-    <meta property="og:locale" content="<?= e($SITE['locale']) ?>">
+    <meta property="og:locale" content="<?= e($PUB_LOCALE[$LANG] ?? $SITE['locale']) ?>">
+    <?php foreach (['az','ru','en'] as $lc): if ($lc !== $LANG): ?><meta property="og:locale:alternate" content="<?= e($PUB_LOCALE[$lc]) ?>">
+    <?php endif; endforeach; ?>
     <meta property="og:title" content="<?= e($page_title) ?>">
     <meta property="og:description" content="<?= e($page_desc) ?>">
     <meta property="og:url" content="<?= e($canonical) ?>">
@@ -110,4 +120,4 @@ $ld = ['@context' => 'https://schema.org', '@graph' => $graph];
     <?php endif; ?>
 </head>
 <body class="section-<?= e($current_section) ?>">
-<a class="skip-link" href="#main">Əsas məzmuna keç</a>
+<a class="skip-link" href="#main"><?= e(__('skip')) ?></a>

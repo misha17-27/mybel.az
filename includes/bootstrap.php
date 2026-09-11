@@ -5,6 +5,7 @@
  */
 require __DIR__ . '/config.php';
 require __DIR__ . '/icons.php';
+require __DIR__ . '/lang.php';   // publik interfeys tərcümələri (__())
 
 // ---- Dizayn temaları (3 versiya) ----
 $THEMES = [

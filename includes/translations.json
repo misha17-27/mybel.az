@@ -1,0 +1,212 @@
+{
+  "ru": {
+    "settings": {
+      "tagline": "Премиальная мебель и интерьерные решения",
+      "description": "MYBEL Concept — изготовление мебели по индивидуальному дизайну для ресторанов, отелей и частных домов. Кухонная мебель, ресторанные столы, оснащение гостиничных номеров и комплексные интерьерные решения.",
+      "hero": {
+        "eyebrow": "Премиальная мебель и интерьер",
+        "title": "Индивидуальные мебельные решения, добавляющие ценность вашему пространству",
+        "lead": "Полный цикл производства интерьера и мебели для ресторанов, отелей и частных домов — от проектирования до монтажа."
+      },
+      "about": {
+        "eyebrow": "О компании",
+        "title": "Соединяем качество и дизайн",
+        "text": "В MYBEL Concept мы подходим к каждому проекту индивидуально. От выбора материалов до монтажа все этапы выполняет наша собственная команда — мы создаём долговечный и эстетичный результат. Мы объединяем современные принципы дизайна, сохраняя функциональность пространства."
+      },
+      "home": {
+        "projects_eyebrow": "Проекты",
+        "projects_title": "Избранные работы",
+        "projects_desc": "Некоторые проекты, реализованные для ресторанов, отелей и частных домов.",
+        "services_eyebrow": "Услуги",
+        "services_title": "Что мы предлагаем",
+        "clients_eyebrow": "Клиенты",
+        "clients_title": "Нам доверяют",
+        "cta_title": "Получите предложение для вашего проекта",
+        "cta_text": "Поделитесь идеей — наша команда подготовит замеры, дизайн и предложение по цене.",
+        "cta_btn": "Оставить заявку"
+      },
+      "about_page": {
+        "lead": "MYBEL Concept — производитель мебели, объединяющий дизайн, качество и точность.",
+        "intro_eyebrow": "Кто мы",
+        "intro_title": "Воплощаем идею в реальность",
+        "intro_text": "В MYBEL Concept мы подходим к каждому проекту индивидуально. От выбора материалов до монтажа все этапы выполняет наша собственная команда — мы создаём долговечный и эстетичный результат.\n\nМы объединяем современные принципы дизайна, сохраняя функциональность пространства, и доводим каждую деталь до совершенства.",
+        "stats": [
+          {"label": "Завершённых проектов"},
+          {"label": "Лет опыта"},
+          {"label": "Членов команды"},
+          {"label": "Довольных клиентов"}
+        ]
+      },
+      "pages": {
+        "layiheler": {"title": "Проекты", "subtitle": "Познакомьтесь с нашими работами — каждая с индивидуальным дизайном и профессиональным исполнением."},
+        "elaqe": {"title": "Контакты", "subtitle": "Свяжитесь с нами по вашему проекту или вопросу."}
+      },
+      "xidmetler_page": {
+        "sectors_title": "Сферы, которые мы обслуживаем",
+        "sectors_desc": "Mybel Concept, как и вчера, сегодня реализует индивидуальные мебельные проекты, которые обновляют дух пространств и сочетают функциональность с эстетикой — на уровне выше ваших ожиданий.",
+        "sectors": [
+          {"name": "Отели"},
+          {"name": "Рестораны"},
+          {"name": "Учебные заведения"},
+          {"name": "Медицинские учреждения"},
+          {"name": "Бизнес-центры"},
+          {"name": "Офисы"},
+          {"name": "Частные дома"}
+        ],
+        "process_eyebrow": "Этапы проекта",
+        "process_title": "Услуги",
+        "process": [
+          {"title": "Дизайн мебели", "desc": "Разрабатывается уникальная концепция мебели с учётом особенностей пространства, бюджета, комфорта и пожеланий клиента."},
+          {"title": "Замеры и анализ пространства", "desc": "Изучаются размеры и технические особенности помещения, планируется функциональное и правильное размещение мебели."},
+          {"title": "2D техническое проектирование", "desc": "Разрабатываются детальные 2D-чертежи с размерами, конструкцией и расположением мебели."},
+          {"title": "Мудборд и презентация концепции", "desc": "Представляется мудборд с цветовой палитрой, материалами, текстурами и общим стилем проекта."},
+          {"title": "3D-моделирование и визуализация", "desc": "Мебель выполняется в 3D в реальных размерах пространства. Клиент видит финальный вид проекта до начала производства."},
+          {"title": "Подбор материалов и фурнитуры", "desc": "Подбираются сертифицированные материалы и фурнитура высокого стандарта европейского производства в соответствии с дизайном, назначением и бюджетом проекта."},
+          {"title": "Планирование производства", "desc": "После утверждения проекта профессиональная команда планирует этапы производства, технические детали и сроки сдачи."},
+          {"title": "Изготовление мебели на заказ", "desc": "На основе утверждённого дизайна и технического проекта изготавливается качественная, функциональная и долговечная мебель."},
+          {"title": "Контроль проекта и качества", "desc": "Команда дизайнеров контролирует все процессы проекта, качество работ и установленные сроки — от начального этапа до финальной сдачи."},
+          {"title": "Финальная сдача", "desc": "Готовая мебель передаётся клиенту после проверки всех технических и эстетических деталей."}
+        ]
+      },
+      "page_seo": {
+        "home": {"title": "MYBEL Concept — премиальная мебель и интерьерные решения | Баку", "desc": "MYBEL Concept — индивидуальное производство мебели для ресторанов, отелей и частных домов. Кухонная мебель, ресторанные столы, гостиничные номера и комплексные интерьерные решения."},
+        "about": {"title": "О компании — MYBEL Concept", "desc": "О MYBEL Concept — профессиональный производитель мебели для ресторанов, отелей и частных домов."},
+        "layiheler": {"title": "Проекты — MYBEL Concept", "desc": "Мебельные и интерьерные проекты MYBEL Concept для ресторанов, отелей и частных домов."},
+        "xidmetler": {"title": "Услуги — MYBEL Concept", "desc": "Дизайн мебели, 2D/3D-проектирование, производство и монтаж — для отелей, ресторанов, офисов и частных домов."},
+        "musteriler": {"title": "Клиенты — MYBEL Concept", "desc": "Клиенты и партнёры, доверяющие MYBEL Concept."},
+        "elaqe": {"title": "Контакты — MYBEL Concept", "desc": "Связь с MYBEL Concept: телефон, e-mail, адрес и форма заявки."}
+      },
+      "seo": {
+        "home_title": "MYBEL Concept — премиальная мебель и интерьерные решения | Баку",
+        "home_desc": "MYBEL Concept — индивидуальное производство мебели для ресторанов, отелей и частных домов. Кухонная мебель, ресторанные столы, гостиничные номера и комплексные интерьерные решения.",
+        "keywords": "мебель, дизайн интерьера, ресторанная мебель, гостиничная мебель, кухонная мебель, Баку"
+      }
+    },
+    "projects": {
+      "garabagh-hotel":       {"title": "Отель «Карабах»",              "excerpt": "Полное мебельное и интерьерное решение для отеля."},
+      "lachin-resort":        {"title": "Лачын Резорт",                 "excerpt": "Полное мебельное и интерьерное решение для отеля."},
+      "xankendi-palace":      {"title": "Ханкенди Палас",               "excerpt": "Полное мебельное и интерьерное решение для отеля."},
+      "xankendi-konqres":     {"title": "Ханкендинский конгресс-центр", "excerpt": "Мебельное и интерьерное решение для общественного здания."},
+      "zengilan-konqres":     {"title": "Зангиланский конгресс-центр",  "excerpt": "Мебельное и интерьерное решение для общественного здания."},
+      "hadrut-mescidi":       {"title": "Мечеть в Гадруте",             "excerpt": "Мебельное и интерьерное решение для общественного здания."},
+      "samaxi-avropa-liseyi": {"title": "Шамахинский европейский лицей","excerpt": "Мебельное и интерьерное решение для учебного заведения."},
+      "zen-force-gym":        {"title": "Zen Force Gym",                "excerpt": "Мебельное и интерьерное решение для спортивного объекта."},
+      "tajen":                {"title": "Tajen",                        "excerpt": "Мебельное и интерьерное решение для коммерческого объекта."},
+      "tug-export":           {"title": "Туг Экспорт",                  "excerpt": "Мебельное и интерьерное решение для коммерческого объекта."},
+      "tug-villasi":          {"title": "Вилла в Туге",                 "excerpt": "Мебельное и интерьерное решение для частного дома."}
+    },
+    "services": {
+      "s1": {"title": "Кухонная мебель",       "desc": "Кухонные гарнитуры по индивидуальным размерам — современные и классические."},
+      "s2": {"title": "Ресторанные столы",      "desc": "Прочные и эстетичные решения столов, посадочных мест и барных зон."},
+      "s3": {"title": "Гостиничные номера",     "desc": "Полное мебельное оснащение и дизайн гостиничных номеров."},
+      "s4": {"title": "Гардеробные и шкафы",    "desc": "Индивидуальные гардеробные комнаты и встроенные шкафы."},
+      "s5": {"title": "Мягкая мебель",          "desc": "Изготовление диванов, кресел и мягкой мебели на заказ."},
+      "s6": {"title": "Дизайн интерьера",       "desc": "Проектирование, 3D-визуализация и консультация."}
+    }
+  },
+  "en": {
+    "settings": {
+      "tagline": "Premium furniture & interior solutions",
+      "description": "MYBEL Concept — custom-designed furniture manufacturing for restaurants, hotels and private homes. Kitchen furniture, restaurant tables, hotel rooms and complete interior solutions.",
+      "hero": {
+        "eyebrow": "Premium furniture & interior",
+        "title": "Custom furniture solutions that add value to your space",
+        "lead": "End-to-end interior and furniture production for restaurants, hotels and private homes — from design to installation."
+      },
+      "about": {
+        "eyebrow": "About us",
+        "title": "Bringing quality and design together",
+        "text": "At MYBEL Concept we approach every project individually. From material selection to installation, our own team handles every stage — delivering a durable and aesthetic result. We combine modern design principles while preserving the functionality of the space."
+      },
+      "home": {
+        "projects_eyebrow": "Projects",
+        "projects_title": "Selected works",
+        "projects_desc": "A selection of projects we have completed for restaurants, hotels and private homes.",
+        "services_eyebrow": "Services",
+        "services_title": "What we offer",
+        "clients_eyebrow": "Clients",
+        "clients_title": "Trusted by",
+        "cta_title": "Get a quote for your project",
+        "cta_text": "Share your idea — our team will prepare measurements, design and a price quote.",
+        "cta_btn": "Place a request"
+      },
+      "about_page": {
+        "lead": "MYBEL Concept — a furniture manufacturer that combines design, quality and precision.",
+        "intro_eyebrow": "Who we are",
+        "intro_title": "Turning ideas into reality",
+        "intro_text": "At MYBEL Concept we approach every project individually. From material selection to installation, our own team handles every stage — delivering a durable and aesthetic result.\n\nWe combine modern design principles while preserving the functionality of the space, taking every detail to perfection.",
+        "stats": [
+          {"label": "Completed projects"},
+          {"label": "Years of experience"},
+          {"label": "Team members"},
+          {"label": "Satisfied clients"}
+        ]
+      },
+      "pages": {
+        "layiheler": {"title": "Projects", "subtitle": "Explore our completed works — each with bespoke design and professional craftsmanship."},
+        "elaqe": {"title": "Contact", "subtitle": "Get in touch with us about your project or question."}
+      },
+      "xidmetler_page": {
+        "sectors_title": "Sectors we serve",
+        "sectors_desc": "As it did yesterday, MYBEL Concept today delivers custom furniture projects that renew the spirit of spaces and combine functionality with aesthetics — beyond your expectations.",
+        "sectors": [
+          {"name": "Hotels"},
+          {"name": "Restaurants"},
+          {"name": "Educational institutions"},
+          {"name": "Medical institutions"},
+          {"name": "Business centers"},
+          {"name": "Offices"},
+          {"name": "Private homes"}
+        ],
+        "process_eyebrow": "Project stages",
+        "process_title": "Services",
+        "process": [
+          {"title": "Furniture design", "desc": "A unique furniture concept is developed considering the features of the space, the budget, comfort and the client's wishes."},
+          {"title": "Measurement & space analysis", "desc": "The dimensions and technical features of the space are studied, and the functional, correct placement of the furniture is planned."},
+          {"title": "2D technical design", "desc": "Detailed 2D technical drawings are prepared showing the dimensions, construction and placement of the furniture."},
+          {"title": "Moodboard & concept presentation", "desc": "A moodboard is presented reflecting the project's colour palette, materials, textures and overall style."},
+          {"title": "3D modelling & visualization", "desc": "The furniture is produced in 3D to the real dimensions of the space. The client sees the final look of the project before production begins."},
+          {"title": "Material & hardware selection", "desc": "Certified, high-standard European-made materials and hardware are selected according to the design, purpose and budget of the project."},
+          {"title": "Production planning", "desc": "Once the project is approved, a professional team plans the production stages, technical details and delivery time."},
+          {"title": "Custom furniture manufacturing", "desc": "Based on the approved design and technical project, high-quality, functional and long-lasting furniture is produced."},
+          {"title": "Project & quality control", "desc": "The design team oversees all project processes, workmanship quality and the agreed deadlines — from the initial stage to final delivery."},
+          {"title": "Final delivery", "desc": "The finished furniture is delivered to the client after all technical and aesthetic details have been checked."}
+        ]
+      },
+      "page_seo": {
+        "home": {"title": "MYBEL Concept — Premium furniture & interior solutions | Baku", "desc": "MYBEL Concept — custom furniture manufacturing for restaurants, hotels and private homes. Kitchen furniture, restaurant tables, hotel rooms and complete interior solutions."},
+        "about": {"title": "About — MYBEL Concept", "desc": "About MYBEL Concept — a professional furniture manufacturer for restaurants, hotels and private homes."},
+        "layiheler": {"title": "Projects — MYBEL Concept", "desc": "MYBEL Concept furniture and interior projects for restaurants, hotels and private homes."},
+        "xidmetler": {"title": "Services — MYBEL Concept", "desc": "Furniture design, 2D/3D design, manufacturing and installation — for hotels, restaurants, offices and private homes."},
+        "musteriler": {"title": "Clients — MYBEL Concept", "desc": "Clients and partners who trust MYBEL Concept."},
+        "elaqe": {"title": "Contact — MYBEL Concept", "desc": "Contact MYBEL Concept: phone, e-mail, address and request form."}
+      },
+      "seo": {
+        "home_title": "MYBEL Concept — Premium furniture & interior solutions | Baku",
+        "home_desc": "MYBEL Concept — custom furniture manufacturing for restaurants, hotels and private homes. Kitchen furniture, restaurant tables, hotel rooms and complete interior solutions.",
+        "keywords": "furniture, interior design, restaurant furniture, hotel furniture, kitchen furniture, Baku"
+      }
+    },
+    "projects": {
+      "garabagh-hotel":       {"title": "Karabakh Hotel",            "excerpt": "Complete furniture and interior solution for a hotel."},
+      "lachin-resort":        {"title": "Lachin Resort",             "excerpt": "Complete furniture and interior solution for a hotel."},
+      "xankendi-palace":      {"title": "Khankendi Palace",          "excerpt": "Complete furniture and interior solution for a hotel."},
+      "xankendi-konqres":     {"title": "Khankendi Congress Center", "excerpt": "Furniture and interior solution for a public building."},
+      "zengilan-konqres":     {"title": "Zangilan Congress Center",  "excerpt": "Furniture and interior solution for a public building."},
+      "hadrut-mescidi":       {"title": "Hadrut Mosque",             "excerpt": "Furniture and interior solution for a public building."},
+      "samaxi-avropa-liseyi": {"title": "Shamakhi European Lyceum",  "excerpt": "Furniture and interior solution for an educational institution."},
+      "zen-force-gym":        {"title": "Zen Force Gym",             "excerpt": "Furniture and interior solution for a sports facility."},
+      "tajen":                {"title": "Tajen",                     "excerpt": "Furniture and interior solution for a commercial facility."},
+      "tug-export":           {"title": "Tugh Export",               "excerpt": "Furniture and interior solution for a commercial facility."},
+      "tug-villasi":          {"title": "Tugh Villa",                "excerpt": "Furniture and interior solution for a private home."}
+    },
+    "services": {
+      "s1": {"title": "Kitchen furniture",        "desc": "Custom-sized kitchen sets — modern and classic."},
+      "s2": {"title": "Restaurant tables",        "desc": "Durable and aesthetic table, seating and bar solutions."},
+      "s3": {"title": "Hotel rooms",              "desc": "Complete furniture supply and design for hotel rooms."},
+      "s4": {"title": "Wardrobes & cabinets",     "desc": "Bespoke walk-in wardrobes and built-in cabinets."},
+      "s5": {"title": "Upholstered furniture",    "desc": "Custom-made sofas, armchairs and upholstered furniture."},
+      "s6": {"title": "Interior design",          "desc": "Design, 3D visualization and consultation."}
+    }
+  }
+}

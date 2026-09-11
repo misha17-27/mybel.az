@@ -8,6 +8,22 @@ require_once __DIR__ . '/store.php';
 
 define('IMG', '/assets/img/demo/');
 
+// ---------- Publik sayt dili: az (default) / ru / en ----------
+$PUB_LANGS  = ['az' => 'AZ', 'ru' => 'RU', 'en' => 'EN'];
+$PUB_LOCALE = ['az' => 'az_AZ', 'ru' => 'ru_RU', 'en' => 'en_US'];
+$reqPath = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: '/';
+$LANG = 'az';
+if (preg_match('#^/(ru|en)(/|$)#', $reqPath, $lm)) $LANG = $lm[1];
+$GLOBALS['LANG'] = $LANG;
+
+/** Dilə uyğun daxili URL (AZ = prefikssiz, RU = /ru/..., EN = /en/...). Yalnız səhifə linkləri üçün — asset-lər üçün yox. */
+function u(string $path = '/'): string {
+    global $LANG;
+    $path = '/' . ltrim($path, '/');
+    if (($LANG ?? 'az') === 'az') return $path;
+    return '/' . $LANG . ($path === '/' ? '/' : $path);
+}
+
 // ---------- köməkçi mətn generatoru (seed üçün) ----------
 function ph_text($n = 1) {
     $p = 'MYBEL Concept olaraq hər layihəyə fərdi yanaşırıq. Materialın seçimindən quraşdırmaya '
@@ -230,15 +246,36 @@ $CLIENTS   = load_or_seed('clients',  $DEF_CLIENTS);
 // köhnə seed-lərdə yeni açarlar olmaya bilər — birləşdir
 $SITE = array_replace_recursive($DEF_SETTINGS, $SITE);
 
-// ---------- Kateqoriyalar (statik) ----------
-$CATEGORIES = [
-    'oteller'     => 'Otellər',
-    'ictimai'     => 'İctimai binalar',
-    'kommersiya'  => 'Kommersiya',
-    'tehsil'      => 'Təhsil',
-    'idman'       => 'İdman',
-    'ferdi-evler' => 'Fərdi evlər',
+// ---------- Kateqoriyalar (dilə görə) ----------
+$CAT_ALL = [
+    'az' => ['oteller'=>'Otellər','ictimai'=>'İctimai binalar','kommersiya'=>'Kommersiya','tehsil'=>'Təhsil','idman'=>'İdman','ferdi-evler'=>'Fərdi evlər'],
+    'ru' => ['oteller'=>'Отели','ictimai'=>'Общественные здания','kommersiya'=>'Коммерция','tehsil'=>'Образование','idman'=>'Спорт','ferdi-evler'=>'Частные дома'],
+    'en' => ['oteller'=>'Hotels','ictimai'=>'Public buildings','kommersiya'=>'Commercial','tehsil'=>'Education','idman'=>'Sports','ferdi-evler'=>'Private homes'],
 ];
+$CATEGORIES = $CAT_ALL[$LANG] ?? $CAT_ALL['az'];
+
+// ---------- Məzmun tərcümələri (ru/en) — yükləmə zamanı overlay ----------
+// Baza (kod, deploy olunur) + varsa admin redaktəsi (data/, üstün).
+$TRANSLATIONS = [];
+$trSeed = __DIR__ . '/translations.json';
+if (is_file($trSeed)) { $tj = json_decode(file_get_contents($trSeed), true); if (is_array($tj)) $TRANSLATIONS = $tj; }
+$trData = data_path('translations');
+if (is_file($trData)) { $tj = json_decode(file_get_contents($trData), true); if (is_array($tj)) $TRANSLATIONS = array_replace_recursive($TRANSLATIONS, $tj); }
+
+if ($LANG !== 'az' && !empty($TRANSLATIONS[$LANG])) {
+    $tr = $TRANSLATIONS[$LANG];
+    $tr_filled = function ($a) use (&$tr_filled) {
+        $out = [];
+        foreach ($a as $k => $v) {
+            if (is_array($v)) { $vv = $tr_filled($v); if ($vv !== []) $out[$k] = $vv; }
+            elseif ($v !== '' && $v !== null) $out[$k] = $v;
+        }
+        return $out;
+    };
+    if (!empty($tr['settings'])) $SITE = array_replace_recursive($SITE, $tr_filled($tr['settings']));
+    if (!empty($tr['projects'])) { foreach ($PROJECTS as &$p) if (!empty($tr['projects'][$p['id']])) $p = array_replace($p, $tr_filled($tr['projects'][$p['id']])); unset($p); }
+    if (!empty($tr['services'])) { foreach ($SERVICES as &$s) if (!empty($tr['services'][$s['id']])) $s = array_replace($s, $tr_filled($tr['services'][$s['id']])); unset($s); }
+}
 
 // ---------- yalnız görünən + sıralanmış elementlər (publik sayt üçün) ----------
 function visible_sorted($list) {

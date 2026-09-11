@@ -5,7 +5,7 @@ $ps = page_seo('xidmetler');
 $page_title = $ps['title'] ?: ('Xidmətlər — ' . $SITE['name']);
 $page_desc  = $ps['desc'] ?: 'MYBEL Concept xidmətləri: mebel dizaynı, 2D/3D layihələndirmə, istehsal, nəzarət və təhvil — hotel, restoran, ofis, təhsil, tibb və fərdi evlər üçün.';
 $page_url   = '/xidmetler/';
-$breadcrumbs = [['name' => 'Ana səhifə', 'url' => '/'], ['name' => 'Xidmətlər', 'url' => '/xidmetler/']];
+$breadcrumbs = [['name' => __('nav_home'), 'url' => '/'], ['name' => __('nav_services'), 'url' => '/xidmetler/']];
 
 $xp = $SITE['xidmetler_page'];
 
@@ -14,8 +14,8 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
 ?>
 <section class="page-hero">
     <div class="container">
-        <nav class="breadcrumb" aria-label="Naviqasiya izi">
-            <a href="/">Ana səhifə</a><span>/</span><strong>Xidmətlər</strong>
+        <nav class="breadcrumb" aria-label="<?= e(__('breadcrumb')) ?>">
+            <a href="<?= e(u('/')) ?>"><?= e(__('nav_home')) ?></a><span>/</span><strong><?= e(__('nav_services')) ?></strong>
         </nav>
         <h1><?= e($xp['sectors_title']) ?></h1>
         <p><?= e($xp['sectors_desc']) ?></p>
@@ -58,9 +58,9 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
 <section class="section">
     <div class="container">
         <div class="cta-band" data-reveal>
-            <h2>Sizə uyğun həll axtarırıq</h2>
-            <p>Ehtiyacınızı bizə bildirin — layihə və qiymət təklifini hazırlayaq.</p>
-            <a href="/elaqe/" class="btn">Təklif al</a>
+            <h2><?= e(__('xid_cta_title')) ?></h2>
+            <p><?= e(__('xid_cta_text')) ?></p>
+            <a href="<?= e(u('/elaqe/')) ?>" class="btn"><?= e(__('get_quote')) ?></a>
         </div>
     </div>
 </section>

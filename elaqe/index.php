@@ -26,17 +26,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $recent = array_values(array_filter($flog[$ip] ?? [], fn($t) => $t > $now - 3600));
 
     if (!empty($_POST['website'])) {                        // honeypot
-        $error = 'Spam aşkarlandı.';
+        $error = __('err_spam');
     } elseif (turnstile_active($SITE) && !turnstile_verify($SITE['security']['turnstile_secret'], $_POST['cf-turnstile-response'] ?? null, $ip)) {
-        $error = 'Zəhmət olmasa robot olmadığınızı təsdiqləyin.';
+        $error = __('err_robot');
     } elseif (count($recent) >= 5) {
-        $error = 'Çox sayda müraciət göndərilib. Bir saatdan sonra yenidən cəhd edin.';
+        $error = __('err_ratelimit');
     } elseif (mb_strlen($old['name']) < 2 || mb_strlen($old['message']) < 5) {
-        $error = 'Zəhmət olmasa ad və mesaj sahələrini düzgün doldurun.';
+        $error = __('err_namemsg');
     } elseif ($old['email'] !== '' && !filter_var($old['email'], FILTER_VALIDATE_EMAIL)) {
-        $error = 'E-poçt ünvanı düzgün deyil.';
+        $error = __('err_email');
     } elseif ($old['phone'] !== '' && strlen(preg_replace('/\D/', '', $old['phone'])) < 7) {
-        $error = 'Telefon nömrəsi düzgün deyil.';
+        $error = __('err_phone');
     } else {
         $body = "Ad: {$old['name']}\nE-poçt: {$old['email']}\nTelefon: {$old['phone']}\n\n{$old['message']}";
         @error_log('[MYBEL əlaqə] ' . str_replace("\n", ' | ', $body));
@@ -68,15 +68,15 @@ $ps = page_seo('elaqe');
 $page_title = $ps['title'] ?: ('Əlaqə — ' . $SITE['name']);
 $page_desc  = $ps['desc'] ?: 'MYBEL Concept ilə əlaqə: telefon, e-poçt, ünvan və sifariş formu.';
 $page_url   = '/elaqe/';
-$breadcrumbs = [['name' => 'Ana səhifə', 'url' => '/'], ['name' => 'Əlaqə', 'url' => '/elaqe/']];
+$breadcrumbs = [['name' => __('nav_home'), 'url' => '/'], ['name' => __('nav_contact'), 'url' => '/elaqe/']];
 
 include $_SERVER['DOCUMENT_ROOT'] . '/includes/head.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
 ?>
 <section class="page-hero">
     <div class="container">
-        <nav class="breadcrumb" aria-label="Naviqasiya izi">
-            <a href="/">Ana səhifə</a><span>/</span><strong>Əlaqə</strong>
+        <nav class="breadcrumb" aria-label="<?= e(__('breadcrumb')) ?>">
+            <a href="<?= e(u('/')) ?>"><?= e(__('nav_home')) ?></a><span>/</span><strong><?= e(__('nav_contact')) ?></strong>
         </nav>
         <h1><?= e($SITE['pages']['elaqe']['title']) ?></h1>
         <p><?= e($SITE['pages']['elaqe']['subtitle']) ?></p>
@@ -87,31 +87,31 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
     <div class="container contact-layout">
         <div>
             <?php if ($sent): ?>
-                <div class="alert alert-success">Təşəkkür edirik! Müraciətiniz qəbul olundu, tezliklə sizinlə əlaqə saxlayacağıq.</div>
+                <div class="alert alert-success"><?= e(__('c_success')) ?></div>
             <?php elseif ($error): ?>
                 <div class="alert alert-error"><?= e($error) ?></div>
             <?php endif; ?>
 
-            <form method="post" action="/elaqe/" novalidate>
+            <form method="post" action="<?= e(u('/elaqe/')) ?>" novalidate>
                 <div class="form-row two">
                     <div class="field">
-                        <label for="name">Ad, Soyad *</label>
+                        <label for="name"><?= e(__('c_name')) ?> *</label>
                         <input type="text" id="name" name="name" value="<?= e($old['name']) ?>" required maxlength="100" autocomplete="name">
                     </div>
                     <div class="field">
-                        <label for="phone">Telefon</label>
+                        <label for="phone"><?= e(__('c_phone')) ?></label>
                         <input type="tel" id="phone" name="phone" value="<?= e($old['phone']) ?>" data-phone inputmode="tel" pattern="[0-9+()\-\s]{7,25}" maxlength="25" autocomplete="tel" placeholder="+994 50 000 00 00">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="field">
-                        <label for="email">E-poçt</label>
+                        <label for="email"><?= e(__('c_email')) ?></label>
                         <input type="email" id="email" name="email" value="<?= e($old['email']) ?>" maxlength="120" autocomplete="email">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="field">
-                        <label for="message">Mesaj *</label>
+                        <label for="message"><?= e(__('c_message')) ?> *</label>
                         <textarea id="message" name="message" required minlength="5" maxlength="3000"><?= e($old['message']) ?></textarea>
                     </div>
                 </div>
@@ -121,17 +121,17 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
                     <div style="margin:.2rem 0 1rem"><div class="cf-turnstile" data-sitekey="<?= e($SITE['security']['turnstile_site']) ?>"></div></div>
                     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
                 <?php endif; ?>
-                <button type="submit" class="btn">Göndər</button>
-                <p class="form-note">* işarəli sahələr mütləqdir.</p>
+                <button type="submit" class="btn"><?= e(__('c_send')) ?></button>
+                <p class="form-note"><?= e(__('c_required')) ?></p>
             </form>
         </div>
 
         <aside>
             <ul class="contact-info">
-                <li><span class="label">Telefon</span><a href="tel:<?= e($SITE['phone_raw']) ?>"><?= e($SITE['phone']) ?></a></li>
-                <li><span class="label">E-poçt</span><a href="mailto:<?= e($SITE['email']) ?>"><?= e($SITE['email']) ?></a></li>
-                <li><span class="label">Ünvan</span><span><?= e($SITE['address']) ?></span></li>
-                <li><span class="label">İş saatı</span><span><?= e($SITE['work_hours']) ?></span></li>
+                <li><span class="label"><?= e(__('c_phone')) ?></span><a href="tel:<?= e($SITE['phone_raw']) ?>"><?= e($SITE['phone']) ?></a></li>
+                <li><span class="label"><?= e(__('c_email')) ?></span><a href="mailto:<?= e($SITE['email']) ?>"><?= e($SITE['email']) ?></a></li>
+                <li><span class="label"><?= e(__('ci_addr')) ?></span><span><?= e($SITE['address']) ?></span></li>
+                <li><span class="label"><?= e(__('ci_hours')) ?></span><span><?= e($SITE['work_hours']) ?></span></li>
             </ul>
             <div style="margin-top:1.5rem">
                 <?= social_links($SITE) ?>
@@ -140,7 +140,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
     </div>
 
     <div class="container">
-        <iframe class="map-embed" src="<?= e($SITE['map']) ?>" loading="lazy" title="Xəritədə MYBEL Concept" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe class="map-embed" src="<?= e($SITE['map']) ?>" loading="lazy" title="<?= e(__('map_title')) ?>" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
 </section>
 
