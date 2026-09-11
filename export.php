@@ -60,6 +60,10 @@ foreach ($themes as $n => $key) {
 
     // 4) loqo -> data URI
     $html = str_replace('"/assets/img/logo.png"', '"' . $logoData . '"', $html);
+    foreach (['logo-gold-full.png', 'logo-gold.png'] as $lf) {   // qızılı loqolar (header/footer)
+        $lp = $dir . '/assets/img/' . $lf;
+        if (is_file($lp)) $html = str_replace('/assets/img/' . $lf, 'data:image/png;base64,' . base64_encode(file_get_contents($lp)), $html);
+    }
 
     // 5) tema seçici paneli sil (hər fayl artıq ayrıca versiyadır)
     $html = preg_replace('#<div class="theme-switcher".*?</div>\s*#s', '', $html);
