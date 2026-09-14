@@ -35,7 +35,7 @@
     <div class="footer-bottom">
         <div class="container footer-bottom-inner">
             <p>&copy; <?= date('Y') ?> <?= e($SITE['legal']) ?>. <?= e(__('rights')) ?></p>
-            <p class="footer-credit">Site by <a href="https://webline.az" target="_blank" rel="noopener">Webline.az</a></p>
+            <p class="footer-credit">Site by <a href="https://thewebline.com/" target="_blank" rel="noopener">Webline.az</a></p>
         </div>
     </div>
 </footer>
