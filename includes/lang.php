@@ -21,7 +21,7 @@ $UI_T = [
   'c_success'=>'Təşəkkür edirik! Müraciətiniz qəbul olundu, tezliklə sizinlə əlaqə saxlayacağıq.',
   'err_spam'=>'Spam aşkarlandı.','err_robot'=>'Zəhmət olmasa robot olmadığınızı təsdiqləyin.','err_ratelimit'=>'Çox sayda müraciət göndərilib. Bir saatdan sonra yenidən cəhd edin.','err_namemsg'=>'Zəhmət olmasa ad və mesaj sahələrini düzgün doldurun.','err_email'=>'E-poçt ünvanı düzgün deyil.','err_phone'=>'Telefon nömrəsi düzgün deyil.',
   'ci_addr'=>'Ünvan','ci_hours'=>'İş saatı','map_title'=>'Xəritədə MYBEL Concept',
-  'footer_menu'=>'Menyu','rights'=>'Bütün hüquqlar qorunur.',
+  'footer_menu'=>'Kateqoriyalar','rights'=>'Bütün hüquqlar qorunur.',
   'e404_h'=>'Səhifə tapılmadı','e404_text'=>'Axtardığınız səhifə mövcud deyil və ya köçürülüb.','e404_btn'=>'Ana səhifəyə qayıt',
 ],
 'ru' => [
@@ -39,7 +39,7 @@ $UI_T = [
   'c_success'=>'Спасибо! Ваша заявка принята, мы свяжемся с вами в ближайшее время.',
   'err_spam'=>'Обнаружен спам.','err_robot'=>'Пожалуйста, подтвердите, что вы не робот.','err_ratelimit'=>'Отправлено слишком много заявок. Повторите попытку через час.','err_namemsg'=>'Пожалуйста, корректно заполните поля имени и сообщения.','err_email'=>'Некорректный адрес e-mail.','err_phone'=>'Некорректный номер телефона.',
   'ci_addr'=>'Адрес','ci_hours'=>'Часы работы','map_title'=>'MYBEL Concept на карте',
-  'footer_menu'=>'Меню','rights'=>'Все права защищены.',
+  'footer_menu'=>'Категории','rights'=>'Все права защищены.',
   'e404_h'=>'Страница не найдена','e404_text'=>'Запрашиваемая страница не существует или была перемещена.','e404_btn'=>'Вернуться на главную',
 ],
 'en' => [
@@ -57,7 +57,7 @@ $UI_T = [
   'c_success'=>'Thank you! Your request has been received, we’ll get in touch with you shortly.',
   'err_spam'=>'Spam detected.','err_robot'=>'Please confirm you are not a robot.','err_ratelimit'=>'Too many requests. Please try again in an hour.','err_namemsg'=>'Please fill in the name and message fields correctly.','err_email'=>'Invalid e-mail address.','err_phone'=>'Invalid phone number.',
   'ci_addr'=>'Address','ci_hours'=>'Working hours','map_title'=>'MYBEL Concept on the map',
-  'footer_menu'=>'Menu','rights'=>'All rights reserved.',
+  'footer_menu'=>'Categories','rights'=>'All rights reserved.',
   'e404_h'=>'Page not found','e404_text'=>'The page you are looking for doesn’t exist or has been moved.','e404_btn'=>'Back to home',
 ],
 ];
