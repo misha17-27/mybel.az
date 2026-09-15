@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $idx = null;
         foreach ($services as $i => $s) if ($s['id'] === $id) $idx = $i;
         $title = trim($_POST['title'] ?? '');
-        if ($title === '') { flash(t('p_need_title'), 'error'); redirect('/admin/services.php'); }
+        if ($title === '') { flash(t('p_need_title'), 'error'); redirect('/admin/services.php' . ($id ? '?edit=' . $id : '')); }
         $slug = trim($_POST['slug'] ?? '');
         $slug = $slug !== '' ? slugify($slug) : slugify($title);
 
@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         usort($services, fn($a,$b)=>($a['order']??0)<=>($b['order']??0));
         save_json('services', $services);
         flash(t('s_saved'));
-        redirect('/admin/services.php');
+        redirect('/admin/services.php?edit=' . $data['id']);
     }
 }
 
@@ -79,7 +79,12 @@ require __DIR__ . '/includes/layout_top.php';
   <div class="card">
     <div class="item-head">
       <h2><?= $editing['id'] ? e(t('s_edit')) : e(t('s_new')) ?></h2>
-      <a href="/admin/services.php" class="btn btn-outline btn-sm">← <?= e(t('back_list')) ?></a>
+      <div class="inline" style="gap:.4rem">
+        <?php if (!empty($editing['id']) && !empty($editing['slug'])): $sitePfx = $EL === 'az' ? '' : '/' . $EL; ?>
+          <a href="<?= e($sitePfx) ?>/xidmetler/<?= e($editing['slug']) ?>/" target="_blank" rel="noopener" class="btn btn-outline btn-sm">↗ <?= e(t('open_site')) ?></a>
+        <?php endif; ?>
+        <a href="/admin/services.php" class="btn btn-outline btn-sm">← <?= e(t('back_list')) ?></a>
+      </div>
     </div>
     <form method="post">
       <?= csrf_field() ?><input type="hidden" name="action" value="save"><input type="hidden" name="id" value="<?= e($editing['id']) ?>">

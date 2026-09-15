@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         foreach ($projects as $i => $p) if ($p['id'] === $id) $idx = $i;
 
         $title = trim($_POST['title'] ?? '');
-        if ($title === '') { flash(t('p_need_title'), 'error'); redirect('/admin/projects.php'); }
+        if ($title === '') { flash(t('p_need_title'), 'error'); redirect('/admin/projects.php' . ($id ? '?edit=' . $id : '')); }
 
         $slug = trim($_POST['slug'] ?? '');
         $slug = $slug !== '' ? slugify($slug) : slugify($title);
@@ -100,7 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         save_json('services', $services);
 
         flash(t('p_saved'));
-        redirect('/admin/projects.php');
+        redirect('/admin/projects.php?edit=' . $data['id']);
     }
 }
 
@@ -125,7 +125,12 @@ require __DIR__ . '/includes/layout_top.php';
   <div class="card">
     <div class="item-head">
       <h2><?= $editing['id'] ? e(t('p_edit')) : e(t('p_new')) ?></h2>
-      <a href="/admin/projects.php" class="btn btn-outline btn-sm">← <?= e(t('back_list')) ?></a>
+      <div class="inline" style="gap:.4rem">
+        <?php if (!empty($editing['id']) && !empty($editing['slug'])): $sitePfx = $EL === 'az' ? '' : '/' . $EL; ?>
+          <a href="<?= e($sitePfx) ?>/layiheler/<?= e($editing['slug']) ?>/" target="_blank" rel="noopener" class="btn btn-outline btn-sm">↗ <?= e(t('open_site')) ?></a>
+        <?php endif; ?>
+        <a href="/admin/projects.php" class="btn btn-outline btn-sm">← <?= e(t('back_list')) ?></a>
+      </div>
     </div>
     <form method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
@@ -182,12 +187,13 @@ require __DIR__ . '/includes/layout_top.php';
       <div class="field">
         <label><?= e(t('p_gallery')) ?></label>
         <?php if (!empty($editing['gallery'])): ?>
-          <div class="inline" style="flex-wrap:wrap;gap:.8rem;margin-bottom:.6rem">
-            <?php foreach ($editing['gallery'] as $g): ?>
-              <label class="check" style="flex-direction:column;align-items:flex-start;gap:.3rem">
+          <div class="gal-grid">
+            <?php foreach ($editing['gallery'] as $i => $g): ?>
+              <div class="gal-item">
+                <input type="checkbox" name="gal_remove[]" value="<?= e($g) ?>" id="galrm<?= $i ?>" class="gal-remove-cb">
                 <img class="thumb" src="<?= e($g) ?>" alt="">
-                <span class="muted" style="font-size:.75rem"><input type="checkbox" name="gal_remove[]" value="<?= e($g) ?>"> <?= e(t('p_remove')) ?></span>
-              </label>
+                <label for="galrm<?= $i ?>" class="gal-x" title="<?= e(t('p_remove')) ?>" aria-label="<?= e(t('p_remove')) ?>">&times;</label>
+              </div>
             <?php endforeach; ?>
           </div>
         <?php endif; ?>
