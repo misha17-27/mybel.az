@@ -91,8 +91,10 @@ tr:last-child td{border-bottom:0}
 .gal-item{position:relative;line-height:0}
 .gal-item .thumb{width:84px;height:60px;display:block;transition:opacity .2s,filter .2s}
 .gal-remove-cb{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;margin:0}
-.gal-x{position:absolute;top:-7px;right:-7px;width:20px;height:20px;padding:0;border-radius:50%;background:#e2452f;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.35);user-select:none;z-index:2;transition:transform .15s,background .15s}
-.gal-x svg{display:block;width:10px;height:10px}
+.gal-x{position:absolute;top:-7px;right:-7px;width:20px;height:20px;border-radius:50%;background:#e2452f;border:2px solid #fff;box-sizing:border-box;box-shadow:0 1px 4px rgba(0,0,0,.35);cursor:pointer;user-select:none;z-index:2;transition:transform .15s,background .15s}
+.gal-x::before,.gal-x::after{content:"";position:absolute;top:50%;left:50%;width:9px;height:2px;background:#fff;border-radius:2px}
+.gal-x::before{transform:translate(-50%,-50%) rotate(45deg)}
+.gal-x::after{transform:translate(-50%,-50%) rotate(-45deg)}
 .gal-x:hover{background:#c0392b;transform:scale(1.12)}
 .gal-remove-cb:checked ~ .thumb{opacity:.3;filter:grayscale(1);outline:2px solid #c0392b;outline-offset:-2px}
 .gal-remove-cb:checked ~ .gal-x{background:#16a085}
