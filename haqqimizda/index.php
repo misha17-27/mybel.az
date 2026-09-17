@@ -45,7 +45,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
 
 <section class="section">
     <div class="container">
-        <div class="cta-band" data-reveal>
+        <div class="cta-band cta-dark" data-reveal>
             <h2><?= e(__('cta_about_title')) ?></h2>
             <p><?= e(__('cta_about_text')) ?></p>
             <a href="<?= e(u('/elaqe/')) ?>" class="btn"><?= e(__('cta_about_btn')) ?></a>

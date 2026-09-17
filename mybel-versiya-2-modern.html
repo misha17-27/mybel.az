@@ -508,6 +508,10 @@ button { font: inherit; cursor: pointer; }
 .cta-band { background: var(--ink); color: #fff; border-radius: var(--radius); padding: clamp(2.5rem, 5vw, 4rem); text-align: center; }
 .cta-band h2 { font-size: clamp(1.6rem, 4vw, 2.6rem); margin-bottom: 1rem; }
 .cta-band p { color: rgba(255,255,255,.75); max-width: 50ch; margin: 0 auto 2rem; }
+/* Qara CTA variantı (bütün temalarda qara fon, ağ yazı, narıncı düymə) */
+[data-theme] .cta-band.cta-dark { background: #14130f; color: #fff; }
+[data-theme] .cta-band.cta-dark p { color: rgba(255,255,255,.8); }
+[data-theme] .cta-band.cta-dark .btn { background: var(--brand); color: #fff; }
 
 /* =====================================================================
    LIGHTBOX
