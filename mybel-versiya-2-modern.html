@@ -505,6 +505,9 @@ button { font: inherit; cursor: pointer; }
 /* =====================================================================
    CTA band
    ===================================================================== */
+/* CTA banneri olan bölmə: öz şaquli boşluğunu ləğv et — yuxarıdan əvvəlki bölmə,
+   aşağıdan footer margin-top onsuz da lazımi məsafəni verir (ikiqat boşluğun qarşısını alır) */
+.section.cta-section { padding-block: 0; }
 .cta-band { background: var(--ink); color: #fff; border-radius: var(--radius); padding: clamp(2.5rem, 5vw, 4rem); text-align: center; }
 .cta-band h2 { font-size: clamp(1.6rem, 4vw, 2.6rem); margin-bottom: 1rem; }
 .cta-band p { color: rgba(255,255,255,.75); max-width: 50ch; margin: 0 auto 2rem; }
@@ -878,9 +881,9 @@ button { font: inherit; cursor: pointer; }
 <!-- ============ MÜŞTƏRİLƏR ============ -->
 
 <!-- ============ CTA ============ -->
-<section class="section">
+<section class="section cta-section">
     <div class="container">
-        <div class="cta-band" data-reveal>
+        <div class="cta-band cta-dark" data-reveal>
             <h2>Layihəniz üçün təklif alın</h2>
             <p>İdeyanızı bizimlə bölüşün — komandamız ölçü, dizayn və qiymət təklifini hazırlasın.</p>
             <a href="/elaqe/" class="btn">Sifariş ver</a>
@@ -1047,6 +1050,6 @@ button { font: inherit; cursor: pointer; }
 })();
 
 </script>
-<div style="position:fixed;left:16px;bottom:16px;z-index:300;background:#c75b2a;color:#fff;padding:.5rem .9rem;border-radius:999px;font:600 13px Montserrat,sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.25)">Versiya 2 â€” Modern</div>
+<div style="position:fixed;left:16px;bottom:16px;z-index:300;background:#c75b2a;color:#fff;padding:.5rem .9rem;border-radius:999px;font:600 13px Montserrat,sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.25)">Versiya 2 — Modern</div>
 </body>
 </html>

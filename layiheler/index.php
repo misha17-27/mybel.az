@@ -76,7 +76,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
     </div>
 </section>
 
-<section class="section">
+<section class="section cta-section">
     <div class="container">
         <div class="cta-band cta-dark" data-reveal>
             <h2><?= e(__('cta_about_title')) ?></h2>

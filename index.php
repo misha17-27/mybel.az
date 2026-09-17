@@ -113,9 +113,9 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
 <?php endif; ?>
 
 <!-- ============ CTA ============ -->
-<section class="section">
+<section class="section cta-section">
     <div class="container">
-        <div class="cta-band" data-reveal>
+        <div class="cta-band cta-dark" data-reveal>
             <h2><?= e($SITE['home']['cta_title']) ?></h2>
             <p><?= e($SITE['home']['cta_text']) ?></p>
             <a href="<?= e(u('/elaqe/')) ?>" class="btn"><?= e($SITE['home']['cta_btn']) ?></a>
