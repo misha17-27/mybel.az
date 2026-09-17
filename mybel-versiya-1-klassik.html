@@ -505,10 +505,11 @@ button { font: inherit; cursor: pointer; }
 /* =====================================================================
    CTA band
    ===================================================================== */
-/* CTA banneri olan bölmə: yuxarı boşluq normal qalır (əvvəlki bölmədən ayrılsın),
-   aşağıda isə öz padding-ini ləğv et — footer-in margin-top-u onsuz da məsafə verir
-   (ikiqat aşağı boşluğun qarşısını alır, banner footer-ə çox uzaq düşmür) */
-.section.cta-section { padding-bottom: 0; }
+/* CTA banneri olan bölmə: yuxarıda əlavə margin (yapışqan header banner-in üstünə
+   düşməsin deyə), aşağıda isə öz padding-ini ləğv et — footer-in margin-top-u onsuz
+   da məsafə verir (ikiqat aşağı boşluğun qarşısını alır) */
+.section.cta-section { margin-top: 50px; padding-bottom: 0; }
+main:has(.cta-section) + .site-footer { margin-top: 50px; }
 .cta-band { background: var(--ink); color: #fff; border-radius: var(--radius); padding: clamp(2.5rem, 5vw, 4rem); text-align: center; }
 .cta-band h2 { font-size: clamp(1.6rem, 4vw, 2.6rem); margin-bottom: 1rem; }
 .cta-band p { color: rgba(255,255,255,.75); max-width: 50ch; margin: 0 auto 2rem; }
