@@ -92,8 +92,18 @@ function csrf_field(): string {
     return '<input type="hidden" name="_csrf" value="' . e(csrf_token()) . '">';
 }
 function csrf_check(): void {
+    // POST gövdəsi tam düşüb (post_max_size aşılıb): $_POST boşdur, amma məlumat göndərilib.
+    // Bu, adətən çox böyük şəkil yükləməsidir — anlaşılmaz "CSRF" xətası əvəzinə aydın mesaj göstər.
+    if (empty($_POST) && (int)($_SERVER['CONTENT_LENGTH'] ?? 0) > 0) {
+        flash(t('err_upload_big'), 'error');
+        $back = $_SERVER['HTTP_REFERER'] ?? '/admin/';
+        $host = $_SERVER['HTTP_HOST'] ?? '';
+        if (strpos($back, '://') !== false && strcasecmp((string) parse_url($back, PHP_URL_HOST), $host) !== 0) $back = '/admin/';
+        header('Location: ' . $back);
+        exit;
+    }
     $ok = isset($_POST['_csrf']) && hash_equals($_SESSION['csrf'] ?? '', $_POST['_csrf']);
-    if (!$ok) { http_response_code(419); exit('CSRF token yanlışdır. Səhifəni yeniləyin.'); }
+    if (!$ok) { http_response_code(419); exit(t('csrf_bad')); }
 }
 
 // ---- Autentifikasiya ----
