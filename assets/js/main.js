@@ -2,6 +2,13 @@
 (function () {
     'use strict';
 
+    // ---- Dil dropdown-u: kənara klikləyəndə bağla ----
+    document.addEventListener('click', function (e) {
+        document.querySelectorAll('details.lang-dd[open]').forEach(function (d) {
+            if (!d.contains(e.target)) d.removeAttribute('open');
+        });
+    });
+
     // ---- Mobil menyu ----
     var toggle = document.querySelector('.nav-toggle');
     var navList = document.getElementById('navList');

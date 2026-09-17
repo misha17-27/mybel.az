@@ -16,13 +16,18 @@ $curPath = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: '/';
 $curPath = preg_replace('#^/(ru|en)(?=/|$)#', '', $curPath);
 if ($curPath === '') $curPath = '/';
 $curQS = $_SERVER['QUERY_STRING'] ?? '';
-ob_start();
-foreach ($PUB_LANGS as $lc => $lbl):
-    $pfx   = $lc === 'az' ? '' : '/' . $lc;
-    $lhref = $pfx . ($curPath === '/' ? '/' : $curPath) . ($curQS !== '' ? '?' . $curQS : '');
-    ?><a href="<?= e($lhref) ?>"<?= $LANG === $lc ? ' class="is-active" aria-current="true"' : '' ?>><?= e($lbl) ?></a><?php
-endforeach;
-$langSwitchHtml = ob_get_clean();
+ob_start(); ?>
+<details class="lang-dd">
+    <summary><?= e($PUB_LANGS[$LANG] ?? strtoupper($LANG)) ?><span class="lang-caret"></span></summary>
+    <div class="lang-dd-menu">
+        <?php foreach ($PUB_LANGS as $lc => $lbl):
+            $pfx   = $lc === 'az' ? '' : '/' . $lc;
+            $lhref = $pfx . ($curPath === '/' ? '/' : $curPath) . ($curQS !== '' ? '?' . $curQS : ''); ?>
+            <a href="<?= e($lhref) ?>"<?= $LANG === $lc ? ' class="is-active"' : '' ?>><?= e($lbl) ?></a>
+        <?php endforeach; ?>
+    </div>
+</details>
+<?php $langSwitchHtml = ob_get_clean();
 ?>
 <header class="site-header" id="siteHeader">
     <div class="container header-inner">
@@ -44,10 +49,10 @@ $langSwitchHtml = ob_get_clean();
                         <a href="<?= e(u($href)) ?>"<?= $current_section === $key ? ' aria-current="page"' : '' ?>><?= e($label) ?></a>
                     </li>
                 <?php endforeach; ?>
-                <li class="nav-m-lang"><div class="lang-switch"><?= $langSwitchHtml ?></div></li>
+                <li class="nav-m-lang"><?= $langSwitchHtml ?></li>
                 <li class="nav-m-socials"><?= social_links($SITE) ?></li>
             </ul>
-            <div class="header-lang"><div class="lang-switch"><?= $langSwitchHtml ?></div></div>
+            <div class="header-lang"><?= $langSwitchHtml ?></div>
         </nav>
     </div>
 </header>
