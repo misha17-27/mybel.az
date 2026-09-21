@@ -41,7 +41,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $body = "Ad: {$old['name']}\nE-poçt: {$old['email']}\nTelefon: {$old['phone']}\n\n{$old['message']}";
         @error_log('[MYBEL əlaqə] ' . str_replace("\n", ' | ', $body));
         $mErr = null;
-        @send_site_mail($SITE['email'], 'Yeni müraciət — mybel.az', $body, $mErr);
+        // Bildiriş həm sayt e-poçtuna (admin ayarlarındakı ünvana), həm də sabit info@mybel.az-a getsin.
+        $notify = array_values(array_unique(array_filter(
+            [$SITE['email'] ?? '', 'info@mybel.az'],
+            fn($a) => filter_var($a, FILTER_VALIDATE_EMAIL)
+        )));
+        foreach ($notify as $rcpt) { @send_site_mail($rcpt, 'Yeni müraciət — mybel.az', $body, $mErr); }
 
         $messages = load_json('messages', []);
         array_unshift($messages, [
