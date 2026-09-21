@@ -91,7 +91,7 @@ button { font: inherit; cursor: pointer; }
 .lang-dd-menu a:hover { background: rgba(255,255,255,.08); color: #fff; }
 .lang-dd-menu a.is-active { color: var(--brand); background: rgba(226,98,44,.15); }
 .nav-m-lang { display: none; }
-.brand-logo { width: auto; height: 60px; padding: 8px 0; filter: brightness(0) invert(1); }
+.brand-logo { width: auto; height: 60px; padding: 8px 0; }
 .main-nav { display: flex; align-items: center; }
 .nav-list { display: flex; align-items: center; gap: clamp(.5rem, 1.6vw, 1.6rem); }
 .nav-list > li:not(.nav-cta) > a {
@@ -538,7 +538,7 @@ main:has(.cta-section) + .site-footer { margin-top: 50px; }
     /* üst zolaq: loqo (sol) + bağla (sağ) */
     .nav-m-head { display: flex; position: absolute; top: 0; left: 0; right: 0;
         align-items: center; justify-content: space-between; padding: .9rem 1.25rem; }
-    .nav-m-logo img { width: auto; height: 34px; padding: 0; filter: brightness(0) invert(1); }
+    .nav-m-logo img { width: auto; height: 34px; padding: 0; }
     .nav-close { background: none; border: 0; font-size: 2.6rem; line-height: 1; color: #fff; cursor: pointer; padding: 0 .4rem; }
     /* alt: sosial ikonlar */
     .nav-m-socials { display: block; position: absolute; left: 0; right: 0; bottom: 1.6rem; }
