@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = __('err_ratelimit');
     } elseif (mb_strlen($old['name']) < 2) {
         $error = __('err_name');
-    } elseif ($old['email'] !== '' && !filter_var($old['email'], FILTER_VALIDATE_EMAIL)) {
+    } elseif (!filter_var($old['email'], FILTER_VALIDATE_EMAIL)) {
         $error = __('err_email');
     } elseif ($old['phone'] !== '' && strlen(preg_replace('/\D/', '', $old['phone'])) < 7) {
         $error = __('err_phone');
@@ -110,8 +110,8 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
                 </div>
                 <div class="form-row">
                     <div class="field">
-                        <label for="email"><?= e(__('c_email')) ?></label>
-                        <input type="email" id="email" name="email" value="<?= e($old['email']) ?>" maxlength="120" autocomplete="email">
+                        <label for="email"><?= e(__('c_email')) ?> *</label>
+                        <input type="email" id="email" name="email" value="<?= e($old['email']) ?>" required maxlength="120" autocomplete="email">
                     </div>
                 </div>
                 <div class="form-row">
